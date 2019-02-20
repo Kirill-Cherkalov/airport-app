@@ -1,0 +1,18 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+  z-index: 1200;
+  outline: none;
+  overflow-y: auto;
+
+  transform: translateX(0);
+  transition: transform 1s;
+
+  width: 100px;
+  background-color: rgba(128, 128, 128, 0.171);
+}
