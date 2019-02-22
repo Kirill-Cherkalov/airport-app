@@ -5,10 +5,9 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import {styles} from './material.style';
-// import TemporaryDrawer from '../sidebar';
 import HeaderMenu from '../menu';
 import MenuButton from '../menu-button';
-import Sidebar from '../sidebar';
+import {Sidebar, Overlay} from '../sidebar';
 import './index.scss';
 
 class Header extends React.Component {
@@ -29,7 +28,7 @@ class Header extends React.Component {
     const {classes} = this.props;
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar position="fixed">
           <Toolbar>
             <Typography variant="h6" color="inherit" className={classes.grow}>
               Travello
@@ -37,7 +36,8 @@ class Header extends React.Component {
 
             <HeaderMenu className="header__menu"/>
             <MenuButton showSidebar={this.showSidebar} />
-            {this.state.isOpen && <Sidebar />}
+            <Sidebar isOpen={this.state.isOpen} />
+            <Overlay isOpen={this.state.isOpen} hideSidebar={this.showSidebar}/>
           </Toolbar>
         </AppBar>
       </div>
