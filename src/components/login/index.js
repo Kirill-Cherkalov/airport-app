@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -32,6 +33,8 @@ class Login extends React.Component {
         <Button variant="contained" color="primary" className={classes.button} type="submit">
           Log in
         </Button>
+        
+        <Link to="/register"><Button variant="contained" color="default" className={classes.button} type="submit">Registration</Button></Link>
       </form>
     );
   }

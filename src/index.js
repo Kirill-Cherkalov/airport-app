@@ -1,33 +1,30 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './reset.scss';
 import './index.scss';
-import Divider from '@material-ui/core/Divider';
+// import Divider from '@material-ui/core/Divider';
 import Header from './components/header';
-import Register from './components/register';
-import Login from './components/login';
-import Search from './components/search-page';
-import Passengers from './components/passengers-counters';
 import FlightsList from './components/flights-list';
+import Login from './components/login';
+import Register from './components/register';
+import Search from './components/search';
+import PassengersCounters from './components/passengers-counters';
 
 class App extends Component {
   render() {
     return (
       <div>
-        <Header />
-        <FlightsList />
-        <Divider variant="middle" />
-        <Register />
-        <Divider variant="middle" />
-
-        <Login />
-        <Divider variant="middle" />
-
-        <Search />
-        <Divider variant="middle" />
-
-        <Passengers />
-        <Divider variant="middle" />
+        <Router>
+          <div>
+            <Header />
+            <Route path='/search' component={Search}></Route>
+            <Route path='/passengers-counters' component={PassengersCounters}></Route>
+            <Route path='/flights-list' component={FlightsList}></Route>
+            <Route path='/login' component={Login}></Route>
+            <Route path='/register' component={Register}></Route>
+          </div>
+        </Router>
       </div>
     );
   }

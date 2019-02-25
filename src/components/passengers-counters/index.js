@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import { styles } from './material.style';
 import './index.scss';
 
-class Passengers extends React.Component {
+class PassengersCounters extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -47,8 +47,8 @@ class Passengers extends React.Component {
   }
 }
 
-Passengers.propTypes = {
+PassengersCounters.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Passengers);
+export default withStyles(styles)(PassengersCounters);

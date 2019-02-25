@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -88,17 +89,19 @@ class Search extends React.Component {
           </div>
 
           <div className="wrapper">
-            <TextField
-              id="passengers"
-              label="Passengers"
-              type="text"
-              placeholder="1 adult"
-              className={classes.textField}
-              InputLabelProps={{
-                shrink: true,
-              }}
-              margin='dense'
-            />
+            <Link to='/passengers-counters'>
+              <TextField
+                id="passengers"
+                label="Passengers"
+                type="text"
+                placeholder="1 adult"
+                className={classes.textField}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                margin='dense'
+              />
+            </Link>
 
             <Button variant="contained" color="primary" className={classes.button} type="submit">
               Search
