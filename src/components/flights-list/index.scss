@@ -19,7 +19,6 @@
   flex-direction: column;
   align-items: center;
   padding-bottom: 30px;
-  margin-top: 158px;
 }
 
 .flights-list {
@@ -27,7 +26,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 30px;
+
+  &__header {
+    margin-bottom: 90px;
+  }
 }
 
 .flights-list-item {

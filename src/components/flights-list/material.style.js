@@ -1,8 +1,8 @@
 export const styles = {
   root: {
     flexGrow: 1,
-    marginTop: 60,
-    marginBottom: 40
+    zIndex: 1,
+    marginTop: 56
   },
   container: {
     display: 'flex',

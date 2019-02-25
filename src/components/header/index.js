@@ -27,7 +27,7 @@ class Header extends React.Component {
   render() {
     const {classes} = this.props;
     return (
-      <div className={classes.root}>
+      <div className="header">
         <AppBar position="fixed">
           <Toolbar>
             <Typography variant="h6" color="inherit" className={classes.grow}>

@@ -36,7 +36,6 @@ function FlightsListItems({classes, flights}) {
   )
 }
 
-
 class FlightsList extends React.Component {
   constructor(props) {
     super(props);
@@ -78,21 +77,23 @@ class FlightsList extends React.Component {
 
     return (
       <div className="flights-container">
-        <AppBar className={classes.root} position="fixed" color="default">
-          <Toolbar>
-            <div className="text-wrapper">
-              <Typography variant="h6" color="inherit">
-                {this.state.from} to {this.state.to}
-              </Typography>
-              <Typography color="inherit">
-                {this.state.type}, {this.state.passengers}
-                <button className="change-button">
-                  Change
-                </button>
-              </Typography>
-            </div>
-          </Toolbar>
-        </AppBar>
+        <div className="flights-list__header">
+          <AppBar className={classes.root} position="fixed" color="default">
+            <Toolbar>
+              <div className="text-wrapper">
+                <Typography variant="h6" color="inherit">
+                  {this.state.from} to {this.state.to}
+                </Typography>
+                <Typography color="inherit">
+                  {this.state.type}, {this.state.passengers}
+                  <button className="change-button">
+                    Change
+                  </button>
+                </Typography>
+              </div>
+            </Toolbar>
+          </AppBar>
+        </div>
 
         <List className="flights-list" disablePadding={true}>
           <FlightsListItems classes={classes} flights={flights} />
