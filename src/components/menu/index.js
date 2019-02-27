@@ -12,9 +12,6 @@ function HeaderMenu(props) {
       <Button color="inherit" className={classes.button}>flights</Button>
       <Button color="inherit" className={classes.button}>tickets</Button>
       <Button color="inherit" className={classes.button}>about us</Button>
-      {/* <Button color="inherit" href="#text-buttons" disabled className={classes.button}>
-        Link
-      </Button> */}
       <Button className={classes.button}>Login</Button>
     </div>
   );
