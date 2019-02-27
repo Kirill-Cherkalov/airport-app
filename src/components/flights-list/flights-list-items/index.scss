@@ -1,0 +1,28 @@
+@import 'src/variables.scss';
+
+@media only screen and (max-width: $tabletSize) {
+  .flights-list-item__price {
+    display: flex;
+    align-items: center;
+    padding-left: 50px;
+  }
+}
+
+@media only screen and (max-width: $mobileSize) {
+  .flights-list-item {
+    flex-direction: column;
+  }
+}
+
+.flights-list-item {
+  display: flex;
+  justify-content: space-between;
+  min-width: 260px;
+  padding: 15px 15px;
+  border: 1px solid $lightgray;
+
+  &:not(:last-child) {
+    border-bottom: none;
+  }
+}
+

@@ -9,9 +9,6 @@ export const styles = theme => ({
     marginRight: theme.spacing.unit,
     width: 200,
   },
-  dense: {
-    marginTop: 19,
-  },
   formControl: {
     margin: theme.spacing.unit,
     minWidth: 200,

@@ -1,0 +1,13 @@
+@import 'src/variables.scss';
+
+@media screen and (max-width: $mobileSize) {
+  .header__menu {
+    display: none;
+  }
+}
+
+.sidebar__menu {
+  display: flex;
+  flex-direction: column;
+  padding: 30px 50px;
+}

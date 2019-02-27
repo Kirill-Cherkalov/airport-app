@@ -1,4 +1,4 @@
-@import '../../variables.scss';
+@import 'src/variables.scss';
 
 @media only screen and (min-width: $mobileSize) {
   .header__button {
@@ -15,9 +15,10 @@
   outline: none;
   color: white;
   cursor: pointer;
-  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
-              box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
-              border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 250ms,
+              box-shadow 250ms,
+              border 250ms;
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.08);
