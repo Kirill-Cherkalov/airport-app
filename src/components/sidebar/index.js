@@ -1,13 +1,15 @@
 import React from 'react';
 import './index.scss';
 
-class Sidebar extends React.Component {
-  render() {
-    return (
-      <div className="sidebar">
-      </div>
-    );
-  }
+function Overlay({isOpen, hideSidebar}) {
+  return (
+    <div className={isOpen ? "overlay overlay_opened" : "overlay"} 
+         onClick={hideSidebar}
+    ></div>);
 }
 
-export default Sidebar;
+function Sidebar({isOpen}) {
+  return <div className={isOpen ? "sidebar sidebar_opened" : "sidebar"}></div>;
+}
+
+export {Sidebar, Overlay};
