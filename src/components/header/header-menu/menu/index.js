@@ -6,11 +6,11 @@ import './index.scss';
 export function Menu(props) {
   return (
     <div className={props.className} >
-      <Link to="/search"><Button color="inherit">flights</Button></Link>
-      <Link to="/flights-list"><Button color="inherit">tickets</Button></Link>
-      <Link to="/passengers-list"><Button color="inherit">Passengers</Button></Link>
-      <Link to="/"><Button color="inherit">about us</Button></Link>
-      <Link to="/login"><Button>Login</Button></Link>
+      <Link to="/search" className="link-to">flights</Link>
+      <Link to="/flights-list" className="link-to">tickets</Link>
+      <Link to="/passengers-list" className="link-to">Passengers</Link>
+      <Link to="/" className="link-to">about us</Link>
+      <Link to="/login" className="link-to">Login</Link>
     </div>
   );
 }
