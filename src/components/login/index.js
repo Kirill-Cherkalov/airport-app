@@ -15,6 +15,11 @@ class Login extends React.Component {
       password: ""
     }
   }
+
+  static propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
+
   handleChange = name => event => {
     this.setState({ [name]: event.target.value });
   };
@@ -43,15 +48,11 @@ class Login extends React.Component {
             Log in
           </Button>
           
-          <Link to="/register"><Button variant="contained" color="default" className={classes.button} type="submit">Registration</Button></Link>
+          <Link to="/register">Registration</Link>
         </div>
       </form>
     );
   }
 }
-
-Login.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
 export default withStyles(styles)(Login);

@@ -22,6 +22,10 @@ class FlightsList extends React.Component {
     }
   }
 
+  static propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
+
   render() {
     const { classes } = this.props;
 
@@ -76,9 +80,5 @@ class FlightsList extends React.Component {
     );
   }
 }
-
-FlightsList.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
 export default withStyles(styles)(FlightsList);

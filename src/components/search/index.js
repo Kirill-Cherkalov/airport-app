@@ -19,6 +19,11 @@ class Search extends React.Component {
       to: ''
     }
   }
+
+  static propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
+
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
@@ -27,8 +32,8 @@ class Search extends React.Component {
     const { classes } = this.props;
 
     return (
-      <form className={classes.container} noValidate autoComplete="off">
-      <div className="wrapper">
+      <form className="search-form-container" noValidate autoComplete="off">
+        <div className="wrapper">
           <FormControl className={classes.formControl}>
             <InputLabel>From</InputLabel>
             <Select 
@@ -112,9 +117,5 @@ class Search extends React.Component {
     );
   }
 }
-
-Search.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
 export default withStyles(styles)(Search);

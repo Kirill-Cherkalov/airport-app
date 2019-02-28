@@ -1,11 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import { styles } from './material.style';
 import './index.scss';
 
-class PassengersCounters extends React.Component {
+export class PassengersCounters extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,36 +16,26 @@ class PassengersCounters extends React.Component {
   removePassenger = () => {}
 
   render() {
-    const { classes } = this.props;
+    const passengersTypes = ["adult", "child", "infant"];
 
     return (
       <div className="counters">
-        <div className="counter__wrapper">
-          <button className="counter__button counter__button_minus">-</button>
-          <div className="counter__info">{this.state.adult} adult</div>
-          <button className="counter__button counter__button_plus">+</button>
-        </div>
-        <div className="counter__wrapper">
-          <button className="counter__button counter__button_minus">-</button>
-          <div className="counter__info">{this.state.child} child</div>
-          <button className="counter__button counter__button_plus">+</button>
-        </div>
-        <div className="counter__wrapper">
-          <button className="counter__button counter__button_minus">-</button>
-          <div className="counter__info">{this.state.infant} infant</div>
-          <button className="counter__button counter__button_plus">+</button>
-        </div>
+        <div className="counters__container">
+          {passengersTypes.map(type => {
+            return (
+              <div className="counter__wrapper" key={Math.random()}>
+                <button className="counter__button counter__button_minus">-</button>
+                <div className="counter__info">{this.state[type]} {type}</div>
+                <button className="counter__button counter__button_plus">+</button>
+              </div>
+            );
+          })}
 
-        <Button variant="contained" color="primary" className={classes.button} type="submit">
-          OK
-        </Button>
+          <Button variant="contained" color="primary" type="submit">
+            OK
+          </Button>
+        </div>
       </div>
     );
   }
 }
-
-PassengersCounters.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(PassengersCounters);

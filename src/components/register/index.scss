@@ -1,6 +1,6 @@
 @import 'src/variables.scss';
 
-.login-form {
+.register-form {
   display: flex;
   justify-content: center;
 
@@ -10,7 +10,7 @@
     align-items: center;
     justify-content: center;
     width: 250px;
-    height: 280px;
+    height: 350px;
     border: 1px solid $lightgray;
     border-radius: 5px;
     box-shadow: $boxShadow;

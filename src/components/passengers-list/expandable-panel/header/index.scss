@@ -1,0 +1,18 @@
+@import 'src/variables';
+
+.expandable-panel__header {
+  padding: 10px 20px;
+  cursor: pointer;
+  line-height: 1.75;
+  font-size: 1rem;
+  font-weight: 400;
+  font-family: $fontFamily;
+
+  &:hover {
+    background-color: $defaultMaterialHover;
+  }
+}
+
+.opened {
+  border-bottom: 1px solid $lightgray;
+}

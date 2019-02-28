@@ -12,6 +12,12 @@
   }
 }
 
+.search-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .wrapper {
   display: flex;
 }

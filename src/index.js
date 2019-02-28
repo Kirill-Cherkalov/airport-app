@@ -8,8 +8,8 @@ import FlightsList from './components/flights-list';
 import Login from './components/login';
 import Register from './components/register';
 import Search from './components/search';
-import PassengersCounters from './components/passengers-counters';
-import PassengersList from './components/passengers-list';
+import {PassengersCounters} from './components/passengers-counters';
+import {PassengersList} from './components/passengers-list';
 
 class App extends Component {
   render() {

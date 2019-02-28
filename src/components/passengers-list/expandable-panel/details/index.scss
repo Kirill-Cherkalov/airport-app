@@ -1,0 +1,17 @@
+@import 'src/variables';
+
+@media only screen and (max-width: $mobileSize) {
+  .expandable-panel-details__names {
+    flex-direction: column;
+    padding: 0 20px;
+  }
+}
+
+.expandable-panel-details {
+  &__names {
+    display: flex;
+    justify-content: space-evenly;
+    padding-bottom: 30px;
+    border-bottom: 1px solid $lightgray;
+  }
+}

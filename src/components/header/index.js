@@ -16,6 +16,10 @@ class Header extends Component {
       isOpen: false
     };
   }
+  
+  static propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
 
   showSidebar = () => {
     this.setState(state => {
@@ -41,10 +45,6 @@ class Header extends Component {
     );
   }
 }
-
-Header.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
 export default withStyles(styles)(Header);
 
