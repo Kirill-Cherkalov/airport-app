@@ -1,6 +1,6 @@
 @import 'src/variables.scss';
 
-@media only screen and (max-width: $tabletSize) {
+@media only screen and (min-width: $mobileSize) {
   .flights-list-item__price {
     display: flex;
     align-items: center;

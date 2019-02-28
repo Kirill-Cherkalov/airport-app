@@ -9,11 +9,11 @@
 .header__button {
   width: 36px;
   height: 36px;
-  background-color: transparent;
   border: none;
   border-radius: 5px;
   outline: none;
-  color: white;
+  background-color: transparent;
+  color: #fff;
   cursor: pointer;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition: background-color 250ms,

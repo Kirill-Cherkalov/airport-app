@@ -5,8 +5,16 @@ import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { styles } from './material.style';
+import './index.scss';
 
 class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "",
+      password: ""
+    }
+  }
   handleChange = name => event => {
     this.setState({ [name]: event.target.value });
   };
@@ -15,26 +23,28 @@ class Login extends React.Component {
     const { classes } = this.props;
 
     return (
-      <form className={classes.container} noValidate autoComplete="off">
-        <TextField
-          label="Email"
-          className="textfield"
-          type="email"
-          onChange={this.handleChange('name')}
-          margin="dense"
-        />
-        <TextField
-          label="Password"
-          className="textfield"
-          type="password"
-          onChange={this.handleChange('name')}
-          margin="dense"
-        />
-        <Button variant="contained" color="primary" className={classes.button} type="submit">
-          Log in
-        </Button>
-        
-        <Link to="/register"><Button variant="contained" color="default" className={classes.button} type="submit">Registration</Button></Link>
+      <form className="login-form" noValidate autoComplete="off">
+        <div className="login-form__container">
+          <TextField
+            label="Email"
+            className="textfield"
+            type="email"
+            onChange={this.handleChange('email')}
+            margin="dense"
+          />
+          <TextField
+            label="Password"
+            className="textfield"
+            type="password"
+            onChange={this.handleChange('password')}
+            margin="dense"
+          />
+          <Button variant="contained" color="primary" className={classes.button} type="submit">
+            Log in
+          </Button>
+          
+          <Link to="/register"><Button variant="contained" color="default" className={classes.button} type="submit">Registration</Button></Link>
+        </div>
       </form>
     );
   }
