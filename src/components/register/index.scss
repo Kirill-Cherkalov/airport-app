@@ -7,10 +7,9 @@
   &__container {
     display: flex;
     flex-direction: column;
+    padding: 30px 40px;
     align-items: center;
     justify-content: center;
-    width: 250px;
-    height: 350px;
     border: 1px solid $lightgray;
     border-radius: 5px;
     box-shadow: $boxShadow;

@@ -1,11 +1,12 @@
 import React from 'react';
+import { Form, Field } from "react-final-form";
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import { styles } from './material.style';
+import TextField from '../text-field';
 import './index.scss';
+import '../../styles/button.scss';
 
 class Login extends React.Component {
   constructor(props) {
@@ -24,33 +25,53 @@ class Login extends React.Component {
     this.setState({ [name]: event.target.value });
   };
 
-  render() {
-    const { classes } = this.props;
+  onSubmit = async values => {
+    const e = JSON.stringify(values);
+    localStorage.setItem("login", e);
+  };
 
+  validate = values => {
+    const errors = {};
+    if (!values.email) {
+      errors.email = "Required";
+    }
+    if (!values.password) {
+      errors.password = "Required";
+    }
+    return errors;
+  };
+
+  render() {
     return (
-      <form className="login-form" noValidate autoComplete="off">
-        <div className="login-form__container">
-          <TextField
-            label="Email"
-            className="textfield"
-            type="email"
-            onChange={this.handleChange('email')}
-            margin="dense"
-          />
-          <TextField
-            label="Password"
-            className="textfield"
-            type="password"
-            onChange={this.handleChange('password')}
-            margin="dense"
-          />
-          <Button variant="contained" color="primary" className={classes.button} type="submit">
-            Log in
-          </Button>
-          
-          <Link to="/register">Registration</Link>
-        </div>
-      </form>
+      <Form
+        onSubmit={this.onSubmit}
+        validate={this.validate}
+        render={({ handleSubmit }) => (
+          <form className="login-form" onSubmit={handleSubmit}>
+            <div className="login-form__container">
+              <Field
+                name="email"
+                component={TextField}
+                type="email"
+                label="Email"
+                margin="dense"
+              />
+              <Field
+                name="password"
+                component={TextField}
+                type="password"
+                label="Password"
+                margin="dense"
+              />
+              <button className="button" type="submit">
+                Log in
+              </button>
+              
+              <Link to="/register">Registration</Link>
+            </div>
+          </form>
+        )}
+      />
     );
   }
 }

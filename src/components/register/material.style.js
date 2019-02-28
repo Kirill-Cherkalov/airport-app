@@ -9,9 +9,5 @@ export const styles = theme => ({
   },
   menu: {
     width: 200,
-  },
-  button: {
-    margin: theme.spacing.unit,
-    marginTop: 20
-  },
+  }
 });
