@@ -1,0 +1,14 @@
+@import 'src/variables.scss';
+
+@media only screen and (max-width: $mobileSize) {
+  .seats-choice-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.seats-choice-container {
+  display: flex;
+  justify-content: space-evenly;
+  padding-bottom: 30px;
+}
