@@ -10,7 +10,7 @@ export function PlaneSeats({rows, location, signs}) {
       return <div key={Math.random()} className="row seats">
         {location.map((elem, j) => {
           return elem ?
-            <div key={Math.random()} className="seat">
+            <div id={i + signs[j]} key={Math.random()} className="seat">
               <span className="seat-point">{i + signs[j]}</span>
               <span className="tooltiptext">$9</span>
             </div>

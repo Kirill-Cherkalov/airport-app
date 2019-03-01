@@ -10,6 +10,7 @@ import Register from './components/register';
 import Search from './components/search';
 import {PassengersCounters} from './components/passengers-counters';
 import {PassengersList} from './components/passengers-list';
+import {SeatsChoice} from './components/passengers-seats';
 
 class App extends Component {
   render() {
@@ -21,6 +22,7 @@ class App extends Component {
             <Route path='/search' component={Search}></Route>
             <Route path='/passengers-counters' component={PassengersCounters}></Route>
             <Route path='/flights-list' component={FlightsList}></Route>
+            <Route path='/passengers-seats' component={SeatsChoice}></Route>
             <Route path='/passengers-list' component={PassengersList}></Route>
             <Route path='/login' component={Login}></Route>
             <Route path='/register' component={Register}></Route>

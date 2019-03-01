@@ -21,15 +21,13 @@ export class PassengersCounters extends React.Component {
     return (
       <div className="counters">
         <div className="counters__container">
-          {passengersTypes.map(type => {
-            return (
-              <div className="counter__wrapper" key={Math.random()}>
-                <button className="counter__button counter__button_minus">-</button>
-                <div className="counter__info">{this.state[type]} {type}</div>
-                <button className="counter__button counter__button_plus">+</button>
-              </div>
-            );
-          })}
+          {passengersTypes.map(type => 
+            <div className="counter__wrapper" key={Math.random()}>
+              <button className="counter__button counter__button_minus">-</button>
+              <div className="counter__info">{this.state[type]} {type}</div>
+              <button className="counter__button counter__button_plus">+</button>
+            </div>
+          )}
 
           <Button variant="contained" color="primary" type="submit">
             OK

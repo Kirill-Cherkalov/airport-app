@@ -1,23 +1,24 @@
 @import '../../variables.scss';
-@media only screen and (max-width: $mobileSize) {
-  .wrapper {
-    flex-direction: column;
-  }
-}
-
-@media only screen and (max-width: $tabletSize) {
-  .tablet {
-    flex-direction: column;
-    justify-content: center;
-  }
-}
 
 .search-form-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: flex-start;
+  padding-left: 15%;
 }
 
-.wrapper {
+@media only screen and (max-width: $mobileSize) {
+  .search-form-container {
+    justify-content: center;
+    padding-left: 0;
+  }
+}
+
+.search-form {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: rgb(242, 242, 242);
+  box-shadow: $boxShadow;
 }

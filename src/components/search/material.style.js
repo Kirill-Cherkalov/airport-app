@@ -2,14 +2,8 @@ export const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
+    backgroundColor: theme.palette.common.white,
     width: 200,
-  },
-  formControl: {
-    margin: theme.spacing.unit,
-    minWidth: 200,
-    [theme.breakpoints.up('md')]: {
-      minWidth: 358,
-    },
   },
   selectEmpty: {
     marginTop: theme.spacing.unit * 2,

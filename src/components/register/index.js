@@ -7,6 +7,7 @@ import TextField from '../text-field';
 import {onSubmit} from '../../services/register-service';
 import './index.scss';
 import '../../styles/button.scss';
+import {validate} from '../../form-validation/register-form';
 
 class Register extends React.Component {
   constructor(props) {
@@ -32,28 +33,11 @@ class Register extends React.Component {
   //   localStorage.setItem("event", e);
   // };
 
-  validate = values => {
-    const errors = {};
-    if (!values.firstName) {
-      errors.firstName = "Required";
-    }
-    if (!values.lastName) {
-      errors.lastName = "Required";
-    }
-    if (!values.email) {
-      errors.email = "Required";
-    }
-    if (!values.password) {
-      errors.password = "Required";
-    }
-    return errors;
-  };
-
   render() {
     return (
       <Form 
         onSubmit={onSubmit}
-        validate={this.validate}
+        validate={validate}
         render={({ handleSubmit }) => (
           <form className="register-form" onSubmit={handleSubmit}>
             <div className="register-form__container">

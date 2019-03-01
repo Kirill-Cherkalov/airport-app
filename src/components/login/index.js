@@ -7,6 +7,7 @@ import { styles } from './material.style';
 import TextField from '../text-field';
 import './index.scss';
 import '../../styles/button.scss';
+import {validate} from '../../form-validation/login-form';
 
 class Login extends React.Component {
   constructor(props) {
@@ -30,22 +31,11 @@ class Login extends React.Component {
     localStorage.setItem("login", e);
   };
 
-  validate = values => {
-    const errors = {};
-    if (!values.email) {
-      errors.email = "Required";
-    }
-    if (!values.password) {
-      errors.password = "Required";
-    }
-    return errors;
-  };
-
   render() {
     return (
       <Form
         onSubmit={this.onSubmit}
-        validate={this.validate}
+        validate={validate}
         render={({ handleSubmit }) => (
           <form className="login-form" onSubmit={handleSubmit}>
             <div className="login-form__container">

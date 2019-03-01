@@ -1,6 +1,6 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import FlightTakeoffIcon from '@material-ui/icons/FlightTakeoff';
 import FlightLandIcon from '@material-ui/icons/FlightLand';
 import './index.scss';
@@ -21,9 +21,7 @@ export function FlightsListItems({classes, flights}) {
           </Typography>
         </div>
         <div className="flights-list-item__price">
-          <Button variant="contained" color="primary" className={classes.button} type="submit">
-            $ {price}
-          </Button>
+          <Link to="/passengers-seats" className="price-link">$ {price}</Link>
         </div>
       </div>
     )

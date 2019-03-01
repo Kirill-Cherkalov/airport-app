@@ -4,13 +4,17 @@
   .flights-list-item__price {
     display: flex;
     align-items: center;
-    padding-left: 50px;
+    padding-left: 35px;
   }
 }
 
 @media only screen and (max-width: $mobileSize) {
   .flights-list-item {
     flex-direction: column;
+
+    &__price {
+      margin: 10px 0;
+    }
   }
 }
 
@@ -23,6 +27,21 @@
 
   &:not(:last-child) {
     border-bottom: none;
+  }
+}
+
+.price-link {
+  padding: 10px 15px;
+  border-radius: 5px;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: $fontFamily;
+  font-size: 1rem;
+  background-color: $primaryMaterial;
+
+  &:hover {
+    background-color: $primaryMaterialHover;
   }
 }
 
