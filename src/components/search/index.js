@@ -1,25 +1,29 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-// import { Form, Field } from "react-final-form";
-// import { Select } from 'final-form-material-ui';
+import { Form, Field } from "react-final-form";
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import MenuItem from '@material-ui/core/MenuItem';
-// import TextField from '../text-field';
-import TextField from '@material-ui/core/TextField';
+import DateFnsUtils from '@date-io/date-fns';
+import { MuiPickersUtilsProvider } from 'material-ui-pickers';
 import { styles } from './material.style';
 import './index.scss';
+import {airports} from '../../data/airport-array';
+import {validate} from './validate';
+import DatePicker from '../date-picker';
+import SimpleSelect from '../select';
+import TextField from '../text-field';
 
-// import {validate} from '../../form-validation/register-form';
-import {countries} from '../../data/airport-array';
+import {PassengersCounters} from '../passengers-counters';
 
 class Search extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      from: '',
-      to: ''
+      from: 'country',
+      to: '',
+      departure: new Date(),
+      return: new Date(),
+      countersIsShown: false
     }
   }
 
@@ -27,117 +31,80 @@ class Search extends React.Component {
     classes: PropTypes.object.isRequired,
   };
 
-  handleChange = name => event => {
-    this.setState({ [name]: event.target.value });
-  };
-
   onSubmit = async values => {
     const e = JSON.stringify(values);
     localStorage.setItem("search", e);
   };
+
+  showCounters = () => {
+    this.setState(state => {
+      return {countersIsShown: !state.countersIsShown};
+    });
+  }
 
   render() {
     const { classes } = this.props;
 
     return (
       <div className="search-form-container">
-        {/* <Form
+        <Form
           onSubmit={this.onSubmit}
           validate={validate}
-          render={({ handleSubmit }) => ( */}
-            <form className="search-form" noValidate autoComplete="on">
-              <TextField
-                id="from-country"
+          render={({ handleSubmit }) => (
+            <form className="search-form">
+              <Field
+                name="from"
                 label="From"
-                select
-                placeholder="Country"
                 className={classes.textField}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                margin='dense'
-                variant="outlined"
-                onChange={this.handleChange('from')}
-                value={this.state.from}
+                component={SimpleSelect}
+                airports={airports}
               >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                {countries.map(country =>
-                  <MenuItem key={Math.random()} value={country}>
-                    {country}
-                  </MenuItem>
-                )}
-              </TextField>
+              </Field>
 
-              <TextField
-                id="to-country"
+              <Field
+                name="to"
                 label="To"
-                select
-                placeholder="Country"
                 className={classes.textField}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                margin='dense'
-                variant="outlined"
-                onChange={this.handleChange('to')}
-                value={this.state.to}
+                component={SimpleSelect}
+                airports={airports}
               >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                {countries.map(country =>
-                  <MenuItem key={Math.random()} value={country}>
-                    {country}
-                  </MenuItem>
-                )}
-              </TextField>
-              
-              <TextField
-                id="depature-date"
-                label="Departure"
-                type="date"
-                className={classes.textField}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                margin='dense'
-                variant="outlined"
-              />
-              <TextField
-                id="return-date"
-                label="Return"
-                type="date"
-                className={classes.textField}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                margin='dense'
-                variant="outlined"
-              />
+              </Field>
 
-              <Link to='/passengers-counters'>
-                <TextField
-                  id="passengers"
-                  label="Passengers"
-                  type="text"
-                  placeholder="1 adult"
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <Field
+                  name="departure"
+                  label="Departure"
                   className={classes.textField}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  margin='dense'
-                  variant="outlined"
+                  component={DatePicker}
+                  variant='outlined'
                 />
-              </Link>
+              </MuiPickersUtilsProvider>
 
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <Field
+                  name="return"
+                  label="Return"
+                  className={classes.textField}
+                  component={DatePicker}
+                  variant='outlined'
+                />
+              </MuiPickersUtilsProvider>
+
+              <Field 
+                name="passengers"
+                label="Passengers"
+                className={classes.textField}
+                component={TextField}
+                variant="outlined"
+                onClick={this.showCounters}
+              />
               <Button variant="contained" color="primary" className={classes.button} type="submit">
                 Search
               </Button>
             </form>
-          {/* )}
-        /> */}
+          )}
+        />
+        <PassengersCounters isShown={this.state.countersIsShown} />
       </div>
     );
   }

@@ -7,7 +7,7 @@ import { styles } from './material.style';
 import TextField from '../text-field';
 import './index.scss';
 import '../../styles/button.scss';
-import {validate} from '../../form-validation/login-form';
+import {validate} from './validate';
 
 class Login extends React.Component {
   constructor(props) {
