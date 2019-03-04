@@ -7,7 +7,7 @@ import TextField from '../text-field';
 import {onSubmit} from '../../services/register-service';
 import './index.scss';
 import '../../styles/button.scss';
-import {validate} from '../../form-validation/register-form';
+// import {validate} from '../../form-validation/register-form';
 
 class Register extends React.Component {
   constructor(props) {
@@ -37,7 +37,7 @@ class Register extends React.Component {
     return (
       <Form 
         onSubmit={onSubmit}
-        validate={validate}
+        // validate={validate}
         render={({ handleSubmit }) => (
           <form className="register-form" onSubmit={handleSubmit}>
             <div className="register-form__container">

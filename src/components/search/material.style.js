@@ -1,18 +1,44 @@
 export const styles = theme => ({
   textField: {
-    // marginLeft: theme.spacing.unit,
-    // marginRight: theme.spacing.unit,
     marginBottom: theme.spacing.unit,
     backgroundColor: theme.palette.common.white,
-    width: 250,
+    width: 240,
     [theme.breakpoints.up('sm')]: {
-      width: 200,
+      width: 210,
     },
     [theme.breakpoints.up('md')]: {
-      width: 250,
+      width: 240,
     },
     [theme.breakpoints.up('lg')]: {
-      width: 280,
+      width: 270,
+    },
+  },
+
+  selectField: {
+    backgroundColor: theme.palette.common.white,
+    width: 240,
+    [theme.breakpoints.up('sm')]: {
+      width: 210,
+    },
+    [theme.breakpoints.up('md')]: {
+      width: 240,
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: 270,
+    },
+  },
+
+  passengers: {
+    backgroundColor: theme.palette.common.white,
+    width: 80,
+    [theme.breakpoints.up('sm')]: {
+      width: 70,
+    },
+    [theme.breakpoints.up('md')]: {
+      width: 80,
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: 90,
     },
   },
   selectEmpty: {

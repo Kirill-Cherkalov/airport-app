@@ -1,13 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom';
+// import { withStyles } from '@material-ui/core/styles';
 
 import FormControl from '@material-ui/core/FormControl';
+import FormHelperText from '@material-ui/core/FormHelperText';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
+// import {styles} from './material.style';
 
-export default class SimpleSelect extends React.Component {
+class SimpleSelect extends React.Component {
   state = {
     labelWidth: 0,
   };
@@ -19,10 +22,15 @@ export default class SimpleSelect extends React.Component {
   }
 
   render() {
+    // const {classes} = this.props;
     const {input: {name, onChange, value, ...restInput}, meta, ...rest} = this.props;
-
+    console.log();
     return (
-      <FormControl variant="outlined">
+      <FormControl 
+        variant="outlined"
+        error={meta.error && meta.touched}
+        // className={classes.formControl}
+      >
         <InputLabel
           ref={ref => {
             this.InputLabelRef = ref;
@@ -33,8 +41,7 @@ export default class SimpleSelect extends React.Component {
         </InputLabel>
         <Select
           {...rest}
-          // helperText={meta.touched ? meta.error : undefined}
-          error={meta.error && meta.touched}
+          name={name}
           inputProps={restInput}
           value={value}
           onChange={onChange}
@@ -49,11 +56,16 @@ export default class SimpleSelect extends React.Component {
           <MenuItem value="">
             <em>None</em>
           </MenuItem >
-          {this.props.airports.map(airport =>
-            <MenuItem key={Math.random()} value={airport}>{airport}</MenuItem>
+          {console.log(this.props.items)}
+          {this.props.items.length && this.props.items.map(({name}) =>
+            <MenuItem key={Math.random()} value={name}>{name}</MenuItem>
           )}
         </Select>
+        {meta.touched && meta.error && <FormHelperText margin='dense'>{meta.error}</FormHelperText>}
       </FormControl>
     );
   }
 }
+
+// export default withStyles(styles)(SimpleSelect);
+export default SimpleSelect;
