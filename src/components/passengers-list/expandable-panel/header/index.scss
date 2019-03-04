@@ -1,6 +1,7 @@
 @import 'src/variables';
 
 .expandable-panel__header {
+  background-color: $cardBackgroundColor;
   padding: 10px 20px;
   cursor: pointer;
   line-height: 1.75;

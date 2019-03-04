@@ -8,6 +8,8 @@
 }
 
 .expandable-panel-details {
+  
+  background-color: $cardBackgroundColor;
   &__names {
     display: flex;
     justify-content: space-evenly;

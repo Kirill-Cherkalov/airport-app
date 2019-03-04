@@ -1,6 +1,8 @@
 @import 'src/variables';
 
 .luggage-list {
+  
+  background-color: $cardBackgroundColor;
   &__item {
     display: flex;
     justify-content: space-evenly;
