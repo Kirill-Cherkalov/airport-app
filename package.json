@@ -37,7 +37,9 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "axios-mock-adapter": "^1.16.0",
     "node-sass": "^4.11.0",
+    "redux-devtools-extension": "^2.13.8",
     "sass-loader": "^7.1.0"
   }
 }

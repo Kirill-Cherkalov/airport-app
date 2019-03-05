@@ -10,7 +10,7 @@ export function airportsHaveErrored(state = false, action) {
 export function airports(state = [], action) {
   switch (action.type) {
     case 'AIRPORTS_FETCH_DATA_SUCCESS':
-      return action.aiports;
+      return action.airports;
     default:
       return state;
   }

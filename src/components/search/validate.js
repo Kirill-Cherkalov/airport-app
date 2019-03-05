@@ -28,7 +28,5 @@ export const validate = values => {
     errors.infant = ' ';
   }
 
-  
-
   return errors;
 };

@@ -3,9 +3,8 @@ import { withRouter } from 'react-router';
 import { Form, Field } from "react-final-form";
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { ticketsFetchData } from './actions/tickets';
-import { airportsFetchData } from './actions/airports';
-
+import { ticketsFetchData } from '../../redux/search/tickets/actions';
+import { airportsFetchData } from '../../redux/search/airports/actions';
 
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -14,7 +13,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider } from 'material-ui-pickers';
 import { styles } from './material.style';
 import './index.scss';
-// import {airports} from '../../data/airport-array';
+
 import {validate} from './validate';
 import DatePicker from '../date-picker';
 import SimpleSelect from '../select';
@@ -26,28 +25,15 @@ class Search extends React.Component {
   };
 
   onSubmit = async values => {
-    const e = JSON.stringify(values);
-    localStorage.setItem("search", e);
-  };
-
-  clickfunc = (history) => {
-    if (this.props.ticketsHasErrored) {
-      return console.log('Sorry! There was an error loading the items');
-    }
-
-    if (this.props.ticketsIsLoading) {
-      return console.log('Loading...');
-    }
-    
+    const {history} = this.props;
+    this.props.ticketsFetchData('/search-request', values);
     if (this.props.tickets) {
-      // const location = { path: '/flights-list' };
       return history.push('/flights-list');
     }
-  }
+  };
 
   componentDidMount() {
-    // this.props.ticketsFetchData('http://5826ed963900d612000138bd.mockapi.io/items');
-    this.props.airportsFetchData('https://restcountries.eu/rest/v2/all?fields=name');
+    this.props.airportsFetchData('/airports');
   }
 
   render() {
@@ -69,14 +55,14 @@ class Search extends React.Component {
               >
               </Field>
 
-              {/* <Field
+              <Field
                 name="to"
                 label="To"
                 className={classes.selectField}
                 component={SimpleSelect}
-                airports={this.props.airports}
+                items={this.props.airports}
               >
-              </Field> */}
+              </Field>
 
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <Field
@@ -136,6 +122,7 @@ class Search extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    userRequest: state.userRequest,
     tickets: state.tickets,
     ticketsHasErrored: state.ticketsHasErrored,
     ticketsIsLoading: state.ticketsIsLoading,
@@ -146,12 +133,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    ticketsFetchData: (url) => dispatch(ticketsFetchData(url)),
+    ticketsFetchData: (url, values) => dispatch(ticketsFetchData(url, values)),
     airportsFetchData: (url) => dispatch(airportsFetchData(url))
   };
 };
 
-// export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Search));
 export default compose(
   withRouter,
   withStyles(styles),

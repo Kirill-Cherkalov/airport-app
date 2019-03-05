@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { styles } from './material.style';
 import TextField from '../text-field';
-import {onSubmit} from '../../services/register-service';
 import './index.scss';
 import '../../styles/button.scss';
 // import {validate} from '../../form-validation/register-form';
@@ -28,15 +27,15 @@ class Register extends React.Component {
     this.setState({ [name]: event.target.value });
   };
 
-  // onSubmit = async values => {
-  //   const e = JSON.stringify(values);
-  //   localStorage.setItem("event", e);
-  // };
+  onSubmit = async values => {
+    const e = JSON.stringify(values);
+    localStorage.setItem("event", e);
+  };
 
   render() {
     return (
       <Form 
-        onSubmit={onSubmit}
+        onSubmit={this.onSubmit}
         // validate={validate}
         render={({ handleSubmit }) => (
           <form className="register-form" onSubmit={handleSubmit}>

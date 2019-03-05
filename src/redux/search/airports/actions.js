@@ -1,3 +1,5 @@
+import axios from '../../../data';
+
 export function airportHaveErrored(bool) {
   return {
     type: 'AIRPORTS_HAVE_ERRORED',
@@ -14,15 +16,19 @@ export function airportsFetchDataSuccess(airports) {
 
 export function airportsFetchData(url) {
   return (dispatch) => {
-    fetch(url)
+    axios.get(url)
       .then(response => {
-        if (!response.ok) {
+        if (!response.data.airports.length) {
+          console.log(response);
           throw Error(response.statusText);
         }
 
         return response;
       })
-      .then(response => response.json())
+      // .then(response => response.json())
+      .then(response => {
+        return response.data.airports;
+      })
       .then(airports => dispatch(airportsFetchDataSuccess(airports)))
       .catch(() => dispatch(airportHaveErrored(true)));
   }

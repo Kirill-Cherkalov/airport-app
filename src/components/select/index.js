@@ -56,7 +56,6 @@ class SimpleSelect extends React.Component {
           <MenuItem value="">
             <em>None</em>
           </MenuItem >
-          {console.log(this.props.items)}
           {this.props.items.length && this.props.items.map(({name}) =>
             <MenuItem key={Math.random()} value={name}>{name}</MenuItem>
           )}
