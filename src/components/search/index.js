@@ -12,12 +12,12 @@ import Button from '@material-ui/core/Button';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider } from 'material-ui-pickers';
 import { styles } from './material.style';
-import './index.scss';
 
 import {validate} from './validate';
 import DatePicker from '../date-picker';
 import SimpleSelect from '../select';
 import TextField from '../text-field';
+import './index.scss';
 
 class Search extends React.Component {
   static propTypes = {
@@ -121,12 +121,12 @@ class Search extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    userRequest: state.user.request,
-    tickets: state.tickets.items,
-    ticketsHasErrored: state.tickets.hasErrored,
-    ticketsIsLoading: state.tickets.isLoading,
-    airports: state.airports.items,
-    airportsHaveErrored: state.airports.hasErrored
+    userRequest: state.searchPage.user.request,
+    tickets: state.searchPage.tickets.items,
+    ticketsHasErrored: state.searchPage.tickets.hasErrored,
+    ticketsIsLoading: state.searchPage.tickets.isLoading,
+    airports: state.searchPage.airports.items,
+    airportsHaveErrored: state.searchPage.airports.hasErrored
   };
 };
 

@@ -12,6 +12,7 @@
     "final-form-material-ui": "^0.3.0",
     "keymirror": "^0.1.1",
     "material-ui-pickers": "^2.2.1",
+    "moment": "^2.24.0",
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
     "react-final-form": "^3.0.0",
@@ -26,7 +27,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint **/*.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -39,6 +41,9 @@
   ],
   "devDependencies": {
     "axios-mock-adapter": "^1.16.0",
+    "eslint": "^5.15.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-react": "^7.12.4",
     "node-sass": "^4.11.0",
     "redux-devtools-extension": "^2.13.8",
     "sass-loader": "^7.1.0"

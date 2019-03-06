@@ -12,5 +12,9 @@ export const styles = {
   icon: {
     marginLeft: 13,
     marginRight: 10
-  }
+  },
+  textField: {},
+  selectField: {},
+  passengers: {},
+  button: {}
 };
