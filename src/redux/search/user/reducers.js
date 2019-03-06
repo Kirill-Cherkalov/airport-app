@@ -1,7 +1,9 @@
-export function userRequest(state = {}, action) {
+import actionTypes from '../actionTypes';
+
+export function request(state = {}, action) {
   switch (action.type) {
-    case 'USER_REQUEST':
-      return action.request;
+    case actionTypes.USER_REQUEST:
+      return action.data;
     default: 
       return state;
   }

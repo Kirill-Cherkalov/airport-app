@@ -1,16 +1,17 @@
 import axios from '../../../data';
+import actionTypes from '../actionTypes';
 
-export function airportHaveErrored(bool) {
+export function hasErrored(bool) {
   return {
-    type: 'AIRPORTS_HAVE_ERRORED',
-    haveErrored: bool
+    type: actionTypes.AIRPORT_HAS_ERRORED,
+    hasErrored: bool
   };
 };
 
-export function airportsFetchDataSuccess(airports) {
+export function fetchDataSuccess(items) {
   return {
-    type: 'AIRPORTS_FETCH_DATA_SUCCESS',
-    airports
+    type: actionTypes.AIRPORT_FETCH_DATA_SUCCESS,
+    items
   }
 }
 
@@ -18,8 +19,8 @@ export function airportsFetchData(url) {
   return (dispatch) => {
     axios.get(url)
       .then(response => {
+        console.log(response);
         if (!response.data.airports.length) {
-          console.log(response);
           throw Error(response.statusText);
         }
 
@@ -29,7 +30,7 @@ export function airportsFetchData(url) {
       .then(response => {
         return response.data.airports;
       })
-      .then(airports => dispatch(airportsFetchDataSuccess(airports)))
-      .catch(() => dispatch(airportHaveErrored(true)));
+      .then(airports => dispatch(fetchDataSuccess(airports)))
+      .catch(() => dispatch(hasErrored(true)));
   }
 }

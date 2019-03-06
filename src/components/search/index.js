@@ -33,11 +33,11 @@ class Search extends React.Component {
   };
 
   componentDidMount() {
-    this.props.airportsFetchData('/airports');
+    this.props.airports.length || this.props.airportsFetchData('/airports');
   }
 
   render() {
-    const { history, classes } = this.props;
+    const { classes } = this.props;
 
     return (
       <div className="search-form-container">
@@ -108,7 +108,6 @@ class Search extends React.Component {
                 />
               </div>
 
-              <button onClick={() => history.push('/flights-list')}>button</button>
               <Button variant="contained" color="primary" className={classes.button} type="submit">
                 Search
               </Button>
@@ -122,12 +121,12 @@ class Search extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    userRequest: state.userRequest,
-    tickets: state.tickets,
-    ticketsHasErrored: state.ticketsHasErrored,
-    ticketsIsLoading: state.ticketsIsLoading,
-    airports: state.airports,
-    airportsHaveErrored: state.airportsHaveErrored
+    userRequest: state.user.request,
+    tickets: state.tickets.items,
+    ticketsHasErrored: state.tickets.hasErrored,
+    ticketsIsLoading: state.tickets.isLoading,
+    airports: state.airports.items,
+    airportsHaveErrored: state.airports.hasErrored
   };
 };
 

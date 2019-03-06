@@ -1,16 +1,18 @@
-export function airportsHaveErrored(state = false, action) {
+import actionTypes from '../actionTypes';
+
+export function hasErrored(state = false, action) {
   switch (action.type) {
-    case 'AIRPORTS_HAVE_ERRORED':
-      return action.haveErrored;
+    case actionTypes.AIRPORT_HAS_ERRORED:
+      return action.hasErrored;
     default:
       return state;
   }
 }
 
-export function airports(state = [], action) {
+export function items(state = [], action) {
   switch (action.type) {
-    case 'AIRPORTS_FETCH_DATA_SUCCESS':
-      return action.airports;
+    case actionTypes.AIRPORT_FETCH_DATA_SUCCESS:
+      return action.items;
     default:
       return state;
   }

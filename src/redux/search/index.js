@@ -1,14 +1,10 @@
 import { combineReducers } from 'redux';
-import { tickets, ticketsHasErrored, ticketsIsLoading } from './tickets/reducers';
-import { airports, airportsHaveErrored } from './airports/reducers';
-import { userRequest } from './user/reducers';
+import tickets from './tickets';
+import airports from './airports';
+import user from './user';
 
 export default combineReducers({
   tickets,
-  ticketsHasErrored,
-  ticketsIsLoading,
   airports,
-  airportsHaveErrored,
-  userRequest
+  user
 });
-

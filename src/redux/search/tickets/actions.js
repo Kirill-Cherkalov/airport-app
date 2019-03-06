@@ -1,38 +1,40 @@
 import axios from '../../../data';
+import actionTypes from '../actionTypes';
 import {userRequestData} from '../user/actions';
 
-export function ticketsHasErrored(bool) {
+export function hasErrored(bool) {
   return {
-    type: 'TICKETS_HAS_ERRORED',
+    type: actionTypes.TICKETS_HAS_ERRORED,
     hasErrored: bool
   };
 }
 
-export function ticketsIsLoading(bool) {
+export function isLoading(bool) {
   return {
-    type: 'TICKETS_IS_LOADING',
+    type: actionTypes.TICKETS_IS_LOADING,
     isLoading: bool
   };
 }
 
-export function ticketsFetchDataSuccess(tickets) {
+export function fetchDataSuccess(items) {
   return {
-    type: 'TICKETS_FETCH_DATA_SUCCESS',
-    tickets
+    type: actionTypes.TICKETS_FETCH_DATA_SUCCESS,
+    items
   };
 }
 
 export function ticketsFetchData(url, userRequest) {
-  return async (dispatch) => {
-    dispatch(ticketsIsLoading(true));
+  return (dispatch) => {
+    dispatch(isLoading(true));
     dispatch(userRequestData(userRequest));
 
     axios.post(url)
       .then(response => {
         if (!response.data.tickets.length) {
-          console.log(response);
           throw Error(response.statusText);
         }
+
+        dispatch(isLoading(false));
 
         return response;
       })
@@ -40,9 +42,9 @@ export function ticketsFetchData(url, userRequest) {
       .then(response => {
         return response.data.tickets;
       })
-      .then(tickets => dispatch(ticketsFetchDataSuccess(tickets)))
+      .then(tickets => dispatch(fetchDataSuccess(tickets)))
       .catch(() => {
-        dispatch(ticketsHasErrored(true))
+        dispatch(hasErrored(true))
       });
   };
 }
