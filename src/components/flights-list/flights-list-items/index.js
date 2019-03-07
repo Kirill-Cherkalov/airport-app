@@ -4,7 +4,14 @@ import FlightTakeoffIcon from '@material-ui/icons/FlightTakeoff';
 import FlightLandIcon from '@material-ui/icons/FlightLand';
 import './index.scss';
 
-export default function FlightsListItems({ classes, flights, setPrice }) {
+export default function FlightsListItems({
+  classes, flights, setTotalPrice, setSelectedFlightInfo,
+}) {
+  const setInfo = (price, flightInfo) => {
+    setTotalPrice(price);
+    setSelectedFlightInfo(flightInfo);
+  };
+
   return (
     flights.map(({
       id, date, startTime, endTime, price,
@@ -22,7 +29,15 @@ export default function FlightsListItems({ classes, flights, setPrice }) {
           </Typography>
         </div>
         <div className="flights-list-item__price">
-          <button type="button" className="price-link" onClick={() => setPrice(price)}>$ {price}</button>
+          <button
+            type="button"
+            className="price-link"
+            onClick={() => setInfo(price, {
+              id, date, startTime, endTime, price,
+            })}
+          >
+            $ {price}
+          </button>
         </div>
       </div>
     ))

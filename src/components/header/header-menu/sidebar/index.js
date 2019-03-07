@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import './index.scss';
 
@@ -25,12 +25,12 @@ function Sidebar({ isOpen, hideSidebar, children }) {
   };
 
   return (
-    <>
+    <Fragment>
       <div className={`sidebar${isOpen ? ' sidebar_opened' : ''}`}>
         {children}
       </div>
       <Overlay isOpen={isOpen} hideSidebar={hideSidebar} />
-    </>
+    </Fragment>
   );
 }
 

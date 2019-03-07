@@ -1,6 +1,6 @@
 import axios from '../../../data';
 import actionTypes from '../actionTypes';
-import userRequestData from '../user/actions';
+import { setUserRequestData } from '../../user/actions';
 
 export function hasErrored(bool) {
   return {
@@ -26,7 +26,7 @@ export function fetchDataSuccess(items) {
 export function ticketsFetchData(url, userRequest) {
   return (dispatch) => {
     dispatch(isLoading(true));
-    dispatch(userRequestData(userRequest));
+    dispatch(setUserRequestData(userRequest));
 
     axios.post(url)
       .then((response) => {
@@ -46,24 +46,3 @@ export function ticketsFetchData(url, userRequest) {
       });
   };
 }
-
-
-// export function ticketsFetchData(url) {
-//   return (dispatch) => {
-//     dispatch(ticketsIsLoading(true));
-
-//     fetch(url)
-//       .then(response => {
-//         if(!response.ok) {
-//           throw Error(response.statusText);
-//         }
-
-//         dispatch(ticketsIsLoading(false));
-
-//         return response;
-//       })
-//       .then(response => response.json())
-//       .then(tickets => dispatch(ticketsFetchDataSuccess(tickets)))
-//       .catch(() => dispatch(ticketsHasErrored(true)));
-//   };
-// }

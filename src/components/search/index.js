@@ -41,7 +41,6 @@ class Search extends React.Component {
 
   render() {
     const { classes } = this.props;
-    console.log(this.props.airports);
 
     return (
       <div className="search-form-container">
@@ -122,7 +121,7 @@ class Search extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  userRequest: state.searchPage.user.request,
+  userRequest: state.user.request,
   tickets: state.searchPage.tickets.items,
   ticketsHasErrored: state.searchPage.tickets.hasErrored,
   ticketsIsLoading: state.searchPage.tickets.isLoading,

@@ -4,6 +4,7 @@ import React from 'react';
 // import { Form, Field } from "react-final-form";
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import moment from 'moment';
 // import { selectedFlightInfo, flightPrice } from '../../redux/flights-list/actions';
 
 import PropTypes from 'prop-types';
@@ -12,11 +13,11 @@ import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
-import moment from 'moment';
 import styles from './material.style';
-import flightPrice from '../../redux/flights-list/actions';
+// import flightPrice from '../../redux/tickets-page/actions';
+import { setSelectedFlightInfo, setTotalPrice } from '../../redux/user/actions';
 
-// import Search from '../search';
+import Search from '../search';
 
 import FlightsListItems from './flights-list-items';
 import './index.scss';
@@ -26,7 +27,8 @@ class FlightsList extends React.Component {
     classes: PropTypes.object.isRequired,
     userRequest: PropTypes.object.isRequired,
     tickets: PropTypes.array.isRequired,
-    setPrice: PropTypes.func.isRequired,
+    setTotalPrice: PropTypes.func.isRequired,
+    setSelectedFlightInfo: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -67,13 +69,13 @@ class FlightsList extends React.Component {
               </Toolbar>
             </AppBar>
 
-            {/* {this.state.isOpen && <Search />} */}
+            {this.state.isOpen && <Search />}
           </div>
         )
           : <h1>Please, try to search flights</h1>}
 
         <List className="flights-list" disablePadding>
-          <FlightsListItems classes={classes} flights={this.props.tickets} setPrice={this.props.setPrice} />
+          <FlightsListItems classes={classes} flights={this.props.tickets} setTotalPrice={this.props.setTotalPrice} setSelectedFlightInfo={this.props.setSelectedFlightInfo} />
         </List>
       </div>
     );
@@ -81,12 +83,13 @@ class FlightsList extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  userRequest: state.searchPage.user.request,
+  userRequest: state.user.request,
   tickets: state.searchPage.tickets.items,
 });
 
 const mapDispatchToProps = dispatch => ({
-  setPrice: price => dispatch(flightPrice(price)),
+  setTotalPrice: price => dispatch(setTotalPrice(price)),
+  setSelectedFlightInfo: flightInfo => dispatch(setSelectedFlightInfo(flightInfo)),
 });
 
 export default compose(

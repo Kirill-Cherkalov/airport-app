@@ -2,12 +2,11 @@ import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import searchPage from './search';
-// import rootReducer from './search';
-import ticketsPage from './flights-list';
+import user from './user';
 
 const rootReducer = combineReducers({
   searchPage,
-  ticketsPage,
+  user,
 });
 
 export default function configureStore(initialState) {
