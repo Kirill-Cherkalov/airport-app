@@ -1,21 +1,21 @@
 import React from 'react';
-import {TableRows} from './table-rows';
+import TableRows from './table-rows';
 import './index.scss';
 
-export function PassengersSeatsTable() {
+export default function PassengersSeatsTable() {
   const passengers = [
     {
       type: 'adult',
-      amount: 2
+      amount: 2,
     },
     {
       type: 'child',
-      amount: 3
+      amount: 3,
     },
     {
       type: 'infant',
-      amount: 3
-    }
+      amount: 3,
+    },
   ];
 
   return (

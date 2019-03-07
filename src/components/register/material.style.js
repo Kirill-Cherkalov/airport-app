@@ -1,4 +1,4 @@
-export const styles = theme => ({
+const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
@@ -9,5 +9,7 @@ export const styles = theme => ({
   },
   menu: {
     width: 200,
-  }
+  },
 });
+
+export default styles;

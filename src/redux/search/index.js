@@ -6,5 +6,5 @@ import user from './user';
 export default combineReducers({
   tickets,
   airports,
-  user
+  user,
 });

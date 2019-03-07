@@ -1,9 +1,9 @@
 import React from 'react';
-import {PassengersSeatsTable} from './passengers-seats-table';
-import {Plane} from './plane';
+import PassengersSeatsTable from './passengers-seats-table';
+import Plane from './plane';
 import './index.scss';
 
-export function SeatsChoice() {
+export default function SeatsChoice() {
   return (
     <div className="seats-choice-container">
       <PassengersSeatsTable />

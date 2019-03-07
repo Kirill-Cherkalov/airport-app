@@ -3,5 +3,5 @@ import { items, hasErrored } from './reducers';
 
 export default combineReducers({
   items,
-  hasErrored
+  hasErrored,
 });

@@ -4,7 +4,7 @@ export function hasErrored(state = false, action) {
   switch (action.type) {
     case actionTypes.TICKETS_HAS_ERRORED:
       return action.hasErrored;
-    default: 
+    default:
       return state;
   }
 }

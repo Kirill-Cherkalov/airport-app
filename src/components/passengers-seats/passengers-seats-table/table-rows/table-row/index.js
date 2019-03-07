@@ -1,16 +1,23 @@
+/* eslint-disable */
 import React from 'react';
+import PropTypes from 'prop-types';
 import './index.scss';
 
-export class TableRow extends React.Component {
+export default class TableRow extends React.Component {
+  static propTypes = {
+    index: PropTypes.number.isRequired,
+    type: PropTypes.string.isRequired,
+  }
+
   constructor(props) {
     super(props);
     this.state = {
-      seat: 'seat'
-    }
+      seat: 'seat',
+    };
   }
 
   changeSeat = () => {
-    this.setState({seat: this.state.seat === 'seat' ? '6b' : 'seat'});
+    this.setState({ seat: this.state.seat === 'seat' ? '6b' : 'seat' });
   }
 
   render() {

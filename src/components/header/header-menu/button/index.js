@@ -1,10 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import MenuIcon from '@material-ui/icons/Menu';
 import './index.scss';
 
-export function MenuButton(props) {
+export default function MenuButton(props) {
+  MenuButton.propTypes = {
+    showSidebar: PropTypes.func.isRequired,
+  };
+
   return (
-    <button className='header__button' onClick={props.showSidebar}>
+    <button type="button" className="header__button" onClick={props.showSidebar}>
       <MenuIcon />
     </button>
   );

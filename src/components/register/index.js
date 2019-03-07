@@ -1,8 +1,7 @@
 import React from 'react';
-import { Form, Field } from "react-final-form";
-import PropTypes from 'prop-types';
+import { Form, Field } from 'react-final-form';
 import { withStyles } from '@material-ui/core/styles';
-import { styles } from './material.style';
+import styles from './material.style';
 import TextField from '../text-field';
 import './index.scss';
 import '../../styles/button.scss';
@@ -12,29 +11,25 @@ class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: ""
-    }
+      // firstName: '',
+      // lastName: '',
+      // email: '',
+      // password: '',
+    };
   }
 
-  static propTypes = {
-    classes: PropTypes.object.isRequired,
-  };
-
-  handleChange = name => event => {
+  handleChange = name => (event) => {
     this.setState({ [name]: event.target.value });
   };
 
-  onSubmit = async values => {
+  onSubmit = async (values) => {
     const e = JSON.stringify(values);
-    localStorage.setItem("event", e);
+    localStorage.setItem('event', e);
   };
 
   render() {
     return (
-      <Form 
+      <Form
         onSubmit={this.onSubmit}
         // validate={validate}
         render={({ handleSubmit }) => (

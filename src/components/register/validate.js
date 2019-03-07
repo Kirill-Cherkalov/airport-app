@@ -1,16 +1,18 @@
-export const validate = values => {
+const validate = (values) => {
   const errors = {};
   if (!values.firstName) {
-    errors.firstName = "Required";
+    errors.firstName = 'Required';
   }
   if (!values.lastName) {
-    errors.lastName = "Required";
+    errors.lastName = 'Required';
   }
   if (!values.email) {
-    errors.email = "Required";
+    errors.email = 'Required';
   }
   if (!values.password) {
-    errors.password = "Required";
+    errors.password = 'Required';
   }
   return errors;
 };
+
+export default validate;

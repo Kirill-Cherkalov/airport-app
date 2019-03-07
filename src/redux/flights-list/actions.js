@@ -5,11 +5,11 @@
 //   }
 // }
 
-export function flightPrice(price) {
+export default function flightPrice(price) {
   return {
     type: 'FLIGHT_PRICE',
-    price
-  }
+    price,
+  };
 }
 
 // export function setPrice(price) {

@@ -1,23 +1,37 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './index.scss';
 
-function Overlay({isOpen, hideSidebar}) {
+function Overlay({ isOpen, hideSidebar }) {
+  Overlay.propTypes = {
+    isOpen: PropTypes.bool.isRequired,
+    hideSidebar: PropTypes.func.isRequired,
+  };
+
   return (
-    <div 
-      className={"overlay" + (isOpen ? " overlay_opened" : "")}
+    <div
+      role="presentation"
+      className={`overlay${isOpen ? ' overlay_opened' : ''}`}
       onClick={hideSidebar}
-    ></div>);
+    />
+  );
 }
 
-function Sidebar({isOpen, hideSidebar, children}) {
+function Sidebar({ isOpen, hideSidebar, children }) {
+  Sidebar.propTypes = {
+    isOpen: PropTypes.bool.isRequired,
+    hideSidebar: PropTypes.func.isRequired,
+    children: PropTypes.element.isRequired,
+  };
+
   return (
     <>
-      <div className={"sidebar" + (isOpen ? " sidebar_opened" : "")}>
+      <div className={`sidebar${isOpen ? ' sidebar_opened' : ''}`}>
         {children}
       </div>
-      <Overlay isOpen={isOpen} hideSidebar={hideSidebar}/>
+      <Overlay isOpen={isOpen} hideSidebar={hideSidebar} />
     </>
   );
 }
 
-export {Sidebar};
+export default Sidebar;

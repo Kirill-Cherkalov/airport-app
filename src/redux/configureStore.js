@@ -7,13 +7,13 @@ import ticketsPage from './flights-list';
 
 const rootReducer = combineReducers({
   searchPage,
-  ticketsPage
+  ticketsPage,
 });
 
 export default function configureStore(initialState) {
   return createStore(
     rootReducer,
     initialState,
-    composeWithDevTools(applyMiddleware(thunk))
+    composeWithDevTools(applyMiddleware(thunk)),
   );
 }

@@ -1,4 +1,6 @@
-import React from 'react'
+/* eslint-disable */
+import React from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 // import { withStyles } from '@material-ui/core/styles';
 
@@ -11,6 +13,13 @@ import OutlinedInput from '@material-ui/core/OutlinedInput';
 // import {styles} from './material.style';
 
 class SimpleSelect extends React.Component {
+  static propTypes = {
+    input: PropTypes.object.isRequired,
+    meta: PropTypes.object.isRequired,
+    label: PropTypes.string.isRequired,
+    items: PropTypes.array.isRequired,
+  };
+
   state = {
     labelWidth: 0,
   };
@@ -23,21 +32,25 @@ class SimpleSelect extends React.Component {
 
   render() {
     // const {classes} = this.props;
-    const {input: {name, onChange, value, ...restInput}, meta, ...rest} = this.props;
-    console.log();
+    const {
+      input: {
+        name, onChange, value, ...restInput
+      }, meta, ...rest
+    } = this.props;
+
     return (
-      <FormControl 
+      <FormControl
         variant="outlined"
         error={meta.error && meta.touched}
         // className={classes.formControl}
       >
         <InputLabel
-          ref={ref => {
+          ref={(ref) => {
             this.InputLabelRef = ref;
           }}
           htmlFor="outlined-age-simple"
         >
-        {this.props.label}
+          {this.props.label}
         </InputLabel>
         <Select
           {...rest}
@@ -45,22 +58,20 @@ class SimpleSelect extends React.Component {
           inputProps={restInput}
           value={value}
           onChange={onChange}
-          input={
+          input={(
             <OutlinedInput
               labelWidth={this.state.labelWidth}
               name={name}
               id="outlined-age-simple"
             />
-          }
+)}
         >
           <MenuItem value="">
             <em>None</em>
-          </MenuItem >
-          {this.props.items.length && this.props.items.map(({name}) =>
-            <MenuItem key={Math.random()} value={name}>{name}</MenuItem>
-          )}
+          </MenuItem>
+          {this.props.items.length && this.props.items.map(({ name }) => <MenuItem key={Math.random()} value={name}>{name}</MenuItem>)}
         </Select>
-        {meta.touched && meta.error && <FormHelperText margin='dense'>{meta.error}</FormHelperText>}
+        {meta.touched && meta.error && <FormHelperText margin="dense">{meta.error}</FormHelperText>}
       </FormControl>
     );
   }

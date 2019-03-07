@@ -1,7 +1,12 @@
-import React from 'react'
-import TextField from "@material-ui/core/TextField";
+/* eslint-disable */
+import React from 'react';
+import TextField from '@material-ui/core/TextField';
 
-export default ({input: { name, onChange, value, ...restInput }, meta, ...rest}) => (
+export default ({
+  input: {
+    name, onChange, value, ...restInput
+  }, meta, ...rest
+}) => (
   <TextField
     {...rest}
     name={name}
@@ -11,4 +16,4 @@ export default ({input: { name, onChange, value, ...restInput }, meta, ...rest})
     onChange={onChange}
     value={value}
   />
-)
+);

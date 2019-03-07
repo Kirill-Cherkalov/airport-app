@@ -1,4 +1,4 @@
-export const styles = theme => ({
+const styles = theme => ({
   textField: {
     marginBottom: theme.spacing.unit,
     backgroundColor: theme.palette.common.white,
@@ -46,6 +46,8 @@ export const styles = theme => ({
   },
   button: {
     margin: theme.spacing.unit,
-    marginTop: 20
+    marginTop: 20,
   },
 });
+
+export default styles;

@@ -1,34 +1,22 @@
 import React from 'react';
-import { Form, Field } from "react-final-form";
-import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
+import { Form, Field } from 'react-final-form';
+// import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
-import { styles } from './material.style';
+import styles from './material.style';
 import TextField from '../text-field';
 import './index.scss';
 import '../../styles/button.scss';
-import {validate} from './validate';
+import validate from './validate';
 
 class Login extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: "",
-      password: ""
-    }
-  }
-
-  static propTypes = {
-    classes: PropTypes.object.isRequired,
-  };
-
-  handleChange = name => event => {
+  handleChange = name => (event) => {
     this.setState({ [name]: event.target.value });
   };
 
-  onSubmit = async values => {
+  onSubmit = async (values) => {
     const e = JSON.stringify(values);
-    localStorage.setItem("login", e);
+    localStorage.setItem('login', e);
   };
 
   render() {
@@ -56,7 +44,7 @@ class Login extends React.Component {
               <button className="button" type="submit">
                 Log in
               </button>
-              
+
               <Link to="/register">Registration</Link>
             </div>
           </form>

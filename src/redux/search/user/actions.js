@@ -1,9 +1,8 @@
 import actionTypes from '../actionTypes';
 
-export function userRequestData(data) {
+export default function userRequestData(data) {
   return {
     type: actionTypes.USER_REQUEST,
-    data
-  }
+    data,
+  };
 }
-

@@ -7,7 +7,7 @@
 //   }
 // }
 
-export function flightPrice(state = 150, action) {
+export default function flightPrice(state = 150, action) {
   switch (action.type) {
     case 'FLIGHT_PRICE':
       return action.price;

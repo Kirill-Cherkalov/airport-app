@@ -3,21 +3,22 @@ import Button from '@material-ui/core/Button';
 import Person from '@material-ui/icons/Person';
 import './index.scss';
 
-export class PassengersCounters extends React.Component {
+export default class PassengersCounters extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       adult: 0,
       child: 0,
-      infant: 0
-    }
+      infant: 0,
+    };
   }
 
   addPassenger = () => {}
+
   removePassenger = () => {}
 
   render() {
-    const passengersTypes = ["adult", "child", "infant"];
+    const passengersTypes = ['adult', 'child', 'infant'];
 
     return (
       <div className="counters">
@@ -25,13 +26,13 @@ export class PassengersCounters extends React.Component {
           <div className="counters__icon">
             <Person />
           </div>
-          {passengersTypes.map(type => 
+          {passengersTypes.map(type => (
             <div className="counter__wrapper" key={Math.random()}>
-              <button className="counter__button counter__button_minus">-</button>
+              <button type="button" className="counter__button counter__button_minus">-</button>
               <div className="counter__info">{this.state[type]} {type}</div>
-              <button className="counter__button counter__button_plus">+</button>
+              <button type="button" className="counter__button counter__button_plus">+</button>
             </div>
-          )}
+          ))}
 
           <Button variant="contained" color="primary" type="submit">
             OK

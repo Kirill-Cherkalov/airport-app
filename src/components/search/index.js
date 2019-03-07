@@ -1,19 +1,19 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { Form, Field } from "react-final-form";
+import { Form, Field } from 'react-final-form';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { ticketsFetchData } from '../../redux/search/tickets/actions';
-import { airportsFetchData } from '../../redux/search/airports/actions';
 
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider } from 'material-ui-pickers';
-import { styles } from './material.style';
+import { airportsFetchData } from '../../redux/search/airports/actions';
+import { ticketsFetchData } from '../../redux/search/tickets/actions';
+import styles from './material.style';
 
-import {validate} from './validate';
+import validate from './validate';
 import DatePicker from '../date-picker';
 import SimpleSelect from '../select';
 import TextField from '../text-field';
@@ -22,22 +22,26 @@ import './index.scss';
 class Search extends React.Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
-  };
-
-  onSubmit = async values => {
-    const {history} = this.props;
-    this.props.ticketsFetchData('/search-request', values);
-    if (this.props.tickets) {
-      return history.push('/flights-list');
-    }
+    airports: PropTypes.array.isRequired,
+    ticketsFetchData: PropTypes.func.isRequired,
+    airportsFetchData: PropTypes.func.isRequired,
+    tickets: PropTypes.array.isRequired,
+    history: PropTypes.object.isRequired,
   };
 
   componentDidMount() {
-    this.props.airports.length || this.props.airportsFetchData('/airports');
+    return this.props.airports.length || this.props.airportsFetchData('/airports');
   }
+
+  onSubmit = async (values) => {
+    const { history } = this.props;
+    this.props.ticketsFetchData('/search-request', values);
+    return this.props.tickets && history.push('/flights-list');
+  };
 
   render() {
     const { classes } = this.props;
+    console.log(this.props.airports);
 
     return (
       <div className="search-form-container">
@@ -52,8 +56,7 @@ class Search extends React.Component {
                 className={classes.selectField}
                 component={SimpleSelect}
                 items={this.props.airports}
-              >
-              </Field>
+              />
 
               <Field
                 name="to"
@@ -61,8 +64,7 @@ class Search extends React.Component {
                 className={classes.selectField}
                 component={SimpleSelect}
                 items={this.props.airports}
-              >
-              </Field>
+              />
 
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <Field
@@ -70,7 +72,7 @@ class Search extends React.Component {
                   label="Departure"
                   className={classes.textField}
                   component={DatePicker}
-                  variant='outlined'
+                  variant="outlined"
                 />
               </MuiPickersUtilsProvider>
 
@@ -80,26 +82,26 @@ class Search extends React.Component {
                   label="Return"
                   className={classes.textField}
                   component={DatePicker}
-                  variant='outlined'
+                  variant="outlined"
                 />
               </MuiPickersUtilsProvider>
 
-              <div className='passengers-counters'>
-                <Field 
+              <div className="passengers-counters">
+                <Field
                   name="adult"
                   label="Adult"
                   className={classes.passengers}
                   component={TextField}
                   variant="outlined"
                 />
-                <Field 
+                <Field
                   name="child"
                   label="Child"
                   className={classes.passengers}
                   component={TextField}
                   variant="outlined"
                 />
-                <Field 
+                <Field
                   name="infant"
                   label="Infant"
                   className={classes.passengers}
@@ -119,26 +121,22 @@ class Search extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    userRequest: state.searchPage.user.request,
-    tickets: state.searchPage.tickets.items,
-    ticketsHasErrored: state.searchPage.tickets.hasErrored,
-    ticketsIsLoading: state.searchPage.tickets.isLoading,
-    airports: state.searchPage.airports.items,
-    airportsHaveErrored: state.searchPage.airports.hasErrored
-  };
-};
+const mapStateToProps = state => ({
+  userRequest: state.searchPage.user.request,
+  tickets: state.searchPage.tickets.items,
+  ticketsHasErrored: state.searchPage.tickets.hasErrored,
+  ticketsIsLoading: state.searchPage.tickets.isLoading,
+  airports: state.searchPage.airports.items,
+  airportsHaveErrored: state.searchPage.airports.hasErrored,
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    ticketsFetchData: (url, values) => dispatch(ticketsFetchData(url, values)),
-    airportsFetchData: (url) => dispatch(airportsFetchData(url))
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  ticketsFetchData: (url, values) => dispatch(ticketsFetchData(url, values)),
+  airportsFetchData: url => dispatch(airportsFetchData(url)),
+});
 
 export default compose(
   withRouter,
   withStyles(styles),
-  connect(mapStateToProps, mapDispatchToProps)
+  connect(mapStateToProps, mapDispatchToProps),
 )(Search);

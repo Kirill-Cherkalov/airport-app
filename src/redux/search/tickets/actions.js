@@ -1,25 +1,25 @@
 import axios from '../../../data';
 import actionTypes from '../actionTypes';
-import {userRequestData} from '../user/actions';
+import userRequestData from '../user/actions';
 
 export function hasErrored(bool) {
   return {
     type: actionTypes.TICKETS_HAS_ERRORED,
-    hasErrored: bool
+    hasErrored: bool,
   };
 }
 
 export function isLoading(bool) {
   return {
     type: actionTypes.TICKETS_IS_LOADING,
-    isLoading: bool
+    isLoading: bool,
   };
 }
 
 export function fetchDataSuccess(items) {
   return {
     type: actionTypes.TICKETS_FETCH_DATA_SUCCESS,
-    items
+    items,
   };
 }
 
@@ -29,7 +29,7 @@ export function ticketsFetchData(url, userRequest) {
     dispatch(userRequestData(userRequest));
 
     axios.post(url)
-      .then(response => {
+      .then((response) => {
         if (!response.data.tickets.length) {
           throw Error(response.statusText);
         }
@@ -39,41 +39,13 @@ export function ticketsFetchData(url, userRequest) {
         return response;
       })
       // .then(response => response.json())
-      .then(response => {
-        return response.data.tickets;
-      })
+      .then(response => response.data.tickets)
       .then(tickets => dispatch(fetchDataSuccess(tickets)))
       .catch(() => {
-        dispatch(hasErrored(true))
+        dispatch(hasErrored(true));
       });
   };
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // export function ticketsFetchData(url) {
