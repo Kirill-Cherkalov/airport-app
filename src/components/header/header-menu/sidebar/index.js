@@ -2,36 +2,33 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import './index.scss';
 
-function Overlay({ isOpen, hideSidebar }) {
-  Overlay.propTypes = {
-    isOpen: PropTypes.bool.isRequired,
-    hideSidebar: PropTypes.func.isRequired,
-  };
+const Overlay = ({ isOpen, hideSidebar }) => (
+  <div
+    role="presentation"
+    className={`overlay${isOpen ? ' overlay_opened' : ''}`}
+    onClick={hideSidebar}
+  />
+);
 
-  return (
-    <div
-      role="presentation"
-      className={`overlay${isOpen ? ' overlay_opened' : ''}`}
-      onClick={hideSidebar}
-    />
-  );
-}
+Overlay.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  hideSidebar: PropTypes.func.isRequired,
+};
 
-function Sidebar({ isOpen, hideSidebar, children }) {
-  Sidebar.propTypes = {
-    isOpen: PropTypes.bool.isRequired,
-    hideSidebar: PropTypes.func.isRequired,
-    children: PropTypes.element.isRequired,
-  };
+const Sidebar = ({ isOpen, hideSidebar, children }) => (
+  <Fragment>
+    <div className={`sidebar${isOpen ? ' sidebar_opened' : ''}`}>
+      {children}
+    </div>
+    <Overlay isOpen={isOpen} hideSidebar={hideSidebar} />
+  </Fragment>
+);
 
-  return (
-    <Fragment>
-      <div className={`sidebar${isOpen ? ' sidebar_opened' : ''}`}>
-        {children}
-      </div>
-      <Overlay isOpen={isOpen} hideSidebar={hideSidebar} />
-    </Fragment>
-  );
-}
+Sidebar.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  hideSidebar: PropTypes.func.isRequired,
+  children: PropTypes.element.isRequired,
+};
+
 
 export default Sidebar;

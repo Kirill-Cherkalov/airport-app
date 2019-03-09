@@ -5,11 +5,11 @@ import './index.scss';
 
 export default function MenuButton(props) {
   MenuButton.propTypes = {
-    showSidebar: PropTypes.func.isRequired,
+    clicked: PropTypes.func.isRequired,
   };
 
   return (
-    <button type="button" className="header__button" onClick={props.showSidebar}>
+    <button type="button" className="header__button" onClick={props.clicked}>
       <MenuIcon />
     </button>
   );

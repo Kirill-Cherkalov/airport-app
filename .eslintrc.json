@@ -21,6 +21,7 @@
         "ignoreUrls": true,
         "tabWidth": 2
       }],
+      "no-plusplus": "off",
       "no-param-reassign": "warn",
       "no-underscore-dangle": "warn",
       "no-unused-expressions": ["error", { "allowTaggedTemplates": true }],

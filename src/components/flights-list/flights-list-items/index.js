@@ -1,4 +1,5 @@
 import React from 'react';
+// import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import FlightTakeoffIcon from '@material-ui/icons/FlightTakeoff';
 import FlightLandIcon from '@material-ui/icons/FlightLand';
@@ -14,7 +15,7 @@ export default function FlightsListItems({
 
   return (
     flights.map(({
-      id, date, startTime, endTime, price,
+      id, date, startTime, endTime, price, planeId,
     }) => (
       <div key={id} className="flights-list-item">
         <div className="flights-list-item__info">
@@ -33,11 +34,12 @@ export default function FlightsListItems({
             type="button"
             className="price-link"
             onClick={() => setInfo(price, {
-              id, date, startTime, endTime, price,
+              id, date, startTime, endTime, price, planeId,
             })}
           >
             $ {price}
           </button>
+          {/* <Link to="/passengers-seats">$ {price}</Link> */}
         </div>
       </div>
     ))

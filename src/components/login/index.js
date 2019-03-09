@@ -14,7 +14,7 @@ class Login extends React.Component {
     this.setState({ [name]: event.target.value });
   };
 
-  onSubmit = async (values) => {
+  onSubmit = (values) => {
     const e = JSON.stringify(values);
     localStorage.setItem('login', e);
   };

@@ -14,7 +14,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import styles from './material.style';
-// import flightPrice from '../../redux/tickets-page/actions';
 import { setSelectedFlightInfo, setTotalPrice } from '../../redux/user/actions';
 
 import Search from '../search';
@@ -60,7 +59,7 @@ class FlightsList extends React.Component {
                     {from} to {to}
                   </Typography>
                   <Typography color="inherit">
-                  departure {moment(departure).format('LL')}, {back && `return ${moment(back).format('LL')}`}, {adult && adult !== '0' && `adult ${adult}`} {child && child !== '0' && `child ${child}`} {infant && infant !== '0' && `infant ${infant}`}
+                    departure {moment(departure).format('LL')}, {back && `return ${moment(back).format('LL')}`}, {adult && adult !== '0' && `adult ${adult}`} {child && child !== '0' && `child ${child}`} {infant && infant !== '0' && `infant ${infant}`}
                     <button className="change-button" type="button" onClick={this.onclick}>
                     Change
                     </button>

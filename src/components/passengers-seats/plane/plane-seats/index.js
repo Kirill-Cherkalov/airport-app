@@ -6,7 +6,7 @@ export default function PlaneSeats({ rows, location, signs }) {
 
   return (
     rowss.map((elem, i) => {
-      i += 1;
+      i++;
       return (
         <div key={Math.random()} className="row seats">
           {location.map((place, j) => (place

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import MenuButton from './button';
@@ -12,12 +12,12 @@ export default function HeaderMenu(props) {
   };
 
   return (
-    <>
+    <Fragment>
       <Menu className="header__menu" />
       <MenuButton showSidebar={props.showSidebar} />
-      <Sidebar isOpen={props.isOpen} hideSidebar={props.showSidebar}>
+      <Sidebar isOpen={props.isOpen} clicked={props.showSidebar}>
         <Menu className="sidebar__menu" />
       </Sidebar>
-    </>
+    </Fragment>
   );
 }
