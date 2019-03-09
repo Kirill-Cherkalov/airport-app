@@ -8,8 +8,8 @@
   margin-left: -18px;
   border-radius: 6px;
   visibility: hidden;
-  background-color: black;
-  color: #fff;
+  background-color: $tooltipBackgroundColor;
+  color: $textWhiteColor;
   text-align: center;
   z-index: 1;
 
@@ -21,7 +21,7 @@
     margin-left: -5px;
     border-width: 5px;
     border-style: solid;
-    border-color: black transparent transparent transparent;
+    border-color: $tooltipBackgroundColor transparent transparent transparent;
   }
 }
 

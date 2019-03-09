@@ -11,7 +11,7 @@
     cursor: pointer;
 
     &:not(:last-child) {
-      border-bottom: 1px solid $lightgray;
+      border-bottom: 1px solid $borderColor;
     }
   }
 

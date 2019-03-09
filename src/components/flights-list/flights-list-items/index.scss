@@ -22,8 +22,9 @@
   display: flex;
   justify-content: space-between;
   min-width: 260px;
+  width: 100%;
   padding: 15px 15px;
-  border: 1px solid $lightgray;
+  border: 1px solid $borderColor;
   background-color: $cardBackgroundColor;
 
   &:not(:last-child) {
@@ -34,7 +35,7 @@
 .price-link {
   padding: 10px 15px;
   border-radius: 5px;
-  color: #fff;
+  color: $textWhiteColor;
   text-decoration: none;
   text-transform: uppercase;
   font-family: $fontFamily;

@@ -14,7 +14,7 @@
     width: 250px;
     height: 280px;
     padding: 20px 0;
-    border: 1px solid $lightgray;
+    border: 1px solid $borderColor;
     border-radius: 5px;
     box-shadow: $boxShadow;
     display: none;
@@ -31,7 +31,7 @@
   &__info {
     width: 100px;
     padding: 4px 12px;
-    border: 1px solid $lightgray;
+    border: 1px solid $borderColor;
 
     text-align: center;
     line-height: 1.75;
@@ -48,7 +48,7 @@
     border: none;
     outline: none;
     cursor: pointer;
-    color: #ffffff;
+    color: $textWhiteColor;
     line-height: 1.75;
     font-size: 0.875rem;
     font-weight: 500;
