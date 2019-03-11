@@ -20,3 +20,10 @@ export function setTotalPrice(price) {
     price,
   };
 }
+
+export function setPassengersInfo(info) {
+  return {
+    type: actionTypes.PASSENGERS_INFO,
+    info,
+  };
+}

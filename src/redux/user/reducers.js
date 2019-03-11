@@ -26,3 +26,12 @@ export function totalPrice(state = 0, action) {
       return state;
   }
 }
+
+export function passengersInfo(state = {}, action) {
+  switch (action.type) {
+    case actionTypes.PASSENGERS_INFO:
+      return action.info;
+    default:
+      return state;
+  }
+}
