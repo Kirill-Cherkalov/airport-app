@@ -1,18 +1,4 @@
-@import '../../variables.scss';
-
-@media only screen and (max-width: $mobileSize) {
-  .flights-list-item {
-    flex-direction: column;
-  }
-}
-
-@media only screen and (min-width: $mobileSize) {
-  .flights-list-item__price {
-    display: flex;
-    align-items: center;
-    padding-left: 50px;
-  }
-}
+@import 'src/variables.scss';
 
 .flights-container {
   display: flex;
@@ -22,25 +8,13 @@
 }
 
 .flights-list {
-  box-shadow: 0 15px 25px rgba(0,0,0,.1);
+  box-shadow: $boxShadow;
   display: flex;
   flex-direction: column;
   align-items: center;
 
   &__header {
-    margin-bottom: 90px;
-  }
-}
-
-.flights-list-item {
-  display: flex;
-  justify-content: space-between;
-  min-width: 260px;
-  padding: 15px 15px;
-  border: 1px solid lightgray;
-
-  &:not(:last-child) {
-    border-bottom: none;
+    margin-bottom: 60px;
   }
 }
 
@@ -51,9 +25,9 @@
 
 .change-button {
   margin-left: 5px;
-  text-decoration: underline;
-  cursor: pointer;
-  outline: none;
   border: none;
+  outline: none;
   background: none;
+  cursor: pointer;
+  text-decoration: underline;
 }

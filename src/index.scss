@@ -1,0 +1,13 @@
+@import 'src/variables';
+body {
+  background-image: url('assets/back3.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+@media only screen and (max-width: $mobileSize) {
+  body {
+    background-image: url('assets/back3-500-700.jpg');
+  }
+}

@@ -1,0 +1,40 @@
+@import 'src/variables.scss';
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+  outline: none;
+  overflow-y: auto;
+  background-color: $sidebarBackgroundColor;
+  transform: translateX(-100%);
+  transition: transform 0.5s, width 0.5s;
+}
+
+.sidebar_opened {
+  width: 80%;
+  box-shadow: $sidebarBoxShadow;
+  transform: translateX(0);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  visibility: hidden;
+  background-color: transparent;
+  transition: background-color 0.5s, visibility 0.5s;
+}
+
+.overlay_opened {
+  visibility: visible;
+  background-color: $overlayBackgroundColor;
+}

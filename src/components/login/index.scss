@@ -1,0 +1,19 @@
+@import 'src/variables.scss';
+
+.login-form {
+  display: flex;
+  justify-content: center;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 250px;
+    height: 280px;
+    border: 1px solid $borderColor;
+    border-radius: 5px;
+    box-shadow: $boxShadow;
+    background-color: $cardBackgroundColor;
+  }
+}

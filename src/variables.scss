@@ -1,3 +1,28 @@
+//display sizes
 $mobileSize: 600px;
 $tabletSize: 960px;
 $desktopSize: 1280px;
+// colors
+$lightgray: lightgray;
+$borderColor: rgb(211, 211, 211);
+
+$seatBackgroundColor: rgb(245, 245, 220);
+$seatsRowBackgroundColor: rgb(36, 79, 95);
+$tooltipBackgroundColor: rgb(0, 0, 0);
+$overlayBackgroundColor: rgba(44, 34, 34, 0.5);
+$sidebarBackgroundColor: rgb(255, 255, 255);
+$cardBackgroundColor: rgb(242, 242, 242);
+
+$textWhiteColor: rgb(255, 255, 255);
+$textBlackColor: rgb(0, 0, 0);
+
+$buttonHoverColor: rgba(0, 0, 0, 0.08);
+$primaryMaterial: #3f51b5;
+$primaryMaterialHover: #303f9f;
+$defaultMaterialHover: rgb(231, 231, 231);
+//shadows
+$boxShadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12);
+$buttonShadow: 0px 1px 5px 0px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 3px 1px -2px rgba(0,0,0,0.12);
+$sidebarBoxShadow: 0px 8px 10px -5px rgba(0,0,0,0.2), 0px 16px 24px 2px rgba(0,0,0,0.14), 0px 6px 30px 5px rgba(0,0,0,0.12);
+//fonts
+$fontFamily: "Roboto", "Helvetica", "Arial", sans-serif;

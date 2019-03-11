@@ -1,0 +1,54 @@
+@import 'src/variables';
+
+.plane {
+  padding: 1px;
+}
+
+.row {
+  display: flex;
+  padding: 5px 5px;
+  height: 20px;
+  background-color: $seatsRowBackgroundColor;
+}
+
+.seat {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border-radius: 3px;
+  background-color: $seatBackgroundColor;
+  text-align: center;
+  line-height: normal;
+  font-family: $fontFamily;
+  font-size: 0.8rem;
+  cursor: pointer;
+
+  &:not(:last-child) {
+    margin-right: 5px;
+  }
+  
+  &:hover .seat-point {
+    display: inline;
+  }
+
+  &:hover .tooltiptext {
+    visibility: visible;
+  }
+}
+
+.sign {
+  background-color: transparent;
+  color: $textWhiteColor;
+}
+
+.empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 10px;
+  height: 20px;
+  color: $borderColor;
+  font-family: $fontFamily;
+  font-size: 0.5rem;
+  margin-right: 5px;
+}

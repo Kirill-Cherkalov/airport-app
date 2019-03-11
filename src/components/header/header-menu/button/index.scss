@@ -1,0 +1,26 @@
+@import 'src/variables.scss';
+
+@media only screen and (min-width: $mobileSize) {
+  .header__button {
+    display: none;
+  }
+}
+
+.header__button {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  background-color: transparent;
+  color: $textWhiteColor;
+  cursor: pointer;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 250ms,
+              box-shadow 250ms,
+              border 250ms;
+
+  &:hover {
+    background-color: $buttonHoverColor;
+  }
+}

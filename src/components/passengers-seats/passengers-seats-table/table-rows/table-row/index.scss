@@ -1,0 +1,19 @@
+@import 'src/variables';
+
+.passengers-seats {
+  display: flex;
+
+  &__info {
+    width: 200px;
+  }
+
+  &__seat {
+    cursor: pointer;
+  }
+}
+
+.td {
+  padding: 10px 15px;
+  border: 1px solid $borderColor;
+  text-align: center;
+}

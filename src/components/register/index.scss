@@ -1,0 +1,18 @@
+@import 'src/variables.scss';
+
+.register-form {
+  display: flex;
+  justify-content: center;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    padding: 30px 40px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid $borderColor;
+    border-radius: 5px;
+    box-shadow: $boxShadow;
+    background-color: $cardBackgroundColor;
+  }
+}

@@ -1,44 +1,57 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { Form, Field } from 'react-final-form';
+// import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import { styles } from './material.style';
+import styles from './material.style';
+import TextField from '../text-field';
+import './index.scss';
+import '../../styles/button.scss';
+import validate from './validate';
 
 class Login extends React.Component {
-  handleChange = name => event => {
+  handleChange = name => (event) => {
     this.setState({ [name]: event.target.value });
   };
 
-  render() {
-    const { classes } = this.props;
+  onSubmit = (values) => {
+    const e = JSON.stringify(values);
+    localStorage.setItem('login', e);
+  };
 
+  render() {
     return (
-      <form className={classes.container} noValidate autoComplete="off">
-        <TextField
-          label="Email"
-          className="textfield"
-          type="email"
-          onChange={this.handleChange('name')}
-          margin="dense"
-        />
-        <TextField
-          label="Password"
-          className="textfield"
-          type="password"
-          onChange={this.handleChange('name')}
-          margin="dense"
-        />
-        <Button variant="contained" color="primary" className={classes.button} type="submit">
-          Log in
-        </Button>
-      </form>
+      <Form
+        onSubmit={this.onSubmit}
+        validate={validate}
+        render={({ handleSubmit }) => (
+          <form className="login-form" onSubmit={handleSubmit}>
+            <div className="login-form__container">
+              <Field
+                name="email"
+                component={TextField}
+                type="email"
+                label="Email"
+                margin="dense"
+              />
+              <Field
+                name="password"
+                component={TextField}
+                type="password"
+                label="Password"
+                margin="dense"
+              />
+              <button className="button" type="submit">
+                Log in
+              </button>
+
+              <Link to="/register">Registration</Link>
+            </div>
+          </form>
+        )}
+      />
     );
   }
 }
-
-Login.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
 export default withStyles(styles)(Login);

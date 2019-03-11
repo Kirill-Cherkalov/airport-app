@@ -1,0 +1,49 @@
+@import 'src/variables.scss';
+
+@media only screen and (min-width: $mobileSize) {
+  .flights-list-item__price {
+    display: flex;
+    align-items: center;
+    padding-left: 35px;
+  }
+}
+
+@media only screen and (max-width: $mobileSize) {
+  .flights-list-item {
+    flex-direction: column;
+
+    &__price {
+      margin: 10px 0;
+    }
+  }
+}
+
+.flights-list-item {
+  display: flex;
+  justify-content: space-between;
+  min-width: 260px;
+  width: 100%;
+  padding: 15px 15px;
+  border: 1px solid $borderColor;
+  background-color: $cardBackgroundColor;
+
+  &:not(:last-child) {
+    border-bottom: none;
+  }
+}
+
+.price-link {
+  padding: 10px 15px;
+  border-radius: 5px;
+  color: $textWhiteColor;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: $fontFamily;
+  font-size: 1rem;
+  background-color: $primaryMaterial;
+
+  &:hover {
+    background-color: $primaryMaterialHover;
+  }
+}
+

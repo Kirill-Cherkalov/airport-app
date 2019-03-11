@@ -1,9 +1,4 @@
-export const styles = theme => ({
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
+const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
@@ -15,8 +10,6 @@ export const styles = theme => ({
   menu: {
     width: 200,
   },
-  button: {
-    margin: theme.spacing.unit,
-    marginTop: 20
-  },
 });
+
+export default styles;
