@@ -1,47 +1,49 @@
-/* eslint-disable */
+// /* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
-import Avatar from '@material-ui/core/Avatar';
-import WorkIcon from '@material-ui/icons/Work';
+import { Field } from 'react-final-form';
+// import Avatar from '@material-ui/core/Avatar';
+// import WorkIcon from '@material-ui/icons/Work';
 import './index.scss';
 
-export default function Luggage({ selectLuggage }) {
+export default function Luggage({ index }) {
   Luggage.propTypes = {
-    selectLuggage: PropTypes.func.isRequired,
+    index: PropTypes.number.isRequired,
   };
 
   const luggageTypes = [
     {
-      kg: 10,
-      price: 9,
+      kg: '10',
+      price: '9',
     },
     {
-      kg: 20,
-      price: 15,
+      kg: '20',
+      price: '15',
     },
     {
-      kg: 30,
-      price: 21,
+      kg: '30',
+      price: '21',
+    },
+    {
+      kg: 'free carry-on bag',
+      price: '0',
     },
   ];
 
   return (
-    <ul className="luggage-list">
+    <div className="luggage-list">
       {luggageTypes.map(({ kg, price }) => (
-        <li id={price} className="luggage-list__item" onClick={selectLuggage} key={Math.random()}>
-          <Avatar>
-            <WorkIcon />
-          </Avatar>
-          <div className="luggage-list__text"><span>{kg} kg</span><span>$ {price}.00</span></div>
-        </li>
+        <label htmlFor={price}>
+          <Field
+            id={price}
+            name={'luggage' + index}
+            component="input"
+            type="radio"
+            value={price}
+          />{' '}
+          {kg} kg
+        </label>
       ))}
-
-      <li id={0} className="luggage-list__item" onClick={selectLuggage}>
-        <Avatar>
-          <WorkIcon />
-        </Avatar>
-        <div className="luggage-list__text">Free carry-on bag</div>
-      </li>
-    </ul>
+    </div>
   );
 }
