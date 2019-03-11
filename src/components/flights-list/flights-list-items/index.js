@@ -1,16 +1,17 @@
 import React from 'react';
-// import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
 import Typography from '@material-ui/core/Typography';
 import FlightTakeoffIcon from '@material-ui/icons/FlightTakeoff';
 import FlightLandIcon from '@material-ui/icons/FlightLand';
 import './index.scss';
 
-export default function FlightsListItems({
-  classes, flights, setTotalPrice, setSelectedFlightInfo,
+function FlightsListItems({
+  classes, flights, setTotalPrice, setSelectedFlightInfo, history,
 }) {
   const setInfo = (price, flightInfo) => {
     setTotalPrice(price);
     setSelectedFlightInfo(flightInfo);
+    return history.push('/passengers-list');
   };
 
   return (
@@ -39,9 +40,10 @@ export default function FlightsListItems({
           >
             $ {price}
           </button>
-          {/* <Link to="/passengers-seats">$ {price}</Link> */}
         </div>
       </div>
     ))
   );
 }
+
+export default withRouter(FlightsListItems);
