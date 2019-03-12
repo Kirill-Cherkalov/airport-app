@@ -14,8 +14,8 @@ export default function HeaderMenu(props) {
   return (
     <Fragment>
       <Menu className="header__menu" />
-      <MenuButton showSidebar={props.showSidebar} />
-      <Sidebar isOpen={props.isOpen} clicked={props.showSidebar}>
+      <MenuButton onClick={props.showSidebar} />
+      <Sidebar isOpen={props.isOpen} hideSidebar={props.showSidebar}>
         <Menu className="sidebar__menu" />
       </Sidebar>
     </Fragment>

@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import MenuIcon from '@material-ui/icons/Menu';
 import './index.scss';
 
-export default function MenuButton(props) {
+export default function MenuButton({ onClick }) {
   MenuButton.propTypes = {
-    clicked: PropTypes.func.isRequired,
+    onClick: PropTypes.func.isRequired,
   };
 
   return (
-    <button type="button" className="header__button" onClick={props.clicked}>
+    <button type="button" className="header__button" onClick={onClick}>
       <MenuIcon />
     </button>
   );
