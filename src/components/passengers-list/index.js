@@ -1,50 +1,71 @@
 /* eslint-disable */
-import React, { Component, Fragment } from 'react';
-// import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { Form } from 'react-final-form';
+import arrayMutators from 'final-form-arrays';
+import { FieldArray } from 'react-final-form-arrays';
+import PropTypes from 'prop-types';
 import ExpandablePanel from './expandable-panel';
+import { setPassengersInfo } from '../../redux/user/actions';
 import './index.scss';
+import Details from './expandable-panel/details';
+import Header from './expandable-panel/header';
 
-export default class PassengersList extends Component {
-  // Luggage.propTypes = {
-  //   selectLuggage: PropTypes.func.isRequired,
-  // };
+class PassengersList extends Component {
+  static propTypes = {
+    userRequest: PropTypes.object.isRequired,
+    setPassengersInfo: PropTypes.func.isRequired,
+  };
 
-  createItems = (type, amount) => {
-    for (let i = 0; i < amount; i += 1) {
-      return <ExpandablePanel key={Math.random()} type={type} />;
-    }
-  }
+  onSubmit = values => {
+    const history = this.props.history;
+    this.props.setPassengersInfo(values);
+    return history.push('/passengers-seats');
+  };
 
   render() {
-    const passengers = [
-      {
-        type: 'adult',
-        amount: 2,
-      },
-      {
-        type: 'child',
-        amount: 3,
-      },
-      {
-        type: 'infant',
-        amount: 3,
-      },
-    ];
-
-    let i = 1;
+    const { adult, child, infant } = this.props.userRequest;
+    const passengersAmount = new Array((+adult || 0) + (+child || 0) + (+infant || 0)).fill(1);
 
     return (
-      <div className="passengers-list">
-        {passengers.map(({ type, amount }) => {
-          const arr = new Array(amount).fill(amount);
-
-          return (
-            <Fragment key={Math.random()}>
-              {arr.map(() => <ExpandablePanel key={Math.random()} type={type} index={i++} />)}
-            </Fragment>
-          );
-        })}
-      </div>
+      <Form
+        onSubmit={this.onSubmit}
+        mutators={{
+          ...arrayMutators,
+        }}
+        render={({ handleSubmit },
+          pristine, submitting) => (
+            <form onSubmit={handleSubmit}>
+              <FieldArray name="information">
+                {() => (passengersAmount.map((elem, index) => (
+                  // <ExpandablePanel key={Math.random()} index={index} />
+                  <div className="expandable-panel" key={index}>
+                    <Header index={index} />
+                    <Details index={index} />
+                  </div>
+                )))}
+              </FieldArray>
+              <button type="submit" disabled={submitting || pristine}>
+                Confirm
+              </button>
+            </form>
+        )}
+      />
     );
   }
 }
+
+const mapStateToProps = state => ({
+  userRequest: state.user.request,
+});
+
+const mapDispatchToProps = dispatch => ({
+  setPassengersInfo: info => dispatch(setPassengersInfo(info)),
+});
+
+export default compose(
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps),
+)(PassengersList);

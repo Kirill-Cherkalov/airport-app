@@ -6,7 +6,6 @@ import './index.scss';
 
 export default class ExpandablePanel extends React.Component {
   static propTypes = {
-    type: PropTypes.string.isRequired,
     index: PropTypes.number.isRequired,
   };
 
@@ -14,7 +13,6 @@ export default class ExpandablePanel extends React.Component {
     super(props);
     this.state = {
       isOpen: false,
-      luggagePrice: null,
     };
   }
 
@@ -26,19 +24,17 @@ export default class ExpandablePanel extends React.Component {
     this.setState(state => ({ isOpen: !state.isOpen }));
   }
 
-  selectLuggage = (event) => {
-    this.setState({ luggagePrice: +event.target.id });
-  }
+  onSubmit = values => values;
 
   render() {
     return (
       <div className="expandable-panel">
-        <Header isOpen={this.state.isOpen} openPanel={this.openPanel} type={this.props.type} index={this.props.index} />
-        {this.state.isOpen && (
+        <Header isOpen={this.state.isOpen} openPanel={this.openPanel} index={this.props.index} />
+        {/* {this.state.isOpen && ( */}
         <div className="expandable-panel__details">
-          <Details selectLuggage={this.selectLuggage} handleChange={this.handleChange} />
+          <Details i={this.props.index} handleChange={this.handleChange} />
         </div>
-        )}
+        {/* )} */}
       </div>
     );
   }
