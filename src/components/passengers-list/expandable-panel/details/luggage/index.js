@@ -33,7 +33,7 @@ export default function Luggage({ index }) {
   return (
     <div className="luggage-list">
       {luggageTypes.map(({ kg, price }) => (
-        <label htmlFor={price}>
+        <label htmlFor={price} key={Math.random()}>
           <Field
             id={price}
             name={'luggage' + index}

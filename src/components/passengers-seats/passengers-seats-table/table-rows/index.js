@@ -1,26 +1,25 @@
-/* eslint-disable no-plusplus */
 import React, { Fragment } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import TableRow from './table-row';
 import './index.scss';
 
-export default function TableRows({ passengers }) {
+function TableRows({ passengersInfo }) {
   TableRows.propTypes = {
-    passengers: PropTypes.array.isRequired,
+    passengersInfo: PropTypes.array.isRequired,
   };
 
-  let i = 1;
   return (
-    <>
-      {passengers.map(({ type, amount }) => {
-        const arr = new Array(amount).fill(amount);
-
-        return (
-          <Fragment key={Math.random()}>
-            {arr.map(() => <TableRow key={Math.random()} type={type} index={i++} />)}
-          </Fragment>
-        );
-      })}
-    </>
+    <Fragment>
+      {passengersInfo.map(({ firstname, lastname }, index) => (
+        <TableRow key={Math.random()} firstname={firstname} lastname={lastname} index={index} />
+      ))}
+    </Fragment>
   );
 }
+
+const mapStateToProps = state => ({
+  passengersInfo: state.user.passengersInfo,
+});
+
+export default connect(mapStateToProps)(TableRows);

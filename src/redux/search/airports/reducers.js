@@ -1,18 +1,22 @@
 import actionTypes from '../actionTypes';
 
-export function hasErrored(state = false, action) {
-  switch (action.type) {
-    case actionTypes.AIRPORT_HAS_ERRORED:
-      return action.hasErrored;
-    default:
-      return state;
-  }
-}
+const initialState = {
+  items: [],
+  hasErrored: false,
+};
 
-export function items(state = [], action) {
+export default function airports(state = initialState, action) {
   switch (action.type) {
     case actionTypes.AIRPORT_FETCH_DATA_SUCCESS:
-      return action.items;
+      return {
+        ...state,
+        items: action.items,
+      };
+    case actionTypes.AIRPORT_HAS_ERRORED:
+      return {
+        ...state,
+        hasErrored: action.hasErrored,
+      };
     default:
       return state;
   }

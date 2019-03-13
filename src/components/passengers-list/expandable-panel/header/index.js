@@ -5,8 +5,8 @@ import './index.scss';
 
 export default function Header({ isOpen, openPanel, index }) {
   Header.propTypes = {
-    isOpen: PropTypes.bool.isRequired,
-    openPanel: PropTypes.func.isRequired,
+    // isOpen: PropTypes.bool.isRequired,
+    // openPanel: PropTypes.func.isRequired,
     index: PropTypes.number.isRequired,
   };
 

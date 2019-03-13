@@ -20,8 +20,31 @@ class PassengersList extends Component {
   };
 
   onSubmit = values => {
+    const passengers = {};
+    Object.keys(values).sort().forEach(function (key) {
+      passengers[key] = values[key];
+    });
+
+    const sortablePassengers = [];
+
+    for (let passenger in passengers) {
+      sortablePassengers.push(passengers[passenger]);
+    }
+
+    const passengersArray = [];
+    const passAmount = sortablePassengers.length/3;
+
+    for (let i = 0; i < passAmount; i++) {
+      const obj = {
+        firstname: sortablePassengers[i],
+        lastname: sortablePassengers[i+passAmount],
+        luggagePrice: sortablePassengers[i+passAmount*2]
+      }
+      passengersArray.push(obj);
+    }
     const history = this.props.history;
     this.props.setPassengersInfo(values);
+    this.props.setPassengersInfo(passengersArray);
     return history.push('/passengers-seats');
   };
 

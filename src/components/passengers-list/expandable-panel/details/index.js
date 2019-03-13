@@ -5,7 +5,7 @@ import TextField from '../../../text-field';
 import Luggage from './luggage';
 import './index.scss';
 
-export default function Details({index}) {
+export default function Details({ index }) {
   return (
     <div className="expandable-panel-details">
       <div className="expandable-panel-details__names">
@@ -24,7 +24,7 @@ export default function Details({index}) {
           margin="dense"
         />
       </div>
-      <Luggage index={index}/>
+      <Luggage index={index} />
     </div>
   );
 }

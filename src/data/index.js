@@ -47,4 +47,19 @@ mock.onGet('/airports').reply(200, {
   ],
 });
 
+mock.onGet('/planes').reply(200, [
+  {
+    rows: 15,
+    location: [1, 1, 1, 0, 1, 1, 1],
+  },
+  {
+    rows: 15,
+    location: [1, 1, 0, 1, 1, 0, 1, 1],
+  },
+  {
+    rows: 15,
+    location: [1, 0, 1, 1, 1, 0, 1],
+  },
+]);
+
 export default axios;

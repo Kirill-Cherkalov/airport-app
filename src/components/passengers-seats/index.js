@@ -3,7 +3,7 @@ import PassengersSeatsTable from './passengers-seats-table';
 import Plane from './plane';
 import './index.scss';
 
-export default function SeatsChoice() {
+function SeatsChoice() {
   return (
     <div className="seats-choice-container">
       <PassengersSeatsTable />
@@ -11,3 +11,5 @@ export default function SeatsChoice() {
     </div>
   );
 }
+
+export default SeatsChoice;
