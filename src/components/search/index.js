@@ -30,12 +30,12 @@ class Search extends React.Component {
   };
 
   componentDidMount() {
-    return this.props.airports.length || this.props.airportsFetchData('/airports');
+    return this.props.airports.length || this.props.airportsFetchData('http://localhost:3001/airports');
   }
 
   onSubmit = async (values) => {
     const { history } = this.props;
-    this.props.ticketsFetchData('/search-request', values);
+    this.props.ticketsFetchData('http://localhost:3001/tickets', values);
     return this.props.tickets && history.push('/flights-list');
   };
 

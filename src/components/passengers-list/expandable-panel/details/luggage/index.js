@@ -1,49 +1,47 @@
-// /* eslint-disable */
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Field } from 'react-final-form';
 // import Avatar from '@material-ui/core/Avatar';
 // import WorkIcon from '@material-ui/icons/Work';
+import fetchLuggageTypes from '../../../../../redux/data/luggage-types/actions';
 import './index.scss';
 
-export default function Luggage({ index }) {
-  Luggage.propTypes = {
+class Luggage extends React.Component {
+  static propTypes = {
     index: PropTypes.number.isRequired,
+    luggageTypes: PropTypes.array.isRequired,
+    fetchLuggageTypes: PropTypes.func.isRequired,
   };
 
-  const luggageTypes = [
-    {
-      kg: '10',
-      price: '9',
-    },
-    {
-      kg: '20',
-      price: '15',
-    },
-    {
-      kg: '30',
-      price: '21',
-    },
-    {
-      kg: 'free carry-on bag',
-      price: '0',
-    },
-  ];
+  componentDidMount = () => this.props.fetchLuggageTypes();
 
-  return (
-    <div className="luggage-list">
-      {luggageTypes.map(({ kg, price }) => (
-        <label htmlFor={price} key={Math.random()}>
-          <Field
-            id={price}
-            name={'luggage' + index}
-            component="input"
-            type="radio"
-            value={price}
-          />{' '}
-          {kg} kg
-        </label>
-      ))}
-    </div>
-  );
+  render() {
+    return (
+      <div className="luggage-list">
+        {this.props.luggageTypes.map(({ kg, price }) => (
+          <label htmlFor={price} key={Math.random()}>
+            <Field
+              id={price}
+              name={`luggage + ${this.props.index}`}
+              component="input"
+              type="radio"
+              value={price}
+            />{' '}
+            {kg} kg
+          </label>
+        ))}
+      </div>
+    );
+  }
 }
+
+const mapStateToProps = state => ({
+  luggageTypes: state.data.luggage.luggageTypes,
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchLuggageTypes: () => dispatch(fetchLuggageTypes()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Luggage);

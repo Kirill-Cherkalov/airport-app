@@ -44,9 +44,8 @@ class FlightsList extends React.Component {
   render() {
     const { classes } = this.props;
     const {
-      from, to, departure, adult, child, infant,
+      from, to, departure, return: back, adult, child, infant,
     } = this.props.userRequest;
-    const back = this.props.userRequest.return;
 
     return (
       <div className="flights-container">
