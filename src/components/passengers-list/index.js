@@ -1,4 +1,3 @@
-// /* eslint-disable */
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
@@ -24,11 +23,7 @@ class PassengersList extends Component {
   };
 
   onSubmit = (values) => {
-    const passengers = [];
-
-    Object.keys(values).sort().map((key, i) => {
-      passengers[i] = values[key];
-    });
+    const passengers = Object.keys(values).sort().map(key => values[key]);
 
     const passengersArray = [];
     const passAmount = passengers.length / 3;

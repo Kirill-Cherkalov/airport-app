@@ -10,14 +10,14 @@ export default function Details({ index }) {
     <div className="expandable-panel-details">
       <div className="expandable-panel-details__names">
         <Field
-          name={`firstname + ${index}`}
+          name={`firstname${index}`}
           label="First Name"
           component={TextField}
           type="text"
           margin="dense"
         />
         <Field
-          name={`lastname + ${index}`}
+          name={`lastname${index}`}
           label="Last Name"
           component={TextField}
           type="text"
