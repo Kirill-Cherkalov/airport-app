@@ -1,49 +1,116 @@
 @import 'src/variables.scss';
 
-@media only screen and (min-width: $mobileSize) {
-  .flights-list-item__price {
-    display: flex;
-    align-items: center;
-    padding-left: 35px;
-  }
-}
+// @media only screen and (min-width: $mobileSize) {
+//   .flights-list-item__price {
+//     display: flex;
+//     align-items: center;
+//   }
+// }
 
-@media only screen and (max-width: $mobileSize) {
-  .flights-list-item {
-    flex-direction: column;
-
-    &__price {
-      margin: 10px 0;
-    }
-  }
+.flights-container {
+  // background-color: lightgray;
+  display: flex;
 }
 
 .flights-list-item {
   display: flex;
   justify-content: space-between;
-  min-width: 260px;
-  width: 100%;
+  width: 860px;
   padding: 15px 15px;
   border: 1px solid $borderColor;
-  background-color: $cardBackgroundColor;
+  background-color: $ticketsBackgroundColor;
+  font-family: $fontFamily;
+  box-shadow: $boxShadow;
+
+  &__info {
+    flex-grow: 1;
+    margin-right: 45px;
+  }
+
+  &__price {
+    display: flex;
+    align-items: center;
+  }
 
   &:not(:last-child) {
     border-bottom: none;
   }
 }
 
+.date {
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+.info-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+  // border: 1px solid black;
+}
+
+.flight {
+  display: flex;
+  flex-direction: column;
+
+  &__time{
+    margin-bottom: 5px;
+    font-size: 40px;
+    font-weight: 400;
+    letter-spacing: 1px;
+  }
+  &__country{
+    font-weight: 350;
+    color: rgb(173, 173, 173);
+  }
+}
+
 .price-link {
   padding: 10px 15px;
+  border: none;
   border-radius: 5px;
+  cursor: pointer;
   color: $textWhiteColor;
   text-decoration: none;
   text-transform: uppercase;
   font-family: $fontFamily;
   font-size: 1rem;
   background-color: $primaryMaterial;
+  outline: none;
 
   &:hover {
     background-color: $primaryMaterialHover;
   }
 }
 
+@media only screen and (max-width: $tabletSize) {
+  .flights-list-item {
+    width: 620px;
+  }
+}
+
+
+@media only screen and (max-width: $mobileSize) {
+  .flights-list-item {
+    flex-direction: column;
+    width: 260px;
+
+    &__info {
+      margin: 0 0 10px 0;
+    }
+  }
+  .flight {
+    &__time{
+      margin-bottom: 5px;
+      font-size: 35px;
+      font-weight: 300;
+    }
+  }
+}
+
+.fa-long-arrow-right {
+  width: 300px;
+  height: 40px;
+  color: black;
+}

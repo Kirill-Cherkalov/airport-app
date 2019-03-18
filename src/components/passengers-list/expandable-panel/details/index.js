@@ -1,6 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Field } from 'react-final-form';
-// import TextField from '@material-ui/core/TextField';
 import TextField from '../../../text-field';
 import Luggage from './luggage';
 import './index.scss';
@@ -10,14 +10,14 @@ export default function Details({ index }) {
     <div className="expandable-panel-details">
       <div className="expandable-panel-details__names">
         <Field
-          name={'firstname' + index}
+          name={`firstname${index}`}
           label="First Name"
           component={TextField}
           type="text"
           margin="dense"
         />
         <Field
-          name={'lastname' + index}
+          name={`lastname${index}`}
           label="Last Name"
           component={TextField}
           type="text"
@@ -28,3 +28,7 @@ export default function Details({ index }) {
     </div>
   );
 }
+
+Details.propTypes = {
+  index: PropTypes.number.isRequired,
+};

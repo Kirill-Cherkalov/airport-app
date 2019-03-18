@@ -1,0 +1,41 @@
+@import 'src/variables.scss';
+.search-form-container {
+  // position: absolute;
+  // top: 120px;
+  // left: 0;
+  // right: 0;
+  // z-index: 1;
+}
+
+.search-form1 {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top: 120px;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  padding: 0 40px;
+  background-color: aliceblue;
+}
+
+.wrapper {
+  display: flex;
+}
+
+.all-wrapper {
+  display: flex;
+}
+
+@media screen and (max-width: $tabletSize) {
+  .search-form1 {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: $mobileSize) {
+  .search-form1 {
+    flex-direction: column;
+    top: 112px;
+  }
+}

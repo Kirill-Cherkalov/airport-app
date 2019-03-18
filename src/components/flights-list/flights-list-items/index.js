@@ -1,12 +1,9 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import Typography from '@material-ui/core/Typography';
-import FlightTakeoffIcon from '@material-ui/icons/FlightTakeoff';
-import FlightLandIcon from '@material-ui/icons/FlightLand';
 import './index.scss';
 
 function FlightsListItems({
-  classes, flights, setTotalPrice, setSelectedFlightInfo, history,
+  flights, setTotalPrice, setSelectedFlightInfo, history,
 }) {
   const setInfo = (price, flightInfo) => {
     setTotalPrice(price);
@@ -16,19 +13,21 @@ function FlightsListItems({
 
   return (
     flights.map(({
-      id, date, startTime, endTime, price, planeId,
+      id, date, startTime, endTime, fromCountry, toCountry, price, planeId,
     }) => (
       <div key={id} className="flights-list-item">
         <div className="flights-list-item__info">
-          <Typography variant="subtitle1" gutterBottom>
-            {date}
-          </Typography>
-          <Typography variant="h4" gutterBottom>
-            {startTime}
-            <FlightTakeoffIcon className={classes.icon} fontSize="large" />
-            <FlightLandIcon className={classes.icon} fontSize="large" />
-            {endTime}
-          </Typography>
+          <span className="date">{date}</span>
+          <div className="info-wrapper">
+            <div className="flight">
+              <span className="flight__time">{startTime}</span>
+              <span className="flight__country">{fromCountry}</span>
+            </div>
+            <div className="flight">
+              <span className="flight__time">{endTime}</span>
+              <span className="flight__country">{toCountry}</span>
+            </div>
+          </div>
         </div>
         <div className="flights-list-item__price">
           <button
