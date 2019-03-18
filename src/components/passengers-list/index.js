@@ -1,4 +1,4 @@
-/* eslint-disable */
+// /* eslint-disable */
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
@@ -7,7 +7,7 @@ import { Form } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import { FieldArray } from 'react-final-form-arrays';
 import PropTypes from 'prop-types';
-import ExpandablePanel from './expandable-panel';
+// import ExpandablePanel from './expandable-panel';
 import { setPassengersInfo } from '../../redux/user/actions';
 import './index.scss';
 import Details from './expandable-panel/details';
@@ -19,34 +19,31 @@ class PassengersList extends Component {
     userRequest: PropTypes.object.isRequired,
     setPassengersInfo: PropTypes.func.isRequired,
     fetchPlaneSchema: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired,
+    planeId: PropTypes.number.isRequired,
   };
 
-  onSubmit = values => {
-    const passengers = {};
-    Object.keys(values).sort().forEach(function (key) {
-      passengers[key] = values[key];
+  onSubmit = (values) => {
+    const passengers = [];
+
+    Object.keys(values).sort().map((key, i) => {
+      passengers[i] = values[key];
     });
 
-    const sortablePassengers = [];
-
-    for (let passenger in passengers) {
-      sortablePassengers.push(passengers[passenger]);
-    }
-
     const passengersArray = [];
-    const passAmount = sortablePassengers.length/3;
+    const passAmount = passengers.length / 3;
 
     for (let i = 0; i < passAmount; i++) {
       const obj = {
-        firstname: sortablePassengers[i],
-        lastname: sortablePassengers[i+passAmount],
-        luggagePrice: sortablePassengers[i+passAmount*2]
-      }
+        firstname: passengers[i],
+        lastname: passengers[i + passAmount],
+        luggagePrice: passengers[i + passAmount * 2],
+      };
       passengersArray.push(obj);
     }
-    const history = this.props.history;
+
+    const { history } = this.props;
     this.props.setPassengersInfo(passengersArray);
-    console.log(this.props.planeId);
     this.props.fetchPlaneSchema(this.props.planeId);
     return history.push('/passengers-seats');
   };
