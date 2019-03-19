@@ -16,7 +16,7 @@ import List from '@material-ui/core/List';
 import styles from './material.style';
 import { setSelectedFlightInfo, setTotalPrice } from '../../redux/user/actions';
 
-import Search from '../search';
+import SearchForm from './search-form/search-form';
 
 import FlightsListItems from './flights-list-items';
 import './index.scss';
@@ -37,16 +37,15 @@ class FlightsList extends React.Component {
     };
   }
 
-  onclick = () => {
+  onClick = () => {
     this.setState(state => ({ isOpen: !state.isOpen }));
   }
 
   render() {
     const { classes } = this.props;
     const {
-      from, to, departure, adult, child, infant,
+      from, to, departure, return: back, adult, child, infant,
     } = this.props.userRequest;
-    const back = this.props.userRequest.return;
 
     return (
       <div className="flights-container">
@@ -60,7 +59,7 @@ class FlightsList extends React.Component {
                   </Typography>
                   <Typography color="inherit">
                     departure {moment(departure).format('LL')}, {back && `return ${moment(back).format('LL')}`}, {adult && adult !== '0' && `adult ${adult}`} {child && child !== '0' && `child ${child}`} {infant && infant !== '0' && `infant ${infant}`}
-                    <button className="change-button" type="button" onClick={this.onclick}>
+                    <button className="change-button" type="button" onClick={this.onClick}>
                     Change
                     </button>
                   </Typography>
@@ -68,7 +67,7 @@ class FlightsList extends React.Component {
               </Toolbar>
             </AppBar>
 
-            {this.state.isOpen && <Search />}
+            {this.state.isOpen && <SearchForm />}
           </div>
         )
           : <h1>Please, try to search flights</h1>}

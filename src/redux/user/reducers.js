@@ -1,36 +1,49 @@
 import actionTypes from './actionTypes';
 
-export function request(state = {}, action) {
+const initialState = {
+  request: {},
+  selectedFlight: {},
+  planeLayout: {
+    rows: 0,
+    location: [],
+  },
+  totalPrice: 0,
+  passengersInfo: [],
+  selectedPassenger: 0,
+};
+
+export default function user(state = initialState, action) {
   switch (action.type) {
     case actionTypes.USER_REQUEST:
-      return action.data;
-    default:
-      return state;
-  }
-}
-
-export function selectedFlight(state = {}, action) {
-  switch (action.type) {
+      return {
+        ...state,
+        request: action.request,
+      };
     case actionTypes.USER_SELECTED_FLIGHT_INFO:
-      return action.flightInfo;
-    default:
-      return state;
-  }
-}
-
-export function totalPrice(state = 0, action) {
-  switch (action.type) {
+      return {
+        ...state,
+        selectedFlight: action.flightInfo,
+      };
+    case actionTypes.PLANE_LAYOUT:
+      return {
+        ...state,
+        planeLayout: action.layout,
+      };
     case actionTypes.USER_TOTAL_PRICE:
-      return state.totalPrice ? +state.totalPrice + +action.price : +action.price;
-    default:
-      return state;
-  }
-}
-
-export function passengersInfo(state = {}, action) {
-  switch (action.type) {
+      return {
+        ...state,
+        totalPrice: state.totalPrice ? +state.totalPrice + +action.price : +action.price,
+      };
     case actionTypes.PASSENGERS_INFO:
-      return action.info;
+      return {
+        ...state,
+        passengersInfo: action.info,
+      };
+    case actionTypes.SELECTED_PASSENGER:
+      return {
+        ...state,
+        selectedPassenger: action.id,
+      };
     default:
       return state;
   }

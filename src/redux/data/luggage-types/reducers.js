@@ -1,18 +1,18 @@
 import actionTypes from '../actionTypes';
 
 const initialState = {
-  items: [],
+  luggageTypes: [],
   hasErrored: false,
 };
 
-export default function airports(state = initialState, action) {
+export default function luggageTypes(state = initialState, action) {
   switch (action.type) {
-    case actionTypes.AIRPORT_FETCH_DATA_SUCCESS:
+    case actionTypes.GET_LUGGAGE_TYPES:
       return {
         ...state,
-        items: action.items,
+        luggageTypes: action.luggageTypes,
       };
-    case actionTypes.AIRPORT_HAS_ERRORED:
+    case actionTypes.LUGGAGE_HAS_ERRORED:
       return {
         ...state,
         hasErrored: action.hasErrored,

@@ -1,18 +1,18 @@
 import actionTypes from '../actionTypes';
 
 const initialState = {
-  items: [],
+  planeSchema: {},
   hasErrored: false,
 };
 
-export default function airports(state = initialState, action) {
+export default function plane(state = initialState, action) {
   switch (action.type) {
-    case actionTypes.AIRPORT_FETCH_DATA_SUCCESS:
+    case actionTypes.GET_PLANE_SCHEMA:
       return {
         ...state,
-        items: action.items,
+        schema: action.schema,
       };
-    case actionTypes.AIRPORT_HAS_ERRORED:
+    case actionTypes.PLANE_SCHEMA_HAS_ERRORED:
       return {
         ...state,
         hasErrored: action.hasErrored,

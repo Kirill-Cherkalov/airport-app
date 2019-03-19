@@ -9,17 +9,17 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider } from 'material-ui-pickers';
-import { airportsFetchData } from '../../redux/search/airports/actions';
-import { ticketsFetchData } from '../../redux/search/tickets/actions';
+import { airportsFetchData } from '../../../redux/search/airports/actions';
+import { ticketsFetchData } from '../../../redux/search/tickets/actions';
 import styles from './material.style';
 
 import validate from './validate';
-import DatePicker from '../date-picker';
-import SimpleSelect from '../select';
-import TextField from '../text-field';
+import DatePicker from '../../date-picker';
+import SimpleSelect from '../../select';
+import TextField from '../../text-field';
 import './index.scss';
 
-class Search extends React.Component {
+class SearchForm extends React.Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
     airports: PropTypes.array.isRequired,
@@ -48,34 +48,37 @@ class Search extends React.Component {
           onSubmit={this.onSubmit}
           validate={validate}
           render={({ handleSubmit }) => (
-            <form className="search-form" onSubmit={handleSubmit}>
-              <Field
-                name="from"
-                label="From"
-                className={classes.selectField}
-                component={SimpleSelect}
-                items={this.props.airports}
-              />
-
-              <Field
-                name="to"
-                label="To"
-                className={classes.selectField}
-                component={SimpleSelect}
-                items={this.props.airports}
-              />
-
-              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <form className="search-form1" onSubmit={handleSubmit}>
+              <div className="wrapper">
                 <Field
-                  name="departure"
-                  label="Departure"
-                  className={classes.textField}
-                  component={DatePicker}
-                  variant="outlined"
+                  name="from"
+                  label="From"
+                  className={classes.selectField}
+                  component={SimpleSelect}
+                  items={this.props.airports}
                 />
-              </MuiPickersUtilsProvider>
 
-              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <Field
+                  name="to"
+                  label="To"
+                  className={classes.selectField}
+                  component={SimpleSelect}
+                  items={this.props.airports}
+                />
+              </div>
+
+              <div className="wrapper">
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                  <Field
+                    name="departure"
+                    label="Departure"
+                    className={classes.textField}
+                    component={DatePicker}
+                    variant="outlined"
+                  />
+                </MuiPickersUtilsProvider>
+
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <Field
                   name="return"
                   label="Return"
@@ -84,6 +87,7 @@ class Search extends React.Component {
                   variant="outlined"
                 />
               </MuiPickersUtilsProvider>
+              </div>
 
               <div className="passengers-counters">
                 <Field
@@ -138,4 +142,4 @@ export default compose(
   withRouter,
   withStyles(styles),
   connect(mapStateToProps, mapDispatchToProps),
-)(Search);
+)(SearchForm);

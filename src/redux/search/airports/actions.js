@@ -1,4 +1,3 @@
-import axios from '../../../data';
 import actionTypes from '../actionTypes';
 
 export function hasErrored(bool) {
@@ -17,16 +16,15 @@ export function fetchDataSuccess(items) {
 
 export function airportsFetchData(url) {
   return (dispatch) => {
-    axios.get(url)
+    fetch(url)
       .then((response) => {
-        if (!response.data.airports.length) {
+        if (!response.ok) {
           throw Error(response.statusText);
         }
 
         return response;
       })
-      // .then(response => response.json())
-      .then(response => response.data.airports)
+      .then(response => response.json())
       .then(airports => dispatch(fetchDataSuccess(airports)))
       .catch(() => dispatch(hasErrored(true)));
   };

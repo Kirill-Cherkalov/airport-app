@@ -1,4 +1,3 @@
-import axios from '../../../data';
 import actionTypes from '../actionTypes';
 import { setUserRequestData } from '../../user/actions';
 
@@ -28,9 +27,9 @@ export function ticketsFetchData(url, userRequest) {
     dispatch(isLoading(true));
     dispatch(setUserRequestData(userRequest));
 
-    axios.post(url)
+    fetch(url)
       .then((response) => {
-        if (!response.data.tickets.length) {
+        if (!response.ok) {
           throw Error(response.statusText);
         }
 
@@ -38,11 +37,8 @@ export function ticketsFetchData(url, userRequest) {
 
         return response;
       })
-      // .then(response => response.json())
-      .then(response => response.data.tickets)
+      .then(response => response.json())
       .then(tickets => dispatch(fetchDataSuccess(tickets)))
-      .catch(() => {
-        dispatch(hasErrored(true));
-      });
+      .catch(() => dispatch(hasErrored(true)));
   };
 }
