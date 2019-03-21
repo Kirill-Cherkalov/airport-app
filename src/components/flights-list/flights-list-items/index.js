@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router';
+import { FaPlane } from 'react-icons/fa';
 import './index.scss';
 
 function FlightsListItems({
@@ -17,12 +18,13 @@ function FlightsListItems({
     }) => (
       <div key={id} className="flights-list-item">
         <div className="flights-list-item__info">
-          <span className="date">{date}</span>
+          {/* <span className="date">{date}</span> */}
           <div className="info-wrapper">
             <div className="flight">
               <span className="flight__time">{startTime}</span>
               <span className="flight__country">{fromCountry}</span>
             </div>
+            <FaPlane className="fa-arrow" />
             <div className="flight">
               <span className="flight__time">{endTime}</span>
               <span className="flight__country">{toCountry}</span>

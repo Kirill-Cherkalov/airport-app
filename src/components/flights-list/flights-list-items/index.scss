@@ -1,14 +1,6 @@
 @import 'src/variables.scss';
 
-// @media only screen and (min-width: $mobileSize) {
-//   .flights-list-item__price {
-//     display: flex;
-//     align-items: center;
-//   }
-// }
-
 .flights-container {
-  // background-color: lightgray;
   display: flex;
 }
 
@@ -16,7 +8,7 @@
   display: flex;
   justify-content: space-between;
   width: 860px;
-  padding: 15px 15px;
+  padding: 15px 25px;
   border: 1px solid $borderColor;
   background-color: $ticketsBackgroundColor;
   font-family: $fontFamily;
@@ -24,7 +16,7 @@
 
   &__info {
     flex-grow: 1;
-    margin-right: 45px;
+    margin-right: 55px;
   }
 
   &__price {
@@ -46,8 +38,8 @@
 .info-wrapper {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin: 10px 0;
-  // border: 1px solid black;
 }
 
 .flight {
@@ -67,6 +59,8 @@
 }
 
 .price-link {
+  width: 100px;
+  height: 50px;
   padding: 10px 15px;
   border: none;
   border-radius: 5px;
@@ -75,7 +69,7 @@
   text-decoration: none;
   text-transform: uppercase;
   font-family: $fontFamily;
-  font-size: 1rem;
+  font-size: 1.25rem;
   background-color: $primaryMaterial;
   outline: none;
 
@@ -84,9 +78,60 @@
   }
 }
 
+@-webkit-keyframes sidearrowDesktop {
+  0% { 
+    transform: translateX(220px);
+    color: white;
+  }
+  50% {
+    color: gray;
+  }
+  100% { 
+    transform: translateX(-220px);
+    color: white;
+  }
+}
+
+@-webkit-keyframes sidearrowTablet {
+  0% { 
+    transform: translateX(100px);
+    color: white;
+  }
+  50% {
+    color: gray;
+  }
+  100% { 
+    transform: translateX(-80px);
+    color: white;
+  }
+}
+
+@-webkit-keyframes sidearrowMobile {
+  0% { 
+    transform: translateX(20px);
+    color: white;
+  }
+  50% {
+    color: gray;
+  }
+  100% { 
+    transform: translateX(-15px);
+    color: white;
+  }
+}
+
+
+.fa-arrow {
+  color: rgb(192, 190, 190);
+  animation: sidearrowDesktop 4.5s infinite reverse ease-in-out;
+}
+
 @media only screen and (max-width: $tabletSize) {
   .flights-list-item {
     width: 620px;
+  }
+  .fa-arrow {
+    animation: sidearrowTablet 3.5s infinite reverse ease-in-out;
   }
 }
 
@@ -100,6 +145,7 @@
       margin: 0 0 10px 0;
     }
   }
+
   .flight {
     &__time{
       margin-bottom: 5px;
@@ -107,10 +153,15 @@
       font-weight: 300;
     }
   }
-}
 
-.fa-long-arrow-right {
-  width: 300px;
-  height: 40px;
-  color: black;
+  .price-link {
+    width: 260px;
+    height: 35px;
+    margin: 10px 0 0 0;
+    font-size: 1rem;
+    line-height: 100%;
+  }
+  .fa-arrow {
+    animation: sidearrowMobile 2.5s infinite reverse ease-in-out;
+  }
 }
