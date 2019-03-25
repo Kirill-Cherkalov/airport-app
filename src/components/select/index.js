@@ -69,7 +69,7 @@ class SimpleSelect extends React.Component {
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          {this.props.items.length && this.props.items.map(({ name }) => <MenuItem key={Math.random()} value={name}>{name}</MenuItem>)}
+          {this.props.items.length && this.props.items.map(({ _id, name }) => <MenuItem key={Math.random()} value={_id}>{name}</MenuItem>)}
         </Select>
         {meta.touched && meta.error && <FormHelperText margin="dense">{meta.error}</FormHelperText>}
       </FormControl>
