@@ -3,7 +3,8 @@ import actionTypes from '../actionTypes';
 const initialState = {
   hasErrored: false,
   isLoading: false,
-  items: [],
+  departureItems: [],
+  returnItems: [],
 };
 
 export default function tickets(state = initialState, action) {
@@ -11,7 +12,7 @@ export default function tickets(state = initialState, action) {
     case actionTypes.TICKETS_HAS_ERRORED:
       return {
         ...state,
-        hasErrores: action.hasErrored,
+        hasErrored: action.hasErrored,
       };
     case actionTypes.TICKETS_IS_LOADING:
       return {
@@ -21,7 +22,12 @@ export default function tickets(state = initialState, action) {
     case actionTypes.TICKETS_FETCH_DATA_SUCCESS:
       return {
         ...state,
-        items: action.items,
+        departureItems: action.items,
+      };
+    case actionTypes.TICKETS_RETURN_FETCH_DATA_SUCCESS:
+      return {
+        ...state,
+        returnItems: action.items,
       };
     default:
       return state;
