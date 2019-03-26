@@ -16,6 +16,7 @@ const styles = theme => ({
 
   selectField: {
     backgroundColor: theme.palette.common.white,
+    marginBottom: theme.spacing.unit,
     width: 240,
     [theme.breakpoints.up('sm')]: {
       width: 210,
