@@ -3,10 +3,6 @@ import actionTypes from './actionTypes';
 const initialState = {
   request: {},
   selectedFlight: {},
-  planeLayout: {
-    rows: 0,
-    location: [],
-  },
   totalPrice: 0,
   passengersInfo: [],
   selectedPassenger: 0,
@@ -23,11 +19,6 @@ export default function user(state = initialState, action) {
       return {
         ...state,
         selectedFlight: action.flightInfo,
-      };
-    case actionTypes.PLANE_LAYOUT:
-      return {
-        ...state,
-        planeLayout: action.layout,
       };
     case actionTypes.USER_TOTAL_PRICE:
       return {

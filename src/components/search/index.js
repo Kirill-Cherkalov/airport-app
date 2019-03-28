@@ -35,7 +35,7 @@ class Search extends React.Component {
 
   onSubmit = async (values) => {
     const { history } = this.props;
-    this.props.ticketsFetchData('http://localhost:3001/tickets', values);
+    this.props.ticketsFetchData(values);
     return this.props.tickets && history.push('/flights-list');
   };
 
@@ -122,7 +122,7 @@ class Search extends React.Component {
 
 const mapStateToProps = state => ({
   userRequest: state.user.request,
-  tickets: state.searchPage.tickets.items,
+  tickets: state.searchPage.tickets.departureItems,
   ticketsHasErrored: state.searchPage.tickets.hasErrored,
   ticketsIsLoading: state.searchPage.tickets.isLoading,
   airports: state.searchPage.airports.items,

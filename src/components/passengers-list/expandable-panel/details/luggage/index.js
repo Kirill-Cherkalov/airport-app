@@ -23,12 +23,12 @@ class Luggage extends React.Component {
           <label htmlFor={price} key={Math.random()}>
             <Field
               id={price}
-              name={`luggage + ${this.props.index}`}
+              name={`luggage${this.props.index}`}
               component="input"
               type="radio"
-              value={price}
+              value={`${price}`}
             />{' '}
-            {kg} kg
+            kg {kg} ${price}
           </label>
         ))}
       </div>
