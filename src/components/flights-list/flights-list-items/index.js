@@ -14,8 +14,8 @@ function FlightsListItems({
   return (
     flights.map(({
       id, date, startTime, endTime, fromCountry, toCountry, price, planeInfo,
-    }) => (
-      <div key={Math.random()} className="flights-list-item">
+    }, index) => (
+      <div key={index} className="flights-list-item">
         <div className="flights-list-item__info">
           <span className="date">{date}</span>
           <div className="info-wrapper">
