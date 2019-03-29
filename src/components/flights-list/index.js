@@ -5,7 +5,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import moment from 'moment';
-// import { selectedFlightInfo, flightPrice } from '../../redux/flights-list/actions';
 
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -26,6 +25,7 @@ class FlightsList extends React.Component {
     classes: PropTypes.object.isRequired,
     userRequest: PropTypes.object.isRequired,
     tickets: PropTypes.array.isRequired,
+    returnTickets: PropTypes.array.isRequired,
     setTotalPrice: PropTypes.func.isRequired,
     setSelectedFlightInfo: PropTypes.func.isRequired,
   };
@@ -39,6 +39,12 @@ class FlightsList extends React.Component {
 
   onClick = () => {
     this.setState(state => ({ isOpen: !state.isOpen }));
+  }
+
+  getPassAmount = (adult, child, infant) => {
+    const passengers = adult || 0 + child || 0 + infant || 0;
+    const str = passengers > 1 ? `${passengers} passengers` : `${passengers} passenger`;
+    return str;
   }
 
   render() {
@@ -58,7 +64,7 @@ class FlightsList extends React.Component {
                     {from} to {to}
                   </Typography>
                   <Typography color="inherit">
-                    departure {moment(departure).format('LL')}, {back && `return ${moment(back).format('LL')}`}, {adult && adult !== '0' && `adult ${adult}`} {child && child !== '0' && `child ${child}`} {infant && infant !== '0' && `infant ${infant}`}
+                    {moment(departure).format('LL')}{back && ' - ' }{back && moment(back).format('LL')}, {this.getPassAmount(adult, child, infant)}
                     <button className="change-button" type="button" onClick={this.onClick}>
                     Change
                     </button>
@@ -72,9 +78,20 @@ class FlightsList extends React.Component {
         )
           : <h1>Please, try to search flights</h1>}
 
-        <List className="flights-list" disablePadding>
-          <FlightsListItems classes={classes} flights={this.props.tickets} setTotalPrice={this.props.setTotalPrice} setSelectedFlightInfo={this.props.setSelectedFlightInfo} />
-        </List>
+        <>
+          {this.props.tickets[0]
+            ? <h1 className="flights-list__header">from {from} to {to}</h1>
+            : <h1 className="flights-list__header">No flights for this request</h1>
+          }
+          <List className="flights-list" disablePadding>
+            <FlightsListItems classes={classes} flights={this.props.tickets} setTotalPrice={this.props.setTotalPrice} setSelectedFlightInfo={this.props.setSelectedFlightInfo} />
+          </List>
+
+          {this.props.returnTickets[0] && <h1 className="flights-list__header">from {to} to {from}</h1>}
+          <List className="flights-list" disablePadding>
+            <FlightsListItems classes={classes} flights={this.props.returnTickets} setTotalPrice={this.props.setTotalPrice} setSelectedFlightInfo={this.props.setSelectedFlightInfo} />
+          </List>
+        </>
       </div>
     );
   }
@@ -82,7 +99,8 @@ class FlightsList extends React.Component {
 
 const mapStateToProps = state => ({
   userRequest: state.user.request,
-  tickets: state.searchPage.tickets.items,
+  tickets: state.searchPage.tickets.departureItems,
+  returnTickets: state.searchPage.tickets.returnItems,
 });
 
 const mapDispatchToProps = dispatch => ({

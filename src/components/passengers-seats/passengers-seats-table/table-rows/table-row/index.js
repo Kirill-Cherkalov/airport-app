@@ -20,10 +20,14 @@ class TableRow extends React.Component {
   select = event => this.props.selectPassenger(+event.target.id);
 
   render() {
+    const {
+      firstname, lastname, passengersInfo, index,
+    } = this.props;
+
     return (
       <tr className="passengers-seats__passenger">
-        <td className="passengers-seats__info td">{this.props.firstname} {this.props.lastname}</td>
-        <td id={this.props.index} className="passengers-seats__seat td" onClick={this.select}>{this.props.passengersInfo[this.props.index].selectedSeat || 'seat'}</td>
+        <td className="passengers-seats__info td">{firstname} {lastname}</td>
+        <td id={index} className="passengers-seats__seat td" onClick={this.select}>{passengersInfo[index].selectedSeat || 'seat'}</td>
       </tr>
     );
   }

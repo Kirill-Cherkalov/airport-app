@@ -1,14 +1,13 @@
 @import 'src/variables';
 
 .plane {
-  padding: 1px;
+  background-color: $planeBackgroundColor;
 }
 
 .row {
   display: flex;
   padding: 5px 5px;
   height: 20px;
-  background-color: $seatsRowBackgroundColor;
 }
 
 .seat {
@@ -16,10 +15,9 @@
   width: 20px;
   height: 20px;
   border-radius: 3px;
-  background-color: $seatBackgroundColor;
+  background-color: $seatsRowBackgroundColor;
   text-align: center;
   line-height: normal;
-  font-family: $fontFamily;
   font-size: 0.8rem;
   cursor: pointer;
 
@@ -38,7 +36,7 @@
 
 .sign {
   background-color: transparent;
-  color: $textWhiteColor;
+  color: $planeSignsColor;
 }
 
 .empty {
@@ -47,8 +45,7 @@
   align-items: center;
   width: 10px;
   height: 20px;
-  color: $borderColor;
-  font-family: $fontFamily;
-  font-size: 0.5rem;
+  color: $planeSignsColor;
+  font-size: 0.6rem;
   margin-right: 5px;
 }

@@ -11,15 +11,12 @@ import { setPassengersInfo } from '../../redux/user/actions';
 import './index.scss';
 import Details from './expandable-panel/details';
 import Header from './expandable-panel/header';
-import fetchPlaneSchema from '../../redux/data/plane-schema/actions';
 
 class PassengersList extends Component {
   static propTypes = {
     userRequest: PropTypes.object.isRequired,
     setPassengersInfo: PropTypes.func.isRequired,
-    fetchPlaneSchema: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
-    planeId: PropTypes.number.isRequired,
   };
 
   onSubmit = (values) => {
@@ -39,7 +36,6 @@ class PassengersList extends Component {
 
     const { history } = this.props;
     this.props.setPassengersInfo(passengersArray);
-    this.props.fetchPlaneSchema(this.props.planeId);
     return history.push('/passengers-seats');
   };
 
@@ -77,12 +73,10 @@ class PassengersList extends Component {
 
 const mapStateToProps = state => ({
   userRequest: state.user.request,
-  planeId: state.user.selectedFlight.planeId,
 });
 
 const mapDispatchToProps = dispatch => ({
   setPassengersInfo: info => dispatch(setPassengersInfo(info)),
-  fetchPlaneSchema: planeId => dispatch(fetchPlaneSchema(planeId)),
 });
 
 export default compose(

@@ -10,6 +10,7 @@ export default function PassengersSeatsTable() {
           <TableRows />
         </tbody>
       </table>
+      <button type="button" className="button">Continue</button>
     </div>
   );
 }

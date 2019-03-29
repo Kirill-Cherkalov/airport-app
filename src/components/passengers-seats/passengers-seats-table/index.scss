@@ -1,12 +1,14 @@
 @import 'src/variables.scss';
 
-.passenger-seats-container * {
-  font-family: $fontFamily;
-}
-
 .passenger-seats-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 30px;
 }
 
+.passengers-seats {
+  background-color: $passengerTableBackgroundColor;
+  box-shadow: $boxShadow;
+}

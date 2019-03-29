@@ -1,9 +1,11 @@
 @import 'src/variables';
+
 body {
   background-image: url('assets/back3.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
+  font-family: $fontFamily;
 }
 
 @media only screen and (max-width: $mobileSize) {

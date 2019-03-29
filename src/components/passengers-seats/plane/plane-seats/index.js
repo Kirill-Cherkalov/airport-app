@@ -4,7 +4,7 @@ import { setPassengersInfo } from '../../../../redux/user/actions';
 import './index.scss';
 
 function PlaneSeats({
-  rows, location, signs, selectedPassenger, passengersInfo, setInfo,
+  rows, location, selectedPassenger, passengersInfo, setInfo,
 }) {
   const rowss = new Array(rows).fill(1);
 
@@ -22,21 +22,18 @@ function PlaneSeats({
   };
 
   return (
-    rowss.map((elem, i) => {
-      i++;
-      return (
-        <div key={Math.random()} className="row seats">
-          {location.map((place, j) => (place
-            ? (
-              <div id={i + signs[j]} key={Math.random()} className="seat" onClick={selectSeat}>
-                <span id={i + signs[j]} className="seat-point">{i + signs[j]}</span>
-                <span className="tooltiptext">$9</span>
-              </div>
-            )
-            : <div key={Math.random()} className="empty">{i}</div>))}
-        </div>
-      );
-    })
+    rowss.map((elem, index) => (
+      <div key={index} className="row seats">
+        {location.map((place, j) => (place
+          ? (
+            <div id={index + 1 + location[j]} key={index + j} className="seat" onClick={selectSeat}>
+              <span id={index + 1 + location[j]} className="seat-point">{index + 1 + location[j]}</span>
+              <span className="tooltiptext">$9</span>
+            </div>
+          )
+          : <div key={Math.random()} className="empty">{index + 1}</div>))}
+      </div>
+    ))
   );
 }
 
