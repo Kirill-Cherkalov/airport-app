@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Header from './header';
 import Details from './details';
@@ -28,14 +28,14 @@ export default class ExpandablePanel extends React.Component {
 
   render() {
     return (
-      <div className="expandable-panel">
+      <Fragment>
         <Header isOpen={this.state.isOpen} openPanel={this.openPanel} index={this.props.index} />
         {/* {this.state.isOpen && ( */}
         <div className="expandable-panel__details">
           <Details i={this.props.index} handleChange={this.handleChange} />
         </div>
         {/* )} */}
-      </div>
+      </Fragment>
     );
   }
 }
