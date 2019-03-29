@@ -1,1 +1,20 @@
 @import 'src/variables.scss';
+
+.passengers-list-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.expandable-panel {
+  width: 65%;
+  margin: 0 auto;
+  border: 1px solid $borderColor;
+  box-shadow: $boxShadow;
+}
+
+@media screen and (max-width: $tabletSize) {
+  .expandable-panel{
+    width: 85%;
+  }
+}

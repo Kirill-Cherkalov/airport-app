@@ -11,6 +11,8 @@ const validate = (values) => {
   }
   if (!values.password) {
     errors.password = 'Required';
+  } else if (values.password.length < 8) {
+    errors.password = 'Less than 8 signs';
   }
   return errors;
 };

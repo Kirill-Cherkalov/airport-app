@@ -51,7 +51,7 @@ class PassengersList extends Component {
         }}
         render={({ handleSubmit },
           pristine, submitting) => (
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="passengers-list-form">
               <FieldArray name="information">
                 {() => (passengersAmount.map((elem, index) => (
                   // <ExpandablePanel key={Math.random()} index={index} />
