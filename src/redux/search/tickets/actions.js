@@ -69,8 +69,8 @@ export function ticketsFetchData(userRequest) {
               } = ticket;
               const editedUserRequest = {
                 ...userRequest,
-                from: toCountry,
-                to: fromCountry,
+                from: backUrl ? toCountry : fromCountry,
+                to: backUrl ? fromCountry : toCountry,
               };
               dispatch(setUserRequestData(editedUserRequest));
 

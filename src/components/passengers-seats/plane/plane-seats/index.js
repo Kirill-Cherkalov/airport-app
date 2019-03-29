@@ -26,8 +26,8 @@ function PlaneSeats({
       <div key={index} className="row seats">
         {location.map((place, j) => (place
           ? (
-            <div id={j + 1 + location[j]} key={index + j} className="seat" onClick={selectSeat}>
-              <span id={j + 1 + location[j]} className="seat-point">{j + 1 + location[j]}</span>
+            <div id={index + 1 + location[j]} key={index + j} className="seat" onClick={selectSeat}>
+              <span id={index + 1 + location[j]} className="seat-point">{index + 1 + location[j]}</span>
               <span className="tooltiptext">$9</span>
             </div>
           )
