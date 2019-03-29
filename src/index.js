@@ -14,6 +14,7 @@ import Register from './components/register';
 import Search from './components/search';
 import PassengersCounters from './components/passengers-counters';
 import PassengersList from './components/passengers-list';
+import OrderDetails from './components/order-details';
 import SeatsChoice from './components/passengers-seats';
 
 const store = configureStore();
@@ -30,6 +31,7 @@ function App() {
           <Route path="/flights-list" component={FlightsList} />
           <Route path="/passengers-seats" component={SeatsChoice} />
           <Route path="/passengers-list" component={PassengersList} />
+          <Route path="/order-details" component={OrderDetails} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
         </div>
