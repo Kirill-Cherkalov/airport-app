@@ -3,26 +3,31 @@ $mobileSize: 600px;
 $tabletSize: 960px;
 $desktopSize: 1280px;
 // colors
-$lightgray: rgb(211, 211, 211);
 $borderColor: rgb(211, 211, 211);
 $checkIconColor: rgb(20, 184, 20);
-$gray: #808080;
 $dateBorderColor: rgb(225, 225, 225);
+$gray: #808080;
+$lightgray: rgb(211, 211, 211);
+$masterCardColor: rgb(206, 4, 4);
 $priceColor: rgb(0, 0, 139);
+$visaCardColor: rgb(247, 170, 29);
 
 // backgrounds
+$cardBackgroundColor: rgb(242, 242, 242);
 $loginBackgroundColor: rgb(255, 255, 255);
-$passengerTableBackgroundColor: rgb(255, 255, 255);
 $orderDetailsBackground: rgb(255, 255, 255);
+$overlayBackgroundColor: rgba(44, 34, 34, 0.5);
+$passengerTableBackgroundColor: rgb(255, 255, 255);
+$paymentBackground: rgb(255, 255, 255);
+$paymentHeaderBackground: rgb(242, 242, 242);
+$paymentCardBackground: rgb(242, 242, 242);
 $planeBackgroundColor: rgb(255, 255, 255);
-$ticketsBackgroundColor: rgb(255, 255, 255);
 $seatBackgroundColor: rgb(245, 245, 220);
 $seatsRowBackgroundColor: rgb(131, 80, 131);
-$tooltipBackgroundColor: rgb(211, 211, 211);
-$overlayBackgroundColor: rgba(44, 34, 34, 0.5);
 $sidebarBackgroundColor: rgb(255, 255, 255);
+$ticketsBackgroundColor: rgb(255, 255, 255);
+$tooltipBackgroundColor: rgb(211, 211, 211);
 
-$cardBackgroundColor: rgb(242, 242, 242);
 
 $textWhiteColor: rgb(255, 255, 255);
 $textBlackColor: rgb(0, 0, 0);

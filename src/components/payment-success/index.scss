@@ -1,0 +1,15 @@
+@import 'src/variables.scss';
+
+.payment-success {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+  border-radius: 7px;
+  align-items: center;
+  color: $textWhiteColor;
+  text-transform: uppercase;
+  font-size: 3em;
+}
