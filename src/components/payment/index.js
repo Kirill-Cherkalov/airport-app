@@ -3,6 +3,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
+import formatString from 'format-string-by-pattern';
 import { FaCcVisa, FaCcMastercard, FaRegCreditCard, FaUser, FaRegClock, FaUnlock } from 'react-icons/fa';
 import { Form, Field } from 'react-final-form';
 import validate from './validate';
@@ -44,7 +45,7 @@ function Payment({ history }) {
                   name="number"
                   label="Card number"
                   type="text"
-                  pattern="\D [^0-9]"
+                  parse={formatString('9999 9999 9999 9999')}
                   className="payment-card__field"
                   component={TextField}
                   variant="outlined"
@@ -66,6 +67,7 @@ function Payment({ history }) {
                 <div className="payment-card__field-wrapper">
                   <FaRegClock className="payment-card__icon" />
                   <Field
+                    id="month"
                     name="month"
                     label="mm"
                     className="payment-card__date payment-card__date_month"
@@ -73,6 +75,7 @@ function Payment({ history }) {
                     items={months}
                   />
                   <Field
+                    id="year"
                     name="year"
                     label="yy"
                     className="payment-card__date"
@@ -87,6 +90,7 @@ function Payment({ history }) {
                     name="code"
                     label="CVC/CVV"
                     type="password"
+                    parse={formatString('XXX')}
                     className="payment-card__field payment-card__field_code"
                     component={TextField}
                     variant="outlined"

@@ -1,8 +1,13 @@
+import numeral from 'numeral';
+import formatStringByPattern from 'format-string-by-pattern';
+
 const validate = (values) => {
   const errors = {};
 
   if (!values.number) {
     errors.number = 'Please add the card number';
+  } else if (isNaN(parseInt(values.number.split(' ').join()))) {
+    errors.number = 'Should contains numbers';
   }
 
   if (!values.name) {
@@ -14,7 +19,6 @@ const validate = (values) => {
   }
 
   if (!values.year) {
-    
     errors.year = 'Required';
   }
 
