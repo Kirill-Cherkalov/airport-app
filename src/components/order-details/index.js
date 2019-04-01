@@ -1,68 +1,31 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { withRouter } from 'react-router';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 import { FaCheck, FaRegUserCircle } from 'react-icons/fa';
 import './index.scss';
 
-const userInfo = {
-  request: {
-    from: 'Abakan',
-    to: 'Mala Mala',
-    departure: '2019-03-29T13:08:01.677Z',
-    adult: '2',
-  },
-  selectedFlight: {
-    date: '2019-03-29T00:00:00.000Z',
-    startTime: '16.20',
-    endTime: '18.45',
-    price: 95,
-    planeInfo: {
-      seatsInRow: [],
-      _id: '5c98b764fb304d68a0b2cd5a',
-      location: [
-        'A',
-        'B',
-        '',
-        'C',
-        '',
-        'D',
-        'E',
-      ],
-      code: '1',
-      rows: 10,
-      __v: 0,
-    },
-  },
-  totalPrice: 95,
-  passengersInfo: [
-    {
-      firstname: 'Ivan',
-      lastname: 'Ivanov',
-      luggagePrice: '15',
-      selectedSeat: '2B',
-      seatPrice: 9,
-    },
-    {
-      firstname: 'Petr',
-      lastname: 'Petrov',
-      luggagePrice: '21',
-      selectedSeat: '2A',
-      seatPrice: 9,
-    },
-  ],
-  selectedPassenger: 1,
-};
-const { adult, child, infant } = userInfo.request;
-const passAmount = +adult || 0 + +child || 0 + +infant || 0;
-const flightPrice = passAmount * userInfo.selectedFlight.price;
-let luggageprice = 0;
-userInfo.passengersInfo.map(({ luggagePrice }) => {
-  luggageprice += +luggagePrice;
-  return luggageprice;
-});
+function OrderDetails({ userInfo, history }) {
+  OrderDetails.propTypes = {
+    userInfo: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired,
+  };
 
-const totalPrice = flightPrice + luggageprice;
+  const { adult, child, infant } = userInfo.request;
+  const passAmount = +adult || 0 + +child || 0 + +infant || 0;
+  const flightPrice = passAmount * userInfo.selectedFlight.price;
+  let luggageprice = 0;
+  userInfo.passengersInfo.map(({ luggagePrice }) => {
+    luggageprice += +luggagePrice;
+    return luggageprice;
+  });
 
-function OrderDetails() {
+  const totalPrice = flightPrice + luggageprice;
+
+  const onClick = () => history.push('/payment');
+
   return (
     <section className="order-details">
 
@@ -73,11 +36,11 @@ function OrderDetails() {
         </div>
 
         <div className="flight-info">
+          <span className="flight-info__date">{moment(userInfo.selectedFlight.date).format('MMM Do')}</span>
           <div className="flight-info__wrapper">
             <span className="flight-info__direction">{userInfo.request.from} - {userInfo.request.to}</span>
             <span className="flight-info__time">{userInfo.selectedFlight.startTime} - {userInfo.selectedFlight.endTime}</span>
           </div>
-          <span className="flight-info__date">{moment(userInfo.selectedFlight.date).format('MMM Do')}</span>
         </div>
 
         <div className="about-price">
@@ -92,34 +55,41 @@ function OrderDetails() {
           <span className="order-details__text">Passengers</span>
         </div>
 
-        {userInfo.passengersInfo.map(passenger => (
-          <div className="passengers-info">
+        {userInfo.passengersInfo.map((passenger, index) => (
+          <div className="passengers-info" key={index}>
             <div className="passengers-info__about">
               <FaRegUserCircle className="passengers-info__icon" />
               <span className="passengers-info__name">{passenger.firstname} {passenger.lastname}</span>
             </div>
 
             <div className="about-price">
-              <span className="about-price__text">Luggage</span>
-              <span className="about-price__amount">{passenger.luggagePrice}</span>
+              <span className="about-price__text">Luggage - {passenger.luggageKg} kg</span>
+              <span className="about-price__amount">$ {passenger.luggagePrice}</span>
             </div>
 
             <div className="about-price">
               <span className="about-price__text">Seat - {passenger.selectedSeat}</span>
-              <span className="about-price__amount">$ {passenger.seatPrice}</span>
+              <span className="about-price__amount">included</span>
             </div>
           </div>
         ))}
       </section>
 
       <section className="order-details__total-price">
-        <span className="total-price__text">Total price</span>
-        <span className="total-price__amount">{totalPrice}</span>
+        <span className="total-price__text">Total</span>
+        <span className="total-price__amount">$ {totalPrice}</span>
       </section>
 
-      <button type="button" className="button">Confirm</button>
+      <button type="button" className="button" onClick={onClick}>Confirm</button>
     </section>
   );
 }
 
-export default OrderDetails;
+const mapStateToProps = state => ({
+  userInfo: state.user,
+});
+
+export default compose(
+  withRouter,
+  connect(mapStateToProps),
+)(OrderDetails);

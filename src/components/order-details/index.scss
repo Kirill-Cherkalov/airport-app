@@ -1,0 +1,119 @@
+@import 'src/variables.scss';
+
+.order-details {
+  width: 45%;
+  min-height: 350px;
+  margin: 0 auto 30px;
+  padding: 15px 20px;
+  border-radius: 3px;
+  background-color: $orderDetailsBackground;
+  box-shadow: $boxShadow;
+
+  &__header {
+    padding: 10px 0 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-weight: 500;
+  }
+
+  &__icon {
+    margin-right: 10px;
+    color: $checkIconColor;
+  }
+
+  &__flight {
+    margin-bottom: 15px;
+  }
+
+  &__passengers {
+    margin-bottom: 15px;
+    border-top: 2px dotted $gray;
+  }
+
+  &__total-price {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 15px;
+    border-top: 2px dotted $gray;
+    color: $priceColor;
+    font-size: 1.7em;
+    font-weight: 500;
+  }
+}
+
+.flight-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  &__direction {
+    margin-bottom: 5px;
+    font-size: 1.2em;
+    font-weight: 500;
+  }
+  &__time {
+    color: $gray;
+    font-size: 0.8em;
+  }
+  &__date {
+    width: 30px;
+    padding: 7px;
+    margin-right: 20px;
+    border: 2px solid $dateBorderColor;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: 500;
+  }
+}
+
+.about-price {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  letter-spacing: 0.5px;
+  font-size: 0.8em;
+
+  &__amount {
+    width: 50px;
+    text-align: right;
+    color: $priceColor;
+    font-weight: 500;
+  }
+}
+
+.passengers-info {
+  margin-bottom: 10px;
+
+  &__about {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  &__icon {
+    width: 32px;
+    height: 32px;
+    margin-right: 20px;
+    border-radius: 50%;
+    box-shadow: $boxShadow;
+  }
+  &__name {
+    font-weight: 500;
+    font-size: 1em;
+  }
+}
+
+@media only screen and (max-width: $tabletSize) {
+  .order-details {
+    width: 55%;
+  }
+}
+
+@media screen and (max-width: $mobileSize) {
+  .order-details {
+    width: 75%;
+  }
+}
