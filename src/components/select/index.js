@@ -1,8 +1,6 @@
-/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-// import { withStyles } from '@material-ui/core/styles';
 
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -10,7 +8,6 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
-// import {styles} from './material.style';
 
 class SimpleSelect extends React.Component {
   static propTypes = {
@@ -31,7 +28,6 @@ class SimpleSelect extends React.Component {
   }
 
   render() {
-    // const {classes} = this.props;
     const {
       input: {
         name, onChange, value, ...restInput
@@ -42,7 +38,6 @@ class SimpleSelect extends React.Component {
       <FormControl
         variant="outlined"
         error={meta.error && meta.touched}
-        // className={classes.formControl}
       >
         <InputLabel
           ref={(ref) => {
@@ -66,9 +61,6 @@ class SimpleSelect extends React.Component {
             />
 )}
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
           {this.props.items.length && this.props.items.map(({ _id, name }) => <MenuItem key={Math.random()} value={_id}>{name}</MenuItem>)}
         </Select>
         {meta.touched && meta.error && <FormHelperText margin="dense">{meta.error}</FormHelperText>}
@@ -77,5 +69,4 @@ class SimpleSelect extends React.Component {
   }
 }
 
-// export default withStyles(styles)(SimpleSelect);
 export default SimpleSelect;

@@ -16,13 +16,8 @@ function OrderDetails({ userInfo, history }) {
   const { adult, child, infant } = userInfo.request;
   const passAmount = +adult || 0 + +child || 0 + +infant || 0;
   const flightPrice = passAmount * userInfo.selectedFlight.price;
-  let luggageprice = 0;
-  userInfo.passengersInfo.map(({ luggagePrice }) => {
-    luggageprice += +luggagePrice;
-    return luggageprice;
-  });
-
-  const totalPrice = flightPrice + luggageprice;
+  const allLuggagePrice = userInfo.passengersInfo.reduce((total, { luggagePrice: price }) => total + price, 0);
+  const totalPrice = flightPrice + allLuggagePrice;
 
   const onClick = () => history.push('/payment');
 

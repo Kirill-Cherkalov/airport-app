@@ -15,6 +15,7 @@ import Header from './expandable-panel/header';
 class PassengersList extends Component {
   static propTypes = {
     userRequest: PropTypes.object.isRequired,
+    luggageTypes: PropTypes.array.isRequired,
     setPassengersInfo: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
   };
@@ -35,13 +36,19 @@ class PassengersList extends Component {
     }
 
     const { history } = this.props;
+    passengersArray.map(passenger => this.props.luggageTypes.filter((type) => {
+      if (type.price === +passenger.luggagePrice) {
+        passenger.luggagePrice = type.price;
+        passenger.luggageKg = type.kg;
+      }
+    }));
     this.props.setPassengersInfo(passengersArray);
     return history.push('/passengers-seats');
   };
 
   render() {
     const { adult, child, infant } = this.props.userRequest;
-    const passengersAmount = new Array((+adult || 0) + (+child || 0) + (+infant || 0)).fill(1);
+    const passengersAmount = new Array(adult + child + infant).fill(1);
 
     return (
       <Form
@@ -61,7 +68,7 @@ class PassengersList extends Component {
                   </div>
                 )))}
               </FieldArray>
-              <button type="submit" disabled={submitting || pristine}>
+              <button type="submit" className="button" disabled={submitting || pristine}>
                 Confirm
               </button>
             </form>
@@ -73,6 +80,7 @@ class PassengersList extends Component {
 
 const mapStateToProps = state => ({
   userRequest: state.user.request,
+  luggageTypes: state.data.luggage.luggageTypes,
 });
 
 const mapDispatchToProps = dispatch => ({
