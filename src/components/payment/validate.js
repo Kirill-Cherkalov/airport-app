@@ -6,8 +6,6 @@ const validate = (values) => {
 
   if (!values.number) {
     errors.number = 'Please add the card number';
-  } else if (isNaN(parseInt(values.number.split(' ').join()))) {
-    errors.number = 'Should contains numbers';
   }
 
   if (!values.name) {

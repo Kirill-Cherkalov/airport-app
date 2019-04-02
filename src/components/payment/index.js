@@ -24,6 +24,22 @@ function Payment({ history }) {
   const months = [{ _id: 1, name: 1 }, { _id: 2, name: 2 }, { _id: 3, name: 3 }, { _id: 4, name: 4 }, { _id: 5, name: 5 }, { _id: 6, name: 6 }, { _id: 7, name: 7 }, { _id: 8, name: 8 }, { _id: 9, name: 9 }, { _id: 10, name: 10 }, { _id: 11, name: 11 }, { _id: 12, name: 12 }];
   const years = [{ _id: 19, name: 19 }, { _id: 20, name: 20 }, { _id: 21, name: 21 }, { _id: 22, name: 22 }, { _id: 23, name: 23 }, { _id: 24, name: 24 }, { _id: 25, name: 25 }, { _id: 26, name: 26 }, { _id: 27, name: 27 }, { _id: 28, name: 28 }];
 
+  const normalizeCardNumber = (value) => {
+    if (!value) return value;
+    const onlyNums = value.replace(/[^\d]/g, '');
+    if (onlyNums.length <= 3) return onlyNums;
+    if (onlyNums.length <= 7) return `${onlyNums.slice(0, 4)} ${onlyNums.slice(4, 8)}`;
+    if (onlyNums.length <= 11) return `${onlyNums.slice(0, 4)} ${onlyNums.slice(4, 8)} ${onlyNums.slice(8, 12)}`;
+    return `${onlyNums.slice(0, 4)} ${onlyNums.slice(4, 8)} ${onlyNums.slice(8, 12)} ${onlyNums.slice(12, 16)}`;
+  };
+
+  const normalizeCode = (value) => {
+    if (!value) return value;
+    const onlyNums = value.replace(/[^\d]/g, '');
+    if (onlyNums.length <= 3) return onlyNums;
+    return `${onlyNums.slice(0, 3)}`;
+  };
+
   return (
     <section className="payment">
       <h1 className="payment__header">credit card</h1>
@@ -45,7 +61,7 @@ function Payment({ history }) {
                   name="number"
                   label="Card number"
                   type="text"
-                  parse={formatString('9999 9999 9999 9999')}
+                  parse={normalizeCardNumber}
                   className="payment-card__field"
                   component={TextField}
                   variant="outlined"
@@ -90,7 +106,7 @@ function Payment({ history }) {
                     name="code"
                     label="CVC/CVV"
                     type="password"
-                    parse={formatString('XXX')}
+                    parse={normalizeCode}
                     className="payment-card__field payment-card__field_code"
                     component={TextField}
                     variant="outlined"
