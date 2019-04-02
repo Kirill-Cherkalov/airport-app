@@ -1,6 +1,3 @@
-import numeral from 'numeral';
-import formatStringByPattern from 'format-string-by-pattern';
-
 const validate = (values) => {
   const errors = {};
 

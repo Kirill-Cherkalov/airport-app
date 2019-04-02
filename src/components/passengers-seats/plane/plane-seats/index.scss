@@ -9,7 +9,7 @@
   border-radius: 6px;
   visibility: hidden;
   background-color: $tooltipBackgroundColor;
-  color: $textBlackColor;
+  color: $primaryTextColor;
   text-align: center;
   z-index: 1;
 
@@ -28,5 +28,5 @@
 .seat-point {
   display: none;
   font-size: 0.7rem;
-  color: $textWhiteColor;
+  color: $primaryTextInvertColor;
 }

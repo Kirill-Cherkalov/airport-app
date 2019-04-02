@@ -3,7 +3,6 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
-import formatString from 'format-string-by-pattern';
 import { FaCcVisa, FaCcMastercard, FaRegCreditCard, FaUser, FaRegClock, FaUnlock } from 'react-icons/fa';
 import { Form, Field } from 'react-final-form';
 import validate from './validate';

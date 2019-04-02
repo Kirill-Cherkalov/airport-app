@@ -6,10 +6,10 @@ $desktopSize: 1280px;
 $borderColor: rgb(211, 211, 211);
 $checkIconColor: rgb(20, 184, 20);
 $dateBorderColor: rgb(225, 225, 225);
-$gray: #808080;
-$lightgray: rgb(211, 211, 211);
 $masterCardColor: rgb(206, 4, 4);
+$orderDetailsDividerColor: rgb(128, 128, 128);
 $priceColor: rgb(0, 0, 139);
+
 $visaCardColor: rgb(247, 170, 29);
 
 // backgrounds
@@ -28,10 +28,10 @@ $sidebarBackgroundColor: rgb(255, 255, 255);
 $ticketsBackgroundColor: rgb(255, 255, 255);
 $tooltipBackgroundColor: rgb(211, 211, 211);
 
-
-$textWhiteColor: rgb(255, 255, 255);
-$textBlackColor: rgb(0, 0, 0);
-$planeSignsColor: rgb(153, 153, 153);
+// text
+$primaryTextColor: rgb(0, 0, 0);
+$primaryTextInvertColor: rgb(255, 255, 255);
+$secondaryTextColor: rgb(128, 128, 128);
 
 $buttonHoverColor: rgba(0, 0, 0, 0.08);
 $primaryMaterial: rgb(63, 81, 181);

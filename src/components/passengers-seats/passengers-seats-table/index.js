@@ -9,7 +9,7 @@ function PassengersSeatsTable({ history }) {
     history: PropTypes.object.isRequired,
   };
 
-  const toOrderDetailsPage = () => history.push('/order-details');
+  const goToOrderDetailsPage = () => history.push('/order-details');
 
   return (
     <div className="passenger-seats-container">
@@ -18,7 +18,7 @@ function PassengersSeatsTable({ history }) {
           <TableRows />
         </tbody>
       </table>
-      <button type="button" onClick={toOrderDetailsPage} className="button">Continue</button>
+      <button type="button" onClick={goToOrderDetailsPage} className="button">Continue</button>
     </div>
   );
 }

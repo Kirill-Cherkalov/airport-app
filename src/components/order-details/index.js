@@ -19,7 +19,7 @@ function OrderDetails({ userInfo, history }) {
   const allLuggagePrice = userInfo.passengersInfo.reduce((total, { luggagePrice: price }) => total + price, 0);
   const totalPrice = flightPrice + allLuggagePrice;
 
-  const onClick = () => history.push('/payment');
+  const goToPaymentPage = () => history.push('/payment');
 
   return (
     <section className="order-details">
@@ -75,7 +75,7 @@ function OrderDetails({ userInfo, history }) {
         <span className="total-price__amount">$ {totalPrice}</span>
       </section>
 
-      <button type="button" className="button" onClick={onClick}>Confirm</button>
+      <button type="button" className="button" onClick={goToPaymentPage}>Confirm</button>
     </section>
   );
 }

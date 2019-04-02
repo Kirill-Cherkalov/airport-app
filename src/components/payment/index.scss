@@ -14,7 +14,7 @@
     width: 100%;
     padding: 15px 20px;
     text-align: center;
-    border-bottom: 2px solid $lightgray;
+    border-bottom: 2px solid $borderColor;
     background-color: $paymentHeaderBackground;
     text-transform: uppercase;
     letter-spacing: 0.6px;
@@ -24,7 +24,7 @@
   &__text {
     margin-right: 7px;
     text-transform: uppercase;
-    color: $gray;
+    color: $secondaryTextColor;
     font-size: 0.6em;
     font-weight: 500;
   }
@@ -52,7 +52,7 @@
 }
 
 .payment-card {
-  box-sizing:border-box;
+  box-sizing: border-box;
   width: 90%;
   margin: 0 auto;
   padding: 25px 15px;
@@ -76,13 +76,13 @@
   &__icon {
     margin: 15px 15px 0 0;
     font-size: 20px;
-    color: $gray;
+    color: $secondaryTextColor;
   }
 
   &__lock-icon {
     margin: 15px 15px 0 15px;
     font-size: 20px;
-    color: $gray;
+    color: $secondaryTextColor;
   }
 
   &__field {

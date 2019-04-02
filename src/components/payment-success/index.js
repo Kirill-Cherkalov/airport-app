@@ -8,14 +8,14 @@ function PaymentSuccess({ history }) {
     history: PropTypes.object.isRequired,
   };
 
-  const onClick = () => {
+  const goToStartPage = () => {
     history.push('/search');
   };
 
   return (
     <section className="payment-success">
       success
-      <button type="button" className="button" onClick={onClick}>go to START</button>
+      <button type="button" className="button" onClick={goToStartPage}>go to START</button>
     </section>
   );
 }
