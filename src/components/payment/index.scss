@@ -1,0 +1,131 @@
+@import 'src/variables.scss';
+
+.payment {
+  width: 90%;
+  min-height: 350px;
+  padding-bottom: 20px;
+  margin: 0 auto 30px;
+  border-radius: 5px;
+  background-color: $paymentBackground;
+  box-shadow: $boxShadow;
+
+  &__header {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 15px 20px;
+    text-align: center;
+    border-bottom: 2px solid $borderColor;
+    background-color: $paymentHeaderBackground;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    border-radius: 5px 5px 0 0;
+  }
+
+  &__text {
+    margin-right: 7px;
+    text-transform: uppercase;
+    color: $secondaryTextColor;
+    font-size: 0.6em;
+    font-weight: 500;
+  }
+
+  &__cards {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 15px;
+    
+    &_visa {
+      margin-right: 5px;
+      font-size: 1.4em;
+      color: $visaCardColor;
+    }
+    &_mastercard {
+      font-size: 1.4em;
+      color: $masterCardColor;
+    }
+  }
+
+  &__button {
+    margin: 25px 0 0 25px;
+  }
+}
+
+.payment-card {
+  box-sizing: border-box;
+  width: 90%;
+  margin: 0 auto;
+  padding: 25px 15px;
+  background-color: $paymentCardBackground;
+  border-radius: 5px;
+  box-shadow: $boxShadow;
+
+  &__field-wrapper {
+    display: flex;
+    margin-bottom: 10px;
+  }
+
+  &__date {
+    width: 90px;
+
+    &_month {
+      margin-right: 10px;
+    }
+  }
+
+  &__icon {
+    margin: 15px 15px 0 0;
+    font-size: 20px;
+    color: $secondaryTextColor;
+  }
+
+  &__lock-icon {
+    margin: 15px 15px 0 15px;
+    font-size: 20px;
+    color: $secondaryTextColor;
+  }
+
+  &__field {
+    flex-grow: 1;
+  }
+}
+
+.wrapper {
+  box-sizing: border-box;
+  display: flex;
+}
+
+@media only screen and (max-width: $mobileSize) {
+  .wrapper {
+    flex-direction: column;
+  }
+  .payment-card__lock-icon {
+    margin-left: 0;
+  }
+}
+
+@media only screen and (max-width: $mobileSize) {
+  
+  .payment-card__field_code {
+      flex-grow: 0;
+      width: 135px;
+    }
+}
+
+@media only screen and (max-width: $tabletSize) and (min-width: $mobileSize) {
+  .payment {
+    width: 70%;
+  }
+}
+
+@media only screen and (max-width: $desktopSize) and (min-width: $tabletSize) {
+  .payment {
+    width: 50%;
+  }
+}
+
+@media only screen and (min-width: $desktopSize) {
+  .payment {
+    width: 35%;
+  }
+}

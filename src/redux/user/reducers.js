@@ -13,7 +13,12 @@ export default function user(state = initialState, action) {
     case actionTypes.USER_REQUEST:
       return {
         ...state,
-        request: action.request,
+        request: {
+          ...action.request,
+          adult: +action.request.adult || 0,
+          child: +action.request.child || 0,
+          infant: +action.request.infant || 0,
+        },
       };
     case actionTypes.USER_SELECTED_FLIGHT_INFO:
       return {

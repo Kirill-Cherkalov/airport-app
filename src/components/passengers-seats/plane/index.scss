@@ -1,5 +1,11 @@
 @import 'src/variables';
 
+@media only screen and (max-width: $mobileSize) {
+  .plane {
+    margin-bottom: 30px;
+  }
+}
+
 .plane {
   background-color: $planeBackgroundColor;
 }
@@ -36,7 +42,7 @@
 
 .sign {
   background-color: transparent;
-  color: $planeSignsColor;
+  color: $secondaryTextColor;
 }
 
 .empty {
@@ -45,7 +51,7 @@
   align-items: center;
   width: 10px;
   height: 20px;
-  color: $planeSignsColor;
+  color: $secondaryTextColor;
   font-size: 0.6rem;
   margin-right: 5px;
 }
