@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { SecureRoute } from 'react-route-guard';
 import configureStore from './redux/configureStore';
 
 import './reset.scss';
@@ -18,6 +19,7 @@ import SeatsChoice from './components/passengers-seats';
 import OrderDetails from './components/order-details';
 import Payment from './components/payment';
 import PaymentSuccess from './components/payment-success';
+import UserRouteGuard from './auth-service';
 
 const store = configureStore();
 
@@ -27,17 +29,18 @@ function App() {
       <Router>
         <div>
           <Header />
-          {/* <Search /> */}
-          <Route path="/search" component={Search} />
-          <Route path="/passengers-counters" component={PassengersCounters} />
-          <Route path="/flights-list" component={FlightsList} />
-          <Route path="/passengers-seats" component={SeatsChoice} />
-          <Route path="/passengers-list" component={PassengersList} />
-          <Route path="/order-details" component={OrderDetails} />
-          <Route path="/payment" component={Payment} />
-          <Route path="/payment-success" component={PaymentSuccess} />
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
+          <Switch>
+            <Route path="/search" component={Search} />
+            <Route path="/passengers-counters" component={PassengersCounters} />
+            <Route path="/flights-list" component={FlightsList} />
+            <SecureRoute path="/passengers-list" component={PassengersList} routeGuard={UserRouteGuard} redirectToPathWhenFail="/login" />
+            <SecureRoute path="/passengers-seats" component={SeatsChoice} routeGuard={UserRouteGuard} redirectToPathWhenFail="/login" />
+            <SecureRoute path="/order-details" component={OrderDetails} routeGuard={UserRouteGuard} redirectToPathWhenFail="/login" />
+            <SecureRoute path="/payment" component={Payment} routeGuard={UserRouteGuard} redirectToPathWhenFail="/login" />
+            <SecureRoute path="/payment-success" component={PaymentSuccess} routeGuard={UserRouteGuard} redirectToPathWhenFail="/login" />
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+          </Switch>
         </div>
       </Router>
     </div>
