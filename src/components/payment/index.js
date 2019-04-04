@@ -10,13 +10,34 @@ import TextField from '../text-field';
 import SimpleSelect from '../select';
 import './index.scss';
 
-function Payment({ history }) {
+function Payment({ history, userInfo }) {
   Payment.propTypes = {
     history: PropTypes.object.isRequired,
+    userInfo: PropTypes.object.isRequired,
   };
 
   const onSubmit = (values) => {
-    localStorage.setItem('payment', values);
+    localStorage.setItem('payment', JSON.stringify(userInfo));
+    const { from, to, departure, adult, child, infant } = userInfo.request;
+
+    const userOrder = {
+      userId: localStorage.getItem('id'),
+      fromCountry: from,
+      toCountry: to,
+      departureDate: departure,
+      passengersAmount: adult + child + infant,
+      selectedFlight: userInfo.selectedFlight.id,
+      passengersInfo: userInfo.passengersInfo,
+    };
+
+    fetch('http://localhost:3001/order', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(userOrder),
+    });
+
     history.push('/payment-success');
   };
 
