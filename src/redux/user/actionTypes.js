@@ -6,4 +6,6 @@ export default keyMirror({
   USER_TOTAL_PRICE: null,
   PASSENGERS_INFO: null,
   SELECTED_PASSENGER: null,
+  IS_LOGGED_IN_USER: null,
+  IS_REGISTERED_USER: null,
 });
