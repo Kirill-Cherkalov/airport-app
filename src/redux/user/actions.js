@@ -8,19 +8,51 @@ export function setUserRequestData(request) {
   };
 }
 
-function setFlightInfo(flightInfo) {
+export function setFlightInfo(flightInfo) {
   return {
     type: actionTypes.USER_SELECTED_FLIGHT_INFO,
     flightInfo,
   };
 }
 
-function setReturnFlightInfo(flightInfo) {
+export function setReturnFlightInfo(flightInfo) {
   return {
     type: actionTypes.USER_RETURN_SELECTED_FLIGHT_INFO,
     flightInfo,
   };
 }
+
+export function setSelectedFlightInfo(flightInfo, action) {
+  const url = `http://localhost:3001/order?selectedFlight=${flightInfo.id}`;
+
+  return (dispatch) => {
+    axios.get(url)
+      .then((response) => {
+        if (response.status !== 200) {
+          throw Error(response.statusText);
+        }
+
+        return response.data;
+      })
+      .then(orders => orders.map(({ passengersInfo }) => passengersInfo))
+      .then((passengersInfo) => {
+        const seats = [];
+        passengersInfo.map(passenger => passenger.forEach(({ selectedSeat }) => {
+          seats.push(selectedSeat);
+        }));
+        return seats;
+      })
+      .then((soldSeats) => {
+        const updatedFlightInfo = {
+          ...flightInfo,
+          soldSeats,
+        };
+        dispatch(action(updatedFlightInfo));
+      })
+      .catch(err => console.log(err));
+  };
+}
+
 
 export function setTotalPrice(price) {
   return {
@@ -63,38 +95,6 @@ export function payForOrder(userOrder) {
         return response.data;
       })
       .then(() => dispatch(paymentStatus(true)))
-      .catch(err => console.log(err));
-  };
-}
-
-export function setSelectedFlightInfo(flightInfo, isReturn) {
-  const url = `http://localhost:3001/order?selectedFlight=${flightInfo.id}`;
-  const action = isReturn ? setReturnFlightInfo : setFlightInfo;
-
-  return (dispatch) => {
-    axios.get(url)
-      .then((response) => {
-        if (response.status !== 200) {
-          throw Error(response.statusText);
-        }
-
-        return response.data;
-      })
-      .then(orders => orders.map(({ passengersInfo }) => passengersInfo))
-      .then((passengersInfo) => {
-        const seats = [];
-        passengersInfo.map(passenger => passenger.forEach(({ selectedSeat }) => {
-          seats.push(selectedSeat);
-        }));
-        return seats;
-      })
-      .then((soldSeats) => {
-        const updatedFlightInfo = {
-          ...flightInfo,
-          soldSeats,
-        };
-        dispatch(action(updatedFlightInfo));
-      })
       .catch(err => console.log(err));
   };
 }

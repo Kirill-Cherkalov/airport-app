@@ -1,16 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import moment from 'moment';
 import { FaPlane } from 'react-icons/fa';
+import { setSelectedFlightInfo } from '../../../redux/user/actions';
 import './index.scss';
 
 function FlightsListItems({
-  flights, setTotalPrice, setSelectedFlightInfo, departureDate, returnSelectedFlightId, selectedFlightId,
+  flights, setTotalPrice, setSelectedFlightInfo, returnSelectedFlightId, selectedFlightId, setFlightInfo,
 }) {
   const setInfo = (price, flightInfo) => {
     setTotalPrice(price);
-    const isReturn = !(moment(flightInfo.date).format('L') === moment(departureDate).format('L'));
-    setSelectedFlightInfo(flightInfo, isReturn);
+    setSelectedFlightInfo(flightInfo, setFlightInfo);
   };
 
   return (
@@ -58,4 +57,8 @@ const mapStateToProps = state => ({
   returnSelectedFlightId: state.user.returnSelectedFlight.id,
 });
 
-export default connect(mapStateToProps)(FlightsListItems);
+const mapDispatchToProps = dispatch => ({
+  setSelectedFlightInfo: (flightInfo, action) => dispatch(setSelectedFlightInfo(flightInfo, action)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(FlightsListItems);

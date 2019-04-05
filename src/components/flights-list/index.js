@@ -11,7 +11,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import styles from './material.style';
-import { setSelectedFlightInfo, setTotalPrice } from '../../redux/user/actions';
+import { setTotalPrice, setReturnFlightInfo, setFlightInfo } from '../../redux/user/actions';
 
 import SearchForm from './search-form/search-form';
 
@@ -25,7 +25,8 @@ class FlightsList extends React.Component {
     tickets: PropTypes.array.isRequired,
     returnTickets: PropTypes.array.isRequired,
     setTotalPrice: PropTypes.func.isRequired,
-    setSelectedFlightInfo: PropTypes.func.isRequired,
+    setFlightInfo: PropTypes.func.isRequired,
+    setReturnFlightInfo: PropTypes.func.isRequired,
     selectedFlight: PropTypes.object.isRequired,
     returnSelectedFlight: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
@@ -95,12 +96,12 @@ class FlightsList extends React.Component {
             : <h1 className="flights-list__header">No flights for this request</h1>
           }
           <List className="flights-list" disablePadding>
-            <FlightsListItems classes={classes} flights={this.props.tickets} setTotalPrice={this.props.setTotalPrice} setSelectedFlightInfo={this.props.setSelectedFlightInfo} />
+            <FlightsListItems classes={classes} flights={this.props.tickets} setTotalPrice={this.props.setTotalPrice} setFlightInfo={this.props.setFlightInfo} />
           </List>
 
           {this.props.returnTickets[0] && <h1 className="flights-list__header">{to} - {from}</h1>}
           <List className="flights-list" disablePadding>
-            <FlightsListItems classes={classes} flights={this.props.returnTickets} setTotalPrice={this.props.setTotalPrice} setSelectedFlightInfo={this.props.setSelectedFlightInfo} />
+            <FlightsListItems classes={classes} flights={this.props.returnTickets} setTotalPrice={this.props.setTotalPrice} setFlightInfo={this.props.setReturnFlightInfo} />
           </List>
         </>
 
@@ -120,7 +121,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   setTotalPrice: price => dispatch(setTotalPrice(price)),
-  setSelectedFlightInfo: (flightInfo, isReturn) => dispatch(setSelectedFlightInfo(flightInfo, isReturn)),
+  setFlightInfo: flightInfo => dispatch(setFlightInfo(flightInfo)),
+  setReturnFlightInfo: flightInfo => dispatch(setReturnFlightInfo(flightInfo)),
 });
 
 export default compose(
