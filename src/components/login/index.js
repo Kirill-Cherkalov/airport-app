@@ -1,17 +1,20 @@
 import React from 'react';
 import { Form, Field } from 'react-final-form';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+import axios from 'axios';
+import urls from '../../urls';
 import styles from './material.style';
 import TextField from '../text-field';
+import validate from './validate';
 import './index.scss';
 import '../../styles/button.scss';
-import validate from './validate';
 
 class Login extends React.Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired,
   };
 
   handleChange = name => (event) => {
@@ -19,8 +22,14 @@ class Login extends React.Component {
   };
 
   onSubmit = (values) => {
-    const e = JSON.stringify(values);
-    localStorage.setItem('login', e);
+    axios.post(urls.sendLoginFormData, values)
+      .then((response) => {
+        localStorage.setItem('id', response.data.id);
+        localStorage.setItem('token', response.data.token);
+      })
+      .catch(err => localStorage.setItem('error', err));
+
+    this.props.history.goBack();
   };
 
   render() {

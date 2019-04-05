@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, Field } from 'react-final-form';
 import { withStyles } from '@material-ui/core/styles';
+import axios from 'axios';
+import urls from '../../urls';
 import styles from './material.style';
 import TextField from '../text-field';
 import './index.scss';
@@ -18,8 +20,12 @@ class Register extends React.Component {
   };
 
   onSubmit = async (values) => {
-    const e = JSON.stringify(values);
-    localStorage.setItem('event', e);
+    axios.post(urls.sendRegisterFormData, values)
+      .then((response) => {
+        localStorage.setItem('id', response.data.id);
+        localStorage.setItem('token', response.data.token);
+      })
+      .catch(err => localStorage.setItem('register error', JSON.stringify(err)));
   };
 
   render() {
