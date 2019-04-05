@@ -1,3 +1,4 @@
+import axios from 'axios';
 import actionTypes from './actionTypes';
 
 export function setUserRequestData(request) {
@@ -35,17 +36,40 @@ export function selectPassenger(id) {
   };
 }
 
+function paymentStatus(bool) {
+  return {
+    type: actionTypes.PAYMENT_STATUS,
+    bool,
+  };
+}
+
+export function payForOrder(userOrder) {
+  return (dispatch) => {
+    axios.post('http://localhost:3001/order', userOrder)
+      .then((response) => {
+        if (response.status !== 200) {
+          paymentStatus(false);
+          throw Error(response.statusText);
+        }
+
+        return response.data;
+      })
+      .then(() => dispatch(paymentStatus(true)))
+      .catch(err => console.log(err));
+  };
+}
+
 export function setSelectedFlightInfo(flightInfo) {
   const url = `http://localhost:3001/order?selectedFlight=${flightInfo.id}`;
 
   return (dispatch) => {
-    fetch(url)
+    axios.get(url)
       .then((response) => {
-        if (!response.ok) {
+        if (response.status !== 200) {
           throw Error(response.statusText);
         }
 
-        return response.json();
+        return response.data;
       })
       .then(orders => orders.map(({ passengersInfo }) => passengersInfo))
       .then((passengersInfo) => {
@@ -55,10 +79,10 @@ export function setSelectedFlightInfo(flightInfo) {
         }));
         return seats;
       })
-      .then((boughtSeats) => {
+      .then((soldSeats) => {
         const updatedFlightInfo = {
           ...flightInfo,
-          boughtSeats,
+          soldSeats,
         };
         dispatch(setFlightInfo(updatedFlightInfo));
       })

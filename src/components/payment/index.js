@@ -9,15 +9,17 @@ import { Form, Field } from 'react-final-form';
 import validate from './validate';
 import TextField from '../text-field';
 import SimpleSelect from '../select';
+import { payForOrder } from '../../redux/user/actions';
 import './index.scss';
 
-function Payment({ history, userInfo }) {
+function Payment({ history, userInfo, payForOrder }) {
   Payment.propTypes = {
     history: PropTypes.object.isRequired,
     userInfo: PropTypes.object.isRequired,
+    payForOrder: PropTypes.func.isRequired,
   };
 
-  const onSubmit = (values) => {
+  const onSubmit = () => {
     localStorage.setItem('payment', JSON.stringify(userInfo));
     const { from, to, departure, adult, child, infant } = userInfo.request;
 
@@ -31,7 +33,7 @@ function Payment({ history, userInfo }) {
       passengersInfo: userInfo.passengersInfo,
     };
 
-    axios.post('http://localhost:3001/order', userOrder);
+    payForOrder(userOrder);
 
     history.push('/payment-success');
   };
@@ -142,7 +144,11 @@ const mapStateToProps = state => ({
   userInfo: state.user,
 });
 
+const mapDispatchToProps = dispatch => ({
+  payForOrder: userOrder => dispatch(payForOrder(userOrder)),
+});
+
 export default compose(
   withRouter,
-  connect(mapStateToProps),
+  connect(mapStateToProps, mapDispatchToProps),
 )(Payment);

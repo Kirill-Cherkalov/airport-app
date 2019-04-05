@@ -4,7 +4,7 @@ import { setPassengersInfo } from '../../../../redux/user/actions';
 import './index.scss';
 
 function PlaneSeats({
-  rows, location, selectedPassenger, passengersInfo, setInfo, boughtSeats,
+  rows, location, selectedPassenger, passengersInfo, setInfo, soldSeats,
 }) {
   const rowss = new Array(rows).fill(1);
 
@@ -26,7 +26,7 @@ function PlaneSeats({
       <div key={index} className="row seats">
         {location.map((place, j) => {
           const id = index + 1 + location[j];
-          const isDisable = boughtSeats.filter(seat => seat === id).length ? 1 : 0;
+          const isDisable = soldSeats.some(seat => seat === id);
           return (place ? (
             <div
               id={id}
@@ -48,7 +48,7 @@ function PlaneSeats({
 const mapStateToProps = state => ({
   selectedPassenger: state.user.selectedPassenger,
   passengersInfo: state.user.passengersInfo,
-  boughtSeats: state.user.selectedFlight.boughtSeats,
+  soldSeats: state.user.selectedFlight.soldSeats,
 });
 
 const mapDispatchToProps = dispatch => ({
