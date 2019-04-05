@@ -2,7 +2,12 @@ import actionTypes from './actionTypes';
 
 const initialState = {
   request: {},
-  selectedFlight: {},
+  selectedFlight: {
+    id: '',
+  },
+  returnSelectedFlight: {
+    id: '',
+  },
   totalPrice: 0,
   passengersInfo: [],
   selectedPassenger: 0,
@@ -24,6 +29,11 @@ export default function user(state = initialState, action) {
       return {
         ...state,
         selectedFlight: action.flightInfo,
+      };
+    case actionTypes.USER_RETURN_SELECTED_FLIGHT_INFO:
+      return {
+        ...state,
+        returnSelectedFlight: action.flightInfo,
       };
     case actionTypes.USER_TOTAL_PRICE:
       return {
