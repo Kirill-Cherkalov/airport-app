@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
@@ -30,13 +31,7 @@ function Payment({ history, userInfo }) {
       passengersInfo: userInfo.passengersInfo,
     };
 
-    fetch('http://localhost:3001/order', {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify(userOrder),
-    });
+    axios.post('http://localhost:3001/order', userOrder);
 
     history.push('/payment-success');
   };
