@@ -2,25 +2,26 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, Field } from 'react-final-form';
 import { withStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { authoriseUser } from '../../redux/user/actions';
 import styles from './material.style';
 import TextField from '../text-field';
+import validate from './validate';
 import './index.scss';
 import '../../styles/button.scss';
-import validate from './validate';
 
 class Register extends React.Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
+    authoriseUser: PropTypes.func.isRequired,
   };
 
   handleChange = name => (event) => {
     this.setState({ [name]: event.target.value });
   };
 
-  onSubmit = async (values) => {
-    const e = JSON.stringify(values);
-    localStorage.setItem('event', e);
-  };
+  onSubmit = values => this.props.authoriseUser(values);
 
   render() {
     const { classes } = this.props;
@@ -80,4 +81,11 @@ class Register extends React.Component {
   }
 }
 
-export default withStyles(styles)(Register);
+const mapDispatchToProps = dispatch => ({
+  authoriseUser: userInfo => dispatch(authoriseUser(userInfo)),
+});
+
+export default compose(
+  withStyles(styles),
+  connect(null, mapDispatchToProps),
+)(Register);

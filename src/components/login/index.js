@@ -1,17 +1,22 @@
 import React from 'react';
-import { Form, Field } from 'react-final-form';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Form, Field } from 'react-final-form';
+import { withRouter, Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { authoriseUser } from '../../redux/user/actions';
 import styles from './material.style';
 import TextField from '../text-field';
+import validate from './validate';
 import './index.scss';
 import '../../styles/button.scss';
-import validate from './validate';
 
 class Login extends React.Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired,
+    authoriseUser: PropTypes.func.isRequired,
   };
 
   handleChange = name => (event) => {
@@ -19,8 +24,9 @@ class Login extends React.Component {
   };
 
   onSubmit = (values) => {
-    const e = JSON.stringify(values);
-    localStorage.setItem('login', e);
+    this.props.authoriseUser(values);
+    console.log(this.props.history);
+    this.props.history.goBack();
   };
 
   render() {
@@ -63,4 +69,12 @@ class Login extends React.Component {
   }
 }
 
-export default withStyles(styles)(Login);
+const mapDispatchToProps = dispatch => ({
+  authoriseUser: userInfo => dispatch(authoriseUser(userInfo)),
+});
+
+export default compose(
+  withRouter,
+  withStyles(styles),
+  connect(null, mapDispatchToProps),
+)(Login);
