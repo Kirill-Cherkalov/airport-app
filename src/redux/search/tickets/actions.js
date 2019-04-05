@@ -65,7 +65,7 @@ export function ticketsFetchData(userRequest) {
           .then((tickets) => {
             const result = tickets.map((ticket) => {
               const {
-                date, startTime, endTime, price, planeInfo, fromCountry: { name: fromCountry }, toCountry: { name: toCountry },
+                _id, date, startTime, endTime, price, planeInfo, fromCountry: { name: fromCountry }, toCountry: { name: toCountry },
               } = ticket;
               const editedUserRequest = {
                 ...userRequest,
@@ -75,6 +75,7 @@ export function ticketsFetchData(userRequest) {
               dispatch(setUserRequestData(editedUserRequest));
 
               return {
+                id: _id,
                 date,
                 startTime,
                 endTime,

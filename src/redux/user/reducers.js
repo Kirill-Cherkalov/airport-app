@@ -7,6 +7,7 @@ const initialState = {
   passengersInfo: [],
   selectedPassenger: 0,
   loggedInUser: false,
+  paymentSuccess: false,
 };
 
 export default function user(state = initialState, action) {
@@ -45,6 +46,11 @@ export default function user(state = initialState, action) {
       return {
         ...state,
         loggedInUser: action.bool,
+      };
+    case actionTypes.PAYMENT_STATUS:
+      return {
+        ...state,
+        paymentSuccess: action.bool,
       };
     default:
       return state;
