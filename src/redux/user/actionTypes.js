@@ -7,4 +7,5 @@ export default keyMirror({
   USER_TOTAL_PRICE: null,
   PASSENGERS_INFO: null,
   SELECTED_PASSENGER: null,
+  PAYMENT_STATUS: null,
 });

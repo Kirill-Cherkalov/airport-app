@@ -11,6 +11,7 @@ const initialState = {
   totalPrice: 0,
   passengersInfo: [],
   selectedPassenger: 0,
+  paymentSuccess: false,
 };
 
 export default function user(state = initialState, action) {
@@ -49,6 +50,11 @@ export default function user(state = initialState, action) {
       return {
         ...state,
         selectedPassenger: action.id,
+      };
+    case actionTypes.PAYMENT_STATUS:
+      return {
+        ...state,
+        paymentSuccess: action.bool,
       };
     default:
       return state;

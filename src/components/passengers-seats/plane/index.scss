@@ -40,6 +40,15 @@
   }
 }
 
+.disabled {
+  background-color: $disabledSeatBackground;
+  cursor: auto;
+
+  &:hover .seat-point {
+    display: none;
+  }
+}
+
 .sign {
   background-color: transparent;
   color: $secondaryTextColor;

@@ -1,5 +1,5 @@
-import actionTypes from './actionTypes';
 import axios from 'axios';
+import actionTypes from './actionTypes';
 
 export function setUserRequestData(request) {
   return {
@@ -43,6 +43,30 @@ export function selectPassenger(id) {
   };
 }
 
+
+function paymentStatus(bool) {
+  return {
+    type: actionTypes.PAYMENT_STATUS,
+    bool,
+  };
+}
+
+export function payForOrder(userOrder) {
+  return (dispatch) => {
+    axios.post('http://localhost:3001/order', userOrder)
+      .then((response) => {
+        if (response.status !== 200) {
+          paymentStatus(false);
+          throw Error(response.statusText);
+        }
+
+        return response.data;
+      })
+      .then(() => dispatch(paymentStatus(true)))
+      .catch(err => console.log(err));
+  };
+}
+
 export function setSelectedFlightInfo(flightInfo, isReturn) {
   const url = `http://localhost:3001/order?selectedFlight=${flightInfo.id}`;
   const action = isReturn ? setReturnFlightInfo : setFlightInfo;
@@ -64,10 +88,10 @@ export function setSelectedFlightInfo(flightInfo, isReturn) {
         }));
         return seats;
       })
-      .then((boughtSeats) => {
+      .then((soldSeats) => {
         const updatedFlightInfo = {
           ...flightInfo,
-          boughtSeats,
+          soldSeats,
         };
         dispatch(action(updatedFlightInfo));
       })
