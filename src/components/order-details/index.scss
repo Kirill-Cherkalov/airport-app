@@ -1,5 +1,18 @@
 @import 'src/variables.scss';
 
+.order-details-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.one-ticket {
+  flex-basis: 100%;
+}
+
+.two-tickets {
+  flex-basis: 48%;
+}
+
 .order-details {
   width: 45%;
   min-height: 350px;
@@ -22,19 +35,20 @@
   }
 
   &__flight {
-    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 2px dotted $orderDetailsDividerColor;
   }
 
   &__passengers {
-    margin-bottom: 15px;
-    border-top: 2px dotted $orderDetailsDividerColor;
+    padding-bottom: 10px;
+    border-bottom: 2px dotted $orderDetailsDividerColor;
   }
 
   &__total-price {
     display: flex;
     justify-content: space-between;
-    padding-top: 15px;
-    border-top: 2px dotted $orderDetailsDividerColor;
+    padding: 15px 0;
+    border-bottom: 2px dotted $orderDetailsDividerColor;
     color: $priceColor;
     font-size: 1.7em;
     font-weight: 500;
@@ -108,12 +122,15 @@
 
 @media only screen and (max-width: $tabletSize) {
   .order-details {
-    width: 55%;
+    width: 60%;
   }
 }
 
 @media screen and (max-width: $mobileSize) {
   .order-details {
     width: 75%;
+  }
+  .order-details-wrapper {
+    flex-direction: column;
   }
 }
