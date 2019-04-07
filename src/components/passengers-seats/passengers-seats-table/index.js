@@ -1,26 +1,42 @@
 import React from 'react';
-import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
-import TableRows from './table-rows';
 import './index.scss';
 
-function PassengersSeatsTable({ history }) {
+function PassengersSeatsTable({ flight, passengersInfo, setSelectedPassenger, selectedPassenger }) {
   PassengersSeatsTable.propTypes = {
-    history: PropTypes.object.isRequired,
+    flight: PropTypes.object.isRequired,
+    passengersInfo: PropTypes.array.isRequired,
+    setSelectedPassenger: PropTypes.func.isRequired,
+    selectedPassenger: PropTypes.number.isRequired,
   };
 
-  const goToOrderDetailsPage = () => history.push('/order-details');
+  const select = event => setSelectedPassenger(+event.target.id);
 
   return (
     <div className="passenger-seats-container">
       <table className="passengers-seats">
         <tbody>
-          <TableRows />
+          <tr>
+            <th className="th" colSpan="2">
+              {flight.fromCountry} - {flight.toCountry}
+            </th>
+          </tr>
+          {passengersInfo.map(({ firstname, lastname }, index) => (
+            <tr key={index} className="passengers-seats__passenger">
+              <td className="passengers-seats__info td">{firstname} {lastname}</td>
+              <td
+                id={index}
+                className={`passengers-seats__seat td${selectedPassenger === index ? ' selected' : ''}`}
+                onClick={select}
+              >
+                {passengersInfo[index].selectedSeat || 'seat'}
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
-      <button type="button" onClick={goToOrderDetailsPage} className="button">Continue</button>
     </div>
   );
 }
 
-export default withRouter(PassengersSeatsTable);
+export default PassengersSeatsTable;
