@@ -11,10 +11,9 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import styles from './material.style';
-import { setTotalPrice, setReturnFlightInfo, setFlightInfo } from '../../redux/user/actions';
-
+import { setSelectedFlightInfo } from '../../redux/user/selectedFlight/actions';
+import { setReturnSelectedFlightInfo } from '../../redux/user/returnSelectedFlight/actions';
 import SearchForm from './search-form/search-form';
-
 import FlightsListItems from './flights-list-items';
 import './index.scss';
 
@@ -24,9 +23,8 @@ class FlightsList extends React.Component {
     userRequest: PropTypes.object.isRequired,
     tickets: PropTypes.array.isRequired,
     returnTickets: PropTypes.array.isRequired,
-    setTotalPrice: PropTypes.func.isRequired,
-    setFlightInfo: PropTypes.func.isRequired,
-    setReturnFlightInfo: PropTypes.func.isRequired,
+    setSelectedFlightInfo: PropTypes.func.isRequired,
+    setReturnSelectedFlightInfo: PropTypes.func.isRequired,
     selectedFlight: PropTypes.object.isRequired,
     returnSelectedFlight: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
@@ -43,13 +41,7 @@ class FlightsList extends React.Component {
     this.setState(state => ({ isOpen: !state.isOpen }));
   }
 
-  goToNextPage = () => {
-    if (this.props.returnTickets && this.props.selectedFlight.id && this.props.returnSelectedFlight.id) {
-      return this.props.history.push('/passengers-list');
-    }
-
-    return (!this.props.returnTickets.length && this.props.selectedFlight.id && this.props.history.push('/passengers-list'));
-  };
+  goToNextPage = () => (this.props.returnSelectedFlight.id || this.props.selectedFlight.id) && this.props.history.push('/passengers-list');
 
   getPassAmount = (adult, child, infant) => {
     const passengers = adult + child + infant;
@@ -62,8 +54,10 @@ class FlightsList extends React.Component {
   render() {
     const { classes } = this.props;
     const {
-      from, to, departure, return: back, adult, child, infant,
+      from, to, adult, child, infant,
     } = this.props.userRequest;
+    const departure = moment(this.props.userRequest.departure).format('LL');
+    const back = moment(this.props.userRequest.return).format('LL');
 
     return (
       <div className="flights-container">
@@ -76,7 +70,7 @@ class FlightsList extends React.Component {
                     {from} to {to}
                   </Typography>
                   <Typography color="inherit">
-                    {moment(departure).format('LL')}{back && ' - ' }{back && moment(back).format('LL')}, {this.getPassAmount(adult, child, infant)}
+                    {departure}{back && ' - ' }{back && back}, {this.getPassAmount(adult, child, infant)}
                     <button className="change-button" type="button" onClick={this.openSearchForm}>
                     Change
                     </button>
@@ -88,20 +82,28 @@ class FlightsList extends React.Component {
             {this.state.isOpen && <SearchForm />}
           </div>
         )
-          : <h1>Please, try to search flights</h1>}
+          : <h1 className="flights-list__header">Please, try to search flights</h1>}
 
         <>
           {this.props.tickets[0]
-            ? <h1 className="flights-list__header">{from} - {to}</h1>
+            ? <h1 className="flights-list__header"><pre>{from} - {to}   |   {departure}</pre></h1>
             : <h1 className="flights-list__header">No flights for this request</h1>
           }
           <List className="flights-list" disablePadding>
-            <FlightsListItems classes={classes} flights={this.props.tickets} setTotalPrice={this.props.setTotalPrice} setFlightInfo={this.props.setFlightInfo} />
+            <FlightsListItems
+              classes={classes}
+              flights={this.props.tickets}
+              setFlightInfo={this.props.setSelectedFlightInfo}
+            />
           </List>
 
-          {this.props.returnTickets[0] && <h1 className="flights-list__header">{to} - {from}</h1>}
+          {this.props.returnTickets[0] && <h1 className="flights-list__header"><pre>{to} - {from}   |   {back}</pre></h1>}
           <List className="flights-list" disablePadding>
-            <FlightsListItems classes={classes} flights={this.props.returnTickets} setTotalPrice={this.props.setTotalPrice} setFlightInfo={this.props.setReturnFlightInfo} />
+            <FlightsListItems
+              classes={classes}
+              flights={this.props.returnTickets}
+              setFlightInfo={this.props.setReturnSelectedFlightInfo}
+            />
           </List>
         </>
 
@@ -112,7 +114,7 @@ class FlightsList extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  userRequest: state.user.request,
+  userRequest: state.user.requestInfo.request,
   tickets: state.searchPage.tickets.departureItems,
   returnTickets: state.searchPage.tickets.returnItems,
   selectedFlight: state.user.selectedFlight,
@@ -120,9 +122,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setTotalPrice: price => dispatch(setTotalPrice(price)),
-  setFlightInfo: flightInfo => dispatch(setFlightInfo(flightInfo)),
-  setReturnFlightInfo: flightInfo => dispatch(setReturnFlightInfo(flightInfo)),
+  setSelectedFlightInfo: flightInfo => dispatch(setSelectedFlightInfo(flightInfo)),
+  setReturnSelectedFlightInfo: flightInfo => dispatch(setReturnSelectedFlightInfo(flightInfo)),
 });
 
 export default compose(

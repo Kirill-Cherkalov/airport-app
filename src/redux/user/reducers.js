@@ -2,15 +2,6 @@ import actionTypes from './actionTypes';
 
 const initialState = {
   request: {},
-  selectedFlight: {
-    id: '',
-  },
-  returnSelectedFlight: {
-    id: '',
-  },
-  totalPrice: 0,
-  passengersInfo: [],
-  selectedPassenger: 0,
   loggedInUser: false,
   paymentSuccess: false,
 };
@@ -26,31 +17,6 @@ export default function user(state = initialState, action) {
           child: +action.request.child || 0,
           infant: +action.request.infant || 0,
         },
-      };
-    case actionTypes.USER_SELECTED_FLIGHT_INFO:
-      return {
-        ...state,
-        selectedFlight: action.flightInfo,
-      };
-    case actionTypes.USER_RETURN_SELECTED_FLIGHT_INFO:
-      return {
-        ...state,
-        returnSelectedFlight: action.flightInfo,
-      };
-    case actionTypes.USER_TOTAL_PRICE:
-      return {
-        ...state,
-        totalPrice: state.totalPrice ? +state.totalPrice + +action.price : +action.price,
-      };
-    case actionTypes.PASSENGERS_INFO:
-      return {
-        ...state,
-        passengersInfo: action.info,
-      };
-    case actionTypes.SELECTED_PASSENGER:
-      return {
-        ...state,
-        selectedPassenger: action.id,
       };
     case actionTypes.IS_LOGGED_IN_USER:
       return {
