@@ -8,7 +8,6 @@ import { Form, Field } from 'react-final-form';
 import validate from './validate';
 import TextField from '../text-field';
 import SimpleSelect from '../select';
-import defineAvailableFlights from '../../helpers';
 import { payForOrder } from '../../redux/user/actions';
 import './index.scss';
 
@@ -27,21 +26,18 @@ function Payment({
     localStorage.setItem('payment', JSON.stringify(userRequest));
     const { adult, child, infant } = userRequest;
     const passengersAmount = adult + child + infant;
-    const orders = defineAvailableFlights(selectedFlight, returnSelectedFlight).map((flight) => {
-      if (flight.id) {
-        return {
-          userId: localStorage.getItem('id'),
-          fromCountry: flight.fromCountry,
-          toCountry: flight.toCountry,
-          departureDate: flight.date,
-          startTime: flight.startTime,
-          endTime: flight.endTime,
-          passengersAmount,
-          selectedFlight: flight.id,
-          passengersInfo: flight.passengersInfo,
-        };
-      }
-    });
+    const flights = userRequest.twoWayRequest ? [selectedFlight, returnSelectedFlight] : [selectedFlight];
+    const orders = flights.map(flight => ({
+      userId: localStorage.getItem('id'),
+      fromCountry: flight.fromCountry,
+      toCountry: flight.toCountry,
+      departureDate: flight.date,
+      startTime: flight.startTime,
+      endTime: flight.endTime,
+      passengersAmount,
+      selectedFlight: flight.id,
+      passengersInfo: flight.passengersInfo,
+    }));
 
     payForOrder(orders);
 

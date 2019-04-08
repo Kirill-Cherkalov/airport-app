@@ -41,7 +41,13 @@ class FlightsList extends React.Component {
     this.setState(state => ({ isOpen: !state.isOpen }));
   }
 
-  goToNextPage = () => (this.props.returnSelectedFlight.id || this.props.selectedFlight.id) && this.props.history.push('/passengers-list');
+  goToNextPage = () => {
+    if (this.props.userRequest.twoWayRequest && this.props.selectedFlight.id && this.props.returnSelectedFlight.id) {
+      return this.props.history.push('/passengers-list');
+    }
+
+    return (!this.props.userRequest.twoWayRequest && this.props.selectedFlight.id && this.props.history.push('/passengers-list'));
+  };
 
   getPassAmount = (adult, child, infant) => {
     const passengers = adult + child + infant;
@@ -97,7 +103,7 @@ class FlightsList extends React.Component {
             />
           </List>
 
-          {this.props.returnTickets[0] && <h1 className="flights-list__header"><pre>{to} - {from}   |   {back}</pre></h1>}
+          {this.props.userRequest.twoWayRequest && this.props.returnTickets[0] && <h1 className="flights-list__header"><pre>{to} - {from}   |   {back}</pre></h1>}
           <List className="flights-list" disablePadding>
             <FlightsListItems
               classes={classes}
