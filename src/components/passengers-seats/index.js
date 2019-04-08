@@ -18,10 +18,26 @@ class SeatsChoice extends React.Component {
     setPassengersInfo: PropTypes.func.isRequired,
     setReturnFlightSelectedPassenger: PropTypes.func.isRequired,
     setReturnFlightPassengersInfo: PropTypes.func.isRequired,
+    twoWayRequest: PropTypes.bool.isRequired,
+  };
+
+  state = {
+    currentFlightId: this.props.selectedFlight.id,
   };
 
   goToNextPage = () => {
-    this.props.history.push('/order-details');
+    if (this.state.currentFlightId === this.props.selectedFlight.id) {
+      const allSeatAreSelected = this.props.selectedFlight.passengersInfo.some(({ selectedSeat }) => selectedSeat === undefined);
+
+      if (!allSeatAreSelected) {
+        return this.props.twoWayRequest
+          ? this.setState({ currentFlightId: this.props.returnSelectedFlight.id })
+          : this.props.history.push('/order-details');
+      }
+    } else {
+      const allSeatAreSelected = this.props.returnSelectedFlight.passengersInfo.some(({ selectedSeat }) => selectedSeat === undefined);
+      return !allSeatAreSelected && this.props.history.push('/order-details');
+    }
   };
 
   render() {
@@ -37,27 +53,25 @@ class SeatsChoice extends React.Component {
     return (
       <div className="seats-choice-wrapper">
         <div className="seats-choice-container">
-          {selectedFlight.id && (
-            <div className="flight-seats">
-              <PassengersSeatsTable
-                flight={selectedFlight}
-                passengersInfo={selectedFlight.passengersInfo}
-                setSelectedPassenger={setSelectedPassenger}
-                selectedPassenger={selectedFlight.selectedPassenger}
-              />
-              <Plane
-                setInfo={setPassengersInfo}
-                rows={selectedFlight.planeInfo.rows}
-                location={selectedFlight.planeInfo.location}
-                passengersInfo={selectedFlight.passengersInfo}
-                selectedPassenger={selectedFlight.selectedPassenger}
-                soldSeats={selectedFlight.soldSeats}
-              />
-            </div>
-          )}
+          <div className={`flight-seats${this.state.currentFlightId === selectedFlight.id ? '' : ' closed-block'}`}>
+            <PassengersSeatsTable
+              flight={selectedFlight}
+              passengersInfo={selectedFlight.passengersInfo}
+              setSelectedPassenger={setSelectedPassenger}
+              selectedPassenger={selectedFlight.selectedPassenger}
+            />
+            <Plane
+              setInfo={setPassengersInfo}
+              rows={selectedFlight.planeInfo.rows}
+              location={selectedFlight.planeInfo.location}
+              passengersInfo={selectedFlight.passengersInfo}
+              selectedPassenger={selectedFlight.selectedPassenger}
+              soldSeats={selectedFlight.soldSeats}
+            />
+          </div>
 
           {returnSelectedFlight.id && (
-            <div className="flight-seats">
+            <div className={`flight-seats${this.state.currentFlightId === returnSelectedFlight.id ? '' : ' closed-block'}`}>
               <PassengersSeatsTable
                 flight={returnSelectedFlight}
                 passengersInfo={returnSelectedFlight.passengersInfo}
@@ -83,6 +97,7 @@ class SeatsChoice extends React.Component {
 }
 
 const mapStateToProps = state => ({
+  twoWayRequest: state.user.requestInfo.request.twoWayRequest,
   selectedFlight: state.user.selectedFlight,
   returnSelectedFlight: state.user.returnSelectedFlight,
 });

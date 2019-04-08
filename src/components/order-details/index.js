@@ -5,7 +5,6 @@ import { withRouter } from 'react-router';
 import { FaCheck, FaRegUserCircle } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import defineAvailableFlights from '../../helpers';
 import './index.scss';
 
 function OrderDetails({
@@ -18,7 +17,7 @@ function OrderDetails({
     history: PropTypes.object.isRequired,
   };
 
-  const flights = defineAvailableFlights(selectedFlight, returnSelectedFlight);
+  const flights = requestInfo.twoWayRequest ? [selectedFlight, returnSelectedFlight] : [selectedFlight];
 
   const { adult, child, infant } = requestInfo;
   const passengersAmount = adult + child + infant;

@@ -67,8 +67,11 @@ export function ticketsFetchData(userRequest) {
               const {
                 _id, date, startTime, endTime, price, planeInfo, fromCountry: { name: fromCountry }, toCountry: { name: toCountry },
               } = ticket;
+
+              const twoWayRequest = !!(userRequest.departure && userRequest.return);
               const editedUserRequest = {
                 ...userRequest,
+                twoWayRequest,
                 from: backUrl ? toCountry : fromCountry,
                 to: backUrl ? fromCountry : toCountry,
               };
