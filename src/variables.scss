@@ -3,42 +3,50 @@ $mobileSize: 600px;
 $tabletSize: 960px;
 $desktopSize: 1280px;
 // colors
+$gray: rgb(128, 128, 128);
+$white: rgb(255, 255, 255);
+
 $borderColor: rgb(211, 211, 211);
 $checkIconColor: rgb(20, 184, 20);
 $dateBorderColor: rgb(225, 225, 225);
 $masterCardColor: rgb(206, 4, 4);
-$orderDetailsDividerColor: rgb(128, 128, 128);
+$orderDetailsDividerColor: $gray;
 $priceColor: rgb(0, 0, 139);
 $selectedFlightColor: blue;
 $selectedPassengerColor: rgb(131, 80, 131);
-$ticketsHeaderBorderColor: rgb(128, 128, 128);
-$ticketPlaneAnimationColor: rgb(128, 128, 128);
+$ticketsDetailsBorderColor: $gray;
+$ticketsHeaderBorderColor: $gray;
+$ticketPlaneAnimationColor: $gray;
 $visaCardColor: rgb(247, 170, 29);
 
 // backgrounds
 $cardBackgroundColor: rgb(242, 242, 242);
 $disabledSeatBackground: rgb(190, 190, 190);
 $flightListHeaderBackground: rgba(255, 255, 255, 0.8);
-$loginBackgroundColor: rgb(255, 255, 255);
-$orderDetailsBackground: rgb(255, 255, 255);
+$loginBackgroundColor: $white;
+$orderDetailsBackground: $white;
 $overlayBackgroundColor: rgba(44, 34, 34, 0.5);
-$passengerTableBackgroundColor: rgb(255, 255, 255);
-$paymentBackground: rgb(255, 255, 255);
+$passengerTableBackgroundColor: $white;
+$paymentBackground: $white;
 $paymentHeaderBackground: rgb(242, 242, 242);
 $paymentCardBackground: rgb(242, 242, 242);
-$planeBackgroundColor: rgb(255, 255, 255);
+$planeBackgroundColor: $white;
+$printTicketButtonBackgroundColor: rgb(93, 156, 236);
+$printTicketButtonBackgroundColorHover: rgb(93, 156, 236);
 $seatBackgroundColor: rgb(245, 245, 220);
 $seatsRowBackgroundColor: rgb(131, 80, 131);
 $selectedFlightBackgroundColor: rgb(247, 247, 247);
 $selectedPassengerBackground: rgb(255, 228, 255);
-$sidebarBackgroundColor: rgb(255, 255, 255);
-$ticketsBackgroundColor: rgb(255, 255, 255);
+$sidebarBackgroundColor: $white;
+$ticketsDetailsBackroundColor: $white;
+$ticketsDetailsPassengersInfoBackground: rgb(239, 239, 239);
+$ticketsBackgroundColor: $white;
 $tooltipBackgroundColor: rgb(211, 211, 211);
 
 // text
 $primaryTextColor: rgb(0, 0, 0);
-$primaryTextInvertColor: rgb(255, 255, 255);
-$secondaryTextColor: rgb(128, 128, 128);
+$primaryTextInvertColor: $white;
+$secondaryTextColor: $gray;
 
 $buttonHoverColor: rgba(0, 0, 0, 0.08);
 $primaryMaterial: rgb(63, 81, 181);
