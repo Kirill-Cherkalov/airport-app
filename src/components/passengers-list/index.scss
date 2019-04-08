@@ -7,13 +7,20 @@
 }
 
 .expandable-panel {
-  width: 65%;
+  width: 55%;
   margin: 0 auto;
   border: 1px solid $borderColor;
   box-shadow: $boxShadow;
+  border-bottom: 2px solid $passengersListBorderColor;
 }
 
 @media screen and (max-width: $tabletSize) {
+  .expandable-panel{
+    width: 85%;
+  }
+}
+
+@media screen and (max-width: $mobileSize) {
   .expandable-panel{
     width: 85%;
   }

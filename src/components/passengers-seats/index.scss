@@ -1,10 +1,16 @@
 @import 'src/variables.scss';
 
-@media only screen and (max-width: $mobileSize) {
-  .seats-choice-container {
-    flex-direction: column;
-    align-items: center;
-  }
+.flight-seats {
+  display: flex;
+  opacity: 1;
+  justify-content: space-evenly;
+  margin-bottom: 30px;
+  transition: display 2s, opacity 2s;
+}
+
+.closed-block {
+  opacity: 0;
+  display: none;
 }
 
 .seats-choice-container {
