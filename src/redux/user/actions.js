@@ -9,58 +9,21 @@ export function setUserRequestData(request) {
   };
 }
 
-function setFlightInfo(flightInfo) {
+export function setFlightInfo(flightInfo) {
   return {
     type: actionTypes.USER_SELECTED_FLIGHT_INFO,
     flightInfo,
   };
 }
 
-export function setTotalPrice(price) {
+export function setReturnFlightInfo(flightInfo) {
   return {
-    type: actionTypes.USER_TOTAL_PRICE,
-    price,
+    type: actionTypes.USER_RETURN_SELECTED_FLIGHT_INFO,
+    flightInfo,
   };
 }
 
-export function setPassengersInfo(info) {
-  return {
-    type: actionTypes.PASSENGERS_INFO,
-    info,
-  };
-}
-
-export function selectPassenger(id) {
-  return {
-    type: actionTypes.SELECTED_PASSENGER,
-    id,
-  };
-}
-
-function paymentStatus(bool) {
-  return {
-    type: actionTypes.PAYMENT_STATUS,
-    bool,
-  };
-}
-
-export function payForOrder(userOrder) {
-  return (dispatch) => {
-    axios.post('http://localhost:3001/order', userOrder)
-      .then((response) => {
-        if (response.status !== 200) {
-          paymentStatus(false);
-          throw Error(response.statusText);
-        }
-
-        return response.data;
-      })
-      .then(() => dispatch(paymentStatus(true)))
-      .catch(err => console.log(err));
-  };
-}
-
-export function setSelectedFlightInfo(flightInfo) {
+export function setSelectedFlightInfo(flightInfo, action) {
   const url = `http://localhost:3001/order?selectedFlight=${flightInfo.id}`;
 
   return (dispatch) => {
@@ -85,29 +48,54 @@ export function setSelectedFlightInfo(flightInfo) {
           ...flightInfo,
           soldSeats,
         };
-        dispatch(setFlightInfo(updatedFlightInfo));
+        dispatch(action(updatedFlightInfo));
       })
       .catch(err => console.log(err));
   };
 }
 
-function logInUser(bool) {
+
+export function setTotalPrice(price) {
   return {
-    type: actionTypes.IS_LOGGED_IN_USER,
+    type: actionTypes.USER_TOTAL_PRICE,
+    price,
+  };
+}
+
+export function setPassengersInfo(info) {
+  return {
+    type: actionTypes.PASSENGERS_INFO,
+    info,
+  };
+}
+
+export function selectPassenger(id) {
+  return {
+    type: actionTypes.SELECTED_PASSENGER,
+    id,
+  };
+}
+
+
+function paymentStatus(bool) {
+  return {
+    type: actionTypes.PAYMENT_STATUS,
     bool,
   };
 }
 
-export function authoriseUser(userInfo) {
-  const url = userInfo.firstName ? urls.sendRegisterFormData : urls.sendLoginFormData;
-
+export function payForOrder(userOrder) {
   return (dispatch) => {
-    axios.post(url, userInfo)
+    axios.post('http://localhost:3001/order', userOrder)
       .then((response) => {
-        dispatch(logInUser(true));
-        localStorage.setItem('id', response.data.id);
-        localStorage.setItem('token', response.data.token);
+        if (response.status !== 200) {
+          paymentStatus(false);
+          throw Error(response.statusText);
+        }
+
+        return response.data;
       })
-      .catch(err => localStorage.setItem('error', JSON.stringify(err)));
+      .then(() => dispatch(paymentStatus(true)))
+      .catch(err => console.log(err));
   };
 }

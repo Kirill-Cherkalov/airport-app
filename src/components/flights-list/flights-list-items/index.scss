@@ -5,14 +5,19 @@
 }
 
 .flights-list-item {
+  position: relative;
   display: flex;
   justify-content: space-between;
   width: 860px;
   padding: 15px 25px;
-  border: 1px solid $borderColor;
+  border-bottom: 1px solid $borderColor;
   background-color: $ticketsBackgroundColor;
   font-family: $fontFamily;
   box-shadow: $boxShadow;
+
+  &:last-child {
+    border: none;
+  }
 
   &__info {
     flex-grow: 1;
@@ -23,9 +28,19 @@
     display: flex;
     align-items: center;
   }
+}
 
-  &:not(:last-child) {
-    border-bottom: none;
+.selectedFlight {
+  background-color: $selectedFlightBackgroundColor;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 9px;
+    background-color: $primaryMaterial;
   }
 }
 
@@ -54,7 +69,7 @@
   }
   &__country{
     font-weight: 350;
-    color: rgb(173, 173, 173);
+    color: $secondaryTextColor;
   }
 }
 
@@ -81,53 +96,54 @@
 @-webkit-keyframes sidearrowDesktop {
   0% { 
     transform: translateX(220px);
-    color: white;
+    color: transparent;
   }
   50% {
-    color: gray;
+    color: $ticketPlaneAnimationColor;
   }
   100% { 
     transform: translateX(-220px);
-    color: white;
+    color: transparent;
   }
 }
 
 @-webkit-keyframes sidearrowTablet {
   0% { 
     transform: translateX(100px);
-    color: white;
+    color: transparent;
   }
   50% {
-    color: gray;
+    color: $ticketPlaneAnimationColor;
   }
   100% { 
     transform: translateX(-80px);
-    color: white;
+    color: transparent;
   }
 }
 
 @-webkit-keyframes sidearrowMobile {
   0% { 
     transform: translateX(20px);
-    color: white;
+    color: transparent;
   }
   50% {
-    color: gray;
+    color: $ticketPlaneAnimationColor;
   }
   100% { 
     transform: translateX(-15px);
-    color: white;
+    color: transparent;
   }
 }
 
-
 .fa-arrow {
-  color: rgb(192, 190, 190);
   animation: sidearrowDesktop 4.5s infinite reverse ease-in-out;
 }
 
 @media only screen and (max-width: $tabletSize) {
   .flights-list-item {
+    width: 620px;
+  }
+  .flights-list__header {
     width: 620px;
   }
   .fa-arrow {
@@ -137,7 +153,7 @@
 
 
 @media only screen and (max-width: $mobileSize) {
-  .flights-list-item {
+  .flights-list-item, .flights-list__header {
     flex-direction: column;
     width: 260px;
 

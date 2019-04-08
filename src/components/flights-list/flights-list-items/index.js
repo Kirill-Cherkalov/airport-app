@@ -1,22 +1,26 @@
 import React from 'react';
-import { withRouter } from 'react-router';
+import { connect } from 'react-redux';
 import { FaPlane } from 'react-icons/fa';
+import { setSelectedFlightInfo } from '../../../redux/user/actions';
 import './index.scss';
 
 function FlightsListItems({
-  flights, setTotalPrice, setSelectedFlightInfo, history,
+  flights, setTotalPrice, setSelectedFlightInfo, returnSelectedFlightId, selectedFlightId, setFlightInfo,
 }) {
   const setInfo = (price, flightInfo) => {
     setTotalPrice(price);
-    setSelectedFlightInfo(flightInfo);
-    return history.push('/passengers-list');
+    setSelectedFlightInfo(flightInfo, setFlightInfo);
   };
 
   return (
     flights.map(({
       id, date, startTime, endTime, fromCountry, toCountry, price, planeInfo,
     }, index) => (
-      <div key={index} className="flights-list-item">
+      <div
+        id={id}
+        key={index}
+        className={`flights-list-item${id === returnSelectedFlightId || id === selectedFlightId ? ' selectedFlight' : ''}`}
+      >
         <div className="flights-list-item__info">
           {/* <span className="date">{date}</span> */}
           <div className="info-wrapper">
@@ -47,4 +51,14 @@ function FlightsListItems({
   );
 }
 
-export default withRouter(FlightsListItems);
+const mapStateToProps = state => ({
+  departureDate: state.user.request.departure,
+  selectedFlightId: state.user.selectedFlight.id,
+  returnSelectedFlightId: state.user.returnSelectedFlight.id,
+});
+
+const mapDispatchToProps = dispatch => ({
+  setSelectedFlightInfo: (flightInfo, action) => dispatch(setSelectedFlightInfo(flightInfo, action)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(FlightsListItems);
