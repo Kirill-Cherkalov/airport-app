@@ -4,12 +4,12 @@ const defineAvailableFlights = (selectedFlight, returnSelectedFlight) => {
   let flights = [];
   if (returnSelectedFlight.id && selectedFlight.id) {
     flights = [selectedFlight, returnSelectedFlight];
-  }
-  if (selectedFlight.id) {
+  } else if (selectedFlight.id) {
     flights = [selectedFlight];
   } else {
     flights = [returnSelectedFlight];
   }
+
   return flights;
 };
 

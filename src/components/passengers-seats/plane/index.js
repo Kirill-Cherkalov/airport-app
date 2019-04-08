@@ -18,6 +18,8 @@ function Plane({
 
   return (
     <div className="plane">
+      <div className="plane__cockpit" />
+      <div className="plane__exit plane__exit_front" />
       <SeatsSigns signs={location} />
       <PlaneSeats
         setInfo={setInfo}
@@ -27,6 +29,8 @@ function Plane({
         selectedPassenger={selectedPassenger}
         soldSeats={soldSeats}
       />
+      <div className="plane__exit plane__exit_back" />
+      <div className="plane__cockpit_invert" />
     </div>
   );
 }
