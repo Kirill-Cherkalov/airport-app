@@ -7,7 +7,8 @@ import arrayMutators from 'final-form-arrays';
 import { FieldArray } from 'react-final-form-arrays';
 import PropTypes from 'prop-types';
 // import ExpandablePanel from './expandable-panel';
-import { setPassengersInfo } from '../../redux/user/actions';
+import { setPassengersInfo } from '../../redux/user/selectedFlight/actions';
+import { setReturnFlightPassengersInfo } from '../../redux/user/returnSelectedFlight/actions';
 import './index.scss';
 import Details from './expandable-panel/details';
 import Header from './expandable-panel/header';
@@ -17,6 +18,7 @@ class PassengersList extends Component {
     userRequest: PropTypes.object.isRequired,
     luggageTypes: PropTypes.array.isRequired,
     setPassengersInfo: PropTypes.func.isRequired,
+    setReturnFlightPassengersInfo: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
   };
 
@@ -43,6 +45,7 @@ class PassengersList extends Component {
       }
     }));
     this.props.setPassengersInfo(passengersArray);
+    this.props.setReturnFlightPassengersInfo(passengersArray);
     return history.push('/passengers-seats');
   };
 
@@ -58,17 +61,24 @@ class PassengersList extends Component {
         }}
         render={({ handleSubmit },
           pristine, submitting) => (
-            <form onSubmit={handleSubmit} className="passengers-list-form">
+            <form
+              onSubmit={handleSubmit}
+              className="passengers-list-form"
+            >
               <FieldArray name="information">
                 {() => (passengersAmount.map((elem, index) => (
-                  // <ExpandablePanel key={Math.random()} index={index} />
                   <div className="expandable-panel" key={index}>
                     <Header index={index} />
                     <Details index={index} />
                   </div>
                 )))}
               </FieldArray>
-              <button type="submit" className="button" disabled={submitting || pristine}>
+
+              <button
+                type="submit"
+                className="button"
+                disabled={submitting || pristine}
+              >
                 Confirm
               </button>
             </form>
@@ -79,12 +89,13 @@ class PassengersList extends Component {
 }
 
 const mapStateToProps = state => ({
-  userRequest: state.user.request,
+  userRequest: state.user.requestInfo.request,
   luggageTypes: state.data.luggage.luggageTypes,
 });
 
 const mapDispatchToProps = dispatch => ({
   setPassengersInfo: info => dispatch(setPassengersInfo(info)),
+  setReturnFlightPassengersInfo: info => dispatch(setReturnFlightPassengersInfo(info)),
 });
 
 export default compose(

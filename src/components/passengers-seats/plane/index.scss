@@ -1,11 +1,5 @@
 @import 'src/variables';
 
-@media only screen and (max-width: $mobileSize) {
-  .plane {
-    margin-bottom: 30px;
-  }
-}
-
 .plane {
   background-color: $planeBackgroundColor;
 }
@@ -37,6 +31,24 @@
 
   &:hover .tooltiptext {
     visibility: visible;
+    cursor: auto;
+  }
+}
+
+.disabled {
+  background-color: $disabledSeatBackground;
+  cursor: auto;
+
+  &:hover .seat-point {
+    display: none;
+  }
+}
+
+.selectedSeat {
+  background-color: rgb(118, 200, 252);
+  color: black;
+  .seat-point {
+    display: inline;
   }
 }
 
