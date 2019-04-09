@@ -19,7 +19,7 @@ class ListItem extends React.Component {
     const { order } = this.props;
     return (
       <li className="list-item">
-        <div className="list-item__header" onClick={this.openDetails}>
+        <div className="list-item__header" onClick={this.toggleDetails}>
           <div className="list-item__header-wrapper">
             <span className="list-item__destination">{order.fromCountry} - {order.toCountry}</span>
             <div className="list-item__departure">
