@@ -1,15 +1,134 @@
 @import 'src/variables.scss';
 
-.payment-success {
+.tickets {
   display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  width: 300px;
-  height: 300px;
-  margin: 0 auto;
-  border-radius: 7px;
+  justify-content: center;
   align-items: center;
-  color: $primaryTextInvertColor;
-  text-transform: uppercase;
-  font-size: 3em;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+
+.tickets-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+}
+
+.ticket {
+  min-width: 300px;
+  min-height: 100px;
+  flex-grow: 1;
+  margin-right: 30px;
+  margin-bottom: 20px;
+  box-shadow: $boxShadow;
+  border-radius: 0 0 10px 10px; 
+
+  &__header {
+    box-sizing: border-box;
+    background-color: $primaryMaterialHover;
+    border-bottom: 2px solid $ticketsDetailsBorderColor;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    letter-spacing: 0.8px;
+    text-align: center;
+    width: 100%;
+    padding: 10px 20px;
+    color: $primaryTextInvertColor;
+  }
+
+  &__departure-info {
+    box-sizing: border-box;
+    padding: 15px 20px;
+    width: 100%;
+    border-bottom: 2px solid $ticketsDetailsBorderColor;
+    background-color: $ticketsDetailsBackroundColor;
+  }
+
+  &__destination {
+    padding-bottom: 10px;
+    font-size: 1.8em;
+    font-weight: 500;
+  }
+
+  &__time {
+    font-size: 1em;
+    color: $secondaryTextColor;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    background-color: $ticketsDetailsBackroundColor;
+    width: 100%;
+    padding: 15px 20px;
+    border-radius: 0 0 10px 10px;
+  }
+
+  &__barcode {
+    width: 100px;
+    height: 40px;
+    background-image: url('../../assets/barcode.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+  }
+
+  &__print-button {
+   display: block;
+   font-size: 12px;
+   font-weight: bold;
+   background-color: $printTicketButtonBackgroundColor;
+   padding: 0 18px;
+   line-height: 30px;
+   border-radius: 15px;
+   color: $primaryTextInvertColor;
+   text-decoration: none;
+   border: none;
+   outline: none;
+   cursor: pointer;
+   &:hover {
+     background-color: $printTicketButtonBackgroundColorHover;
+   }
+  }
+}
+
+.tickets-wrapper .passengers-info {
+  background-color: $ticketsDetailsPassengersInfoBackground;
+    border-bottom: 2px solid $ticketsDetailsBorderColor;
+    margin-bottom: 0;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 20px 5px 20px;
+    color: $secondaryTextColor;
+  }
+
+  &__details {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px 20px 20px;
+    font-weight: 500;
+    font-size: 1.2em;
+  }
+}
+
+@media only screen and (max-width: $tabletSize) {
+  .tickets-wrapper {
+    flex-direction: column;
+    width: 60%;
+  }
+  .ticket {
+    margin-right: 0;
+  }
+}
+
+@media only screen and (max-width: $mobileSize) {
+  .tickets-wrapper {
+    flex-direction: column;
+    min-width: 90%;
+  }
+  .ticket {
+    margin-right: 0;
+  }
 }
