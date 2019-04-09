@@ -30,7 +30,7 @@ export function payForOrder(userOrder) {
     .catch(err => console.log(err)));
 }
 
-function logInUser(bool) {
+export function logInUser(bool) {
   return {
     type: actionTypes.IS_LOGGED_IN_USER,
     bool,
