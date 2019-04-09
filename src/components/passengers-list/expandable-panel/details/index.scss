@@ -8,12 +8,11 @@
 }
 
 .expandable-panel-details {
-  
-  background-color: $cardBackgroundColor;
   &__names {
     display: flex;
     justify-content: space-evenly;
     padding-bottom: 30px;
-    border-bottom: 1px solid $borderColor;
+    border-bottom: 2px solid $passengersListBorderColor;
+    background-color: $luggageListBackgroundColor;
   }
 }

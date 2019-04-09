@@ -2,8 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Field } from 'react-final-form';
-// import Avatar from '@material-ui/core/Avatar';
-// import WorkIcon from '@material-ui/icons/Work';
+import { FaSuitcase } from 'react-icons/fa';
 import fetchLuggageTypes from '../../../../../redux/data/luggage-types/actions';
 import './index.scss';
 
@@ -20,16 +19,20 @@ class Luggage extends React.Component {
     return (
       <div className="luggage-list">
         {this.props.luggageTypes.map(({ kg, price }) => (
-          <label htmlFor={price} key={Math.random()}>
-            <Field
-              id={price}
-              name={`luggage${this.props.index}`}
-              component="input"
-              type="radio"
-              value={`${price}`}
-            />{' '}
-            kg {kg} ${price}
-          </label>
+          <div className="luggage-list__checkbox">
+            <div className={`image${kg} image${kg}_active`} />
+            <label htmlFor={price} key={Math.random()} className={`luggage-list__label luggage-list__label_${kg}`}>
+              <Field
+                id={price}
+                name={`luggage${this.props.index}`}
+                component="input"
+                type="radio"
+                value={`${price}`}
+              />{' '}
+              <div className="luggage-list__kg">{`${kg === 0 ? 'no baggage' : `kg ${kg}`}`}</div>
+              <div className="luggage-list__price">{`${price === 0 ? 'free' : `$ ${price}`}`}</div>
+            </label>
+          </div>
         ))}
       </div>
     );
