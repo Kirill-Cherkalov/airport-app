@@ -19,6 +19,7 @@ import SeatsChoice from './components/passengers-seats';
 import OrderDetails from './components/order-details';
 import Payment from './components/payment';
 import PaymentSuccess from './components/payment-success';
+import OrdersHistory from './components/orders-history';
 import UserRouteGuard from './auth-service';
 
 const store = configureStore();
@@ -38,6 +39,7 @@ function App() {
             <SecureRoute path="/order-details" component={OrderDetails} routeGuard={UserRouteGuard} redirectToPathWhenFail="/login" />
             <SecureRoute path="/payment" component={Payment} routeGuard={UserRouteGuard} redirectToPathWhenFail="/login" />
             <SecureRoute path="/payment-success" component={PaymentSuccess} routeGuard={UserRouteGuard} redirectToPathWhenFail="/login" />
+            <SecureRoute path="/orders-history" component={OrdersHistory} routeGuard={UserRouteGuard} redirectToPathWhenFail="/login" />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
           </Switch>

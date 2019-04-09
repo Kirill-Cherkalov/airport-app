@@ -1,0 +1,44 @@
+@import 'src/variables.scss';
+
+.orders-history {
+  display: flex;;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  margin: 0 auto;
+
+  &__filter-buttons {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-bottom: 30px;
+  }
+
+  &__filter-button {
+    &:not(:last-child) {
+      margin-right: 10px;
+    }
+  }
+
+  &__list {
+    width: 100%;
+  }
+}
+
+.list-item {
+  background-color: $ordersHistoryListItemBackground;
+  border-bottom: 1px solid $ticketsHeaderBorderColor;
+  font-size: 1em;
+}
+
+@media only screen and (max-width: $tabletSize) {
+  .orders-history {
+    width: 70%;
+  }
+}
+
+@media only screen and (max-width: $mobileSize) {
+  .orders-history {
+    width: 90%;
+  }
+}

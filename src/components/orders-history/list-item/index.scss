@@ -1,0 +1,47 @@
+@import 'src/variables.scss';
+
+.list-item {
+  margin-bottom: 5px;
+  box-shadow: $boxShadow;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+  }
+
+  &__destination {
+    font-weight: 500;
+    font-size: 1.2em;
+    letter-spacing: 1px;
+  }
+
+  &__departure {
+    display: flex;
+    margin-top: 5px;
+    color: $secondaryTextColor;
+    font-size: 0.8em;
+    letter-spacing: 0.5px;
+
+    &_date {
+      margin-right: 30px;
+    }
+  }
+
+  &__table {
+    width: 100%;
+    background-color: $ordersHistoryPassengersTableBackground;
+    border-top: 1px solid $ticketsHeaderBorderColor;
+  }
+
+  &__table-td, &__table-th {
+    padding: 10px 15px;
+    text-align: center;
+    letter-spacing: 0.5px;
+  }
+  
+  &__table-th {
+    color: $secondaryTextColor;
+    font-size: 0.8em;
+  }
+}
