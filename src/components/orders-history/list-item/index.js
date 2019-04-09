@@ -13,7 +13,7 @@ class ListItem extends React.Component {
     isOpened: false,
   }
 
-  openDetails = () => this.setState(state => ({ isOpened: !state.isOpened }));
+  toggleDetails = () => this.setState(state => ({ isOpened: !state.isOpened }));
 
   render() {
     const { order } = this.props;
