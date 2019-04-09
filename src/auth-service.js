@@ -3,7 +3,6 @@ import urls from './urls';
 
 const UserRouteGuard = {
   shouldRoute: () => {
-    debugger;
     const token = localStorage.getItem('token');
 
     if (!token) return Promise.resolve(false);

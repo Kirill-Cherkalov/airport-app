@@ -2,19 +2,42 @@
 
 .flight-seats {
   display: flex;
-  opacity: 1;
   justify-content: space-evenly;
   margin-bottom: 30px;
-  transition: display 2s, opacity 2s;
-}
-
-.closed-block {
-  opacity: 0;
-  display: none;
+  &:not(:last-child) {
+    margin-right: 30px;
+  }
 }
 
 .seats-choice-container {
   display: flex;
   justify-content: space-evenly;
-  padding-bottom: 30px;
+  align-items: center;
+}
+
+@media screen and (max-width: $tabletSize) {
+  .seats-choice-container{
+    flex-direction: column;
+  }
+  .flight-seats {
+    &:not(:last-child) {
+      margin-right: 0;
+    }
+  }
+}
+
+@media only screen and (max-width: $mobileSize) {
+  .flight-seats {
+    flex-direction: column;
+    align-items: center;
+    &:not(:last-child) {
+      margin-right: 0;
+    }
+  }
+  .seats-choice-container {
+    flex-direction: column;
+  }
+  .passenger-seats-container{
+    margin-right: 0;
+  }
 }
