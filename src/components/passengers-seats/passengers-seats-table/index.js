@@ -26,7 +26,7 @@ function PassengersSeatsTable({ flight, passengersInfo, setSelectedPassenger, se
               <td className="passengers-seats__info td">{firstname} {lastname}</td>
               <td
                 id={index}
-                className={`passengers-seats__seat td${selectedPassenger === index ? ' selected' : ''}`}
+                className={`passengers-seats__seat td ${selectedPassenger === index ? 'selected' : ''}`}
                 onClick={select}
               >
                 {passengersInfo[index].selectedSeat || 'seat'}

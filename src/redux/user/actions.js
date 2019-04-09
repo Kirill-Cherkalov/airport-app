@@ -37,16 +37,22 @@ function logInUser(bool) {
   };
 }
 
+function loginUserInSystem(bool, id, token) {
+  return (dispatch) => {
+    dispatch(logInUser(bool));
+    localStorage.setItem('id', id);
+    localStorage.setItem('token', token);
+  };
+}
+
 export function authoriseUser(userInfo) {
   const url = userInfo.firstName ? urls.sendRegisterFormData : urls.sendLoginFormData;
 
   return (dispatch) => {
     axios.post(url, userInfo)
       .then((response) => {
-        dispatch(logInUser(true));
-        localStorage.setItem('id', response.data.id);
-        localStorage.setItem('token', response.data.token);
+        dispatch(loginUserInSystem(true, response.data.id, response.data.token));
       })
-      .catch(err => localStorage.setItem('error', JSON.stringify(err)));
+      .catch(() => logInUser(false));
   };
 }

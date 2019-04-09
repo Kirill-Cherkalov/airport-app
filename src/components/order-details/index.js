@@ -18,9 +18,10 @@ function OrderDetails({
   };
 
   const flights = requestInfo.twoWayRequest ? [selectedFlight, returnSelectedFlight] : [selectedFlight];
-
   const { adult, child, infant } = requestInfo;
   const passengersAmount = adult + child + infant;
+
+  const getTicketPrice = passengersInfo => passengersInfo.reduce((total, { luggagePrice: price }) => total + price, 0);
 
   const goToPaymentPage = () => history.push('/payment');
 
@@ -79,7 +80,7 @@ function OrderDetails({
 
             <section className="order-details__total-price">
               <span className="total-price__text">Total</span>
-              <span className="total-price__amount">$ {price * passengersAmount + passengersInfo.reduce((total, { luggagePrice: price }) => total + price, 0)}</span>
+              <span className="total-price__amount">$ {price * passengersAmount + getTicketPrice(passengersInfo)}</span>
             </section>
           </div>
         ))}
