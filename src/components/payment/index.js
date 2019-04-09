@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
@@ -12,28 +11,35 @@ import SimpleSelect from '../select';
 import { payForOrder } from '../../redux/user/actions';
 import './index.scss';
 
-function Payment({ history, userInfo, payForOrder }) {
+function Payment({
+  history, userRequest, payForOrder, selectedFlight, returnSelectedFlight,
+}) {
   Payment.propTypes = {
     history: PropTypes.object.isRequired,
-    userInfo: PropTypes.object.isRequired,
+    userRequest: PropTypes.object.isRequired,
     payForOrder: PropTypes.func.isRequired,
+    selectedFlight: PropTypes.object.isRequired,
+    returnSelectedFlight: PropTypes.object.isRequired,
   };
 
   const onSubmit = () => {
-    localStorage.setItem('payment', JSON.stringify(userInfo));
-    const { from, to, departure, adult, child, infant } = userInfo.request;
-
-    const userOrder = {
+    localStorage.setItem('payment', JSON.stringify(userRequest));
+    const { adult, child, infant } = userRequest;
+    const passengersAmount = adult + child + infant;
+    const flights = userRequest.twoWayRequest ? [selectedFlight, returnSelectedFlight] : [selectedFlight];
+    const orders = flights.map(flight => ({
       userId: localStorage.getItem('id'),
-      fromCountry: from,
-      toCountry: to,
-      departureDate: departure,
-      passengersAmount: adult + child + infant,
-      selectedFlight: userInfo.selectedFlight.id,
-      passengersInfo: userInfo.passengersInfo,
-    };
+      fromCountry: flight.fromCountry,
+      toCountry: flight.toCountry,
+      departureDate: flight.date,
+      startTime: flight.startTime,
+      endTime: flight.endTime,
+      passengersAmount,
+      selectedFlight: flight.id,
+      passengersInfo: flight.passengersInfo,
+    }));
 
-    payForOrder(userOrder);
+    payForOrder(orders);
 
     history.push('/payment-success');
   };
@@ -141,7 +147,9 @@ function Payment({ history, userInfo, payForOrder }) {
 }
 
 const mapStateToProps = state => ({
-  userInfo: state.user,
+  userRequest: state.user.requestInfo.request,
+  selectedFlight: state.user.selectedFlight,
+  returnSelectedFlight: state.user.returnSelectedFlight,
 });
 
 const mapDispatchToProps = dispatch => ({

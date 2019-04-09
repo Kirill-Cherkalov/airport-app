@@ -1,6 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { setPassengersInfo } from '../../../../redux/user/actions';
 import './index.scss';
 
 function PlaneSeats({
@@ -20,6 +18,7 @@ function PlaneSeats({
 
     setInfo(newInfo);
   };
+  const selectedSeats = passengersInfo.map(({ selectedSeat }) => selectedSeat);
 
   return (
     rowss.map((elem, index) => (
@@ -27,12 +26,13 @@ function PlaneSeats({
         {location.map((place, j) => {
           const id = index + 1 + location[j];
           const isDisable = soldSeats.some(seat => seat === id);
+          const isSelected = selectedSeats.some(seat => seat === id);
           return (place ? (
             <div
               id={id}
               key={index + j}
-              className={`seat${isDisable ? ' disabled' : ''}`}
-              onClick={isDisable ? null : selectSeat}
+              className={`seat${isDisable ? ' disabled' : ''}${isSelected ? ' selectedSeat' : ''}`}
+              onClick={isDisable || isSelected ? null : selectSeat}
             >
               <span id={id} className="seat-point">{id}</span>
               {isDisable ? null : <span className="tooltiptext">$9</span>}
@@ -45,14 +45,4 @@ function PlaneSeats({
   );
 }
 
-const mapStateToProps = state => ({
-  selectedPassenger: state.user.selectedPassenger,
-  passengersInfo: state.user.passengersInfo,
-  soldSeats: state.user.selectedFlight.soldSeats,
-});
-
-const mapDispatchToProps = dispatch => ({
-  setInfo: info => dispatch(setPassengersInfo(info)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(PlaneSeats);
+export default PlaneSeats;
