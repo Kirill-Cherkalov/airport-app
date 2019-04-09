@@ -1,7 +1,7 @@
 @import 'src/variables.scss';
 
 .button {
-  margin-top: 30px;
+  // margin-top: 30px;
   padding: 10px 15px;
   border: none;
   border-radius: 5px;
@@ -14,8 +14,9 @@
   transition: background-color 250ms,
               box-shadow 250ms,
               border 250ms;
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-family: $fontFamily;
+  text-transform: uppercase;
 
   &:hover {
     background-color: $primaryMaterialHover;

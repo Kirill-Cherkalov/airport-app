@@ -30,11 +30,9 @@ export default class ExpandablePanel extends React.Component {
     return (
       <Fragment>
         <Header isOpen={this.state.isOpen} openPanel={this.openPanel} index={this.props.index} />
-        {/* {this.state.isOpen && ( */}
         <div className="expandable-panel__details">
           <Details i={this.props.index} handleChange={this.handleChange} />
         </div>
-        {/* )} */}
       </Fragment>
     );
   }
