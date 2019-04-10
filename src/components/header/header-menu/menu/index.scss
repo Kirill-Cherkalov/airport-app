@@ -1,5 +1,15 @@
 @import 'src/variables.scss';
 
+.header__menu {
+  display: flex;
+}
+
+.sidebar__menu {
+  display: flex;
+  flex-direction: column;
+  padding: 30px 50px;
+}
+
 .link-to {
   padding: 10px 15px;
   border-radius: 5px;
@@ -8,6 +18,37 @@
   text-transform: uppercase;
   font-size: 0.8rem;
   font-family: $fontFamily;
+  line-height: 16px;
+}
+
+.login-menu {
+  display: flex;
+
+  &__user-icon {
+    font-size: 2em;
+  }
+
+  &__link-to {
+    text-decoration: none;
+  }
+
+  &__user-icon-button {
+    padding: 0;
+    margin-left: 15px;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    cursor: pointer;
+  }
+}
+
+.link-to-button {
+  padding: 0;
+  margin-left: 10px;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
 }
 
 @media screen and (max-width: $mobileSize) {
