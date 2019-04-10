@@ -15,5 +15,14 @@
     border-radius: 5px;
     box-shadow: $boxShadow;
     background-color: $loginBackgroundColor;
+
+    .button {
+      margin: 20px 0 10px;
+    }
+  }
+
+  &__register-link {
+    color: $gray;
+    font-size: 0.8em;
   }
 }

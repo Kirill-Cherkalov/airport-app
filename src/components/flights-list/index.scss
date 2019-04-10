@@ -8,6 +8,7 @@
   font-family: $fontFamily;
 
   .button {
+    margin: 30px 0;
     padding: 13px 28px;
   }
 }
@@ -30,7 +31,7 @@
     box-shadow: $boxShadow;
     font-weight: 500;
     font-size: 1.15em;
-    border-bottom: 2px solid $ticketsHeaderBorderColor;
+    border-bottom: 1px solid $ticketsHeaderBorderColor;
     width: 860px;
   }
 }

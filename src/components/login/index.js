@@ -60,7 +60,7 @@ class Login extends React.Component {
                 Log in
               </button>
 
-              <Link to="/register">Registration</Link>
+              <Link to="/register" className="login-form__register-link">Registration</Link>
             </div>
           </form>
         )}

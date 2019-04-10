@@ -16,6 +16,10 @@
   align-items: center;
 }
 
+.seats-choice-wrapper .button {
+  margin-bottom: 30px;
+}
+
 @media screen and (max-width: $tabletSize) {
   .seats-choice-container{
     flex-direction: column;

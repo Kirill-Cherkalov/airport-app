@@ -62,8 +62,8 @@ class FlightsList extends React.Component {
     const {
       from, to, adult, child, infant,
     } = this.props.userRequest;
-    const departure = moment(this.props.userRequest.departure).format('LL');
-    const back = moment(this.props.userRequest.return).format('LL');
+    const departure = moment(this.props.userRequest.departure).format('MMMM DD');
+    const back = moment(this.props.userRequest.return).format('MMMM DD');
 
     return (
       <div className="flights-container">
@@ -113,7 +113,7 @@ class FlightsList extends React.Component {
           </List>
         </>
 
-        <button type="button" className="flights-list-button button" onClick={this.goToNextPage}>Continue</button>
+        <button type="button" className="button" onClick={this.goToNextPage}>Continue</button>
       </div>
     );
   }

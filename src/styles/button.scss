@@ -1,20 +1,19 @@
 @import 'src/variables.scss';
 
 .button {
-  // margin-top: 30px;
   padding: 10px 15px;
   border: none;
   border-radius: 5px;
   outline: none;
   background-color: $primaryMaterial;
-  color: #fff;
+  color:$primaryTextInvertColor;
   box-shadow: $buttonShadow;
   cursor: pointer;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition: background-color 250ms,
               box-shadow 250ms,
               border 250ms;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   font-family: $fontFamily;
   text-transform: uppercase;
 

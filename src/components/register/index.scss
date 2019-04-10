@@ -15,5 +15,9 @@
     border-radius: 5px;
     box-shadow: $boxShadow;
     background-color: $loginBackgroundColor;
+
+    .button {
+      margin: 20px 0 0;
+    }
   }
 }
