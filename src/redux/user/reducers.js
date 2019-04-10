@@ -28,6 +28,10 @@ export default function user(state = initialState, action) {
         ...state,
         paymentSuccess: action.bool,
       };
+    case actionTypes.USER_INFO_RESETTING:
+      return {
+        ...initialState,
+      };
     default:
       return state;
   }

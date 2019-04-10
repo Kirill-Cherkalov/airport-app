@@ -33,3 +33,9 @@ export function fetchUserOrdersData(date, type) {
       .catch(() => dispatch(getUserOrdersErrored(true)));
   };
 }
+
+export function resetOrdersInfo() {
+  return {
+    type: actionTypes.ORDERS_INFO_RESETTING,
+  };
+}

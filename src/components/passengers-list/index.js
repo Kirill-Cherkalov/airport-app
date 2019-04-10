@@ -6,12 +6,12 @@ import { Form } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import { FieldArray } from 'react-final-form-arrays';
 import PropTypes from 'prop-types';
-// import ExpandablePanel from './expandable-panel';
 import { setPassengersInfo } from '../../redux/user/selectedFlight/actions';
 import { setReturnFlightPassengersInfo } from '../../redux/user/returnSelectedFlight/actions';
 import './index.scss';
 import Details from './expandable-panel/details';
 import Header from './expandable-panel/header';
+import { resetTicketsInfo } from '../../redux/search/tickets/actions';
 
 class PassengersList extends Component {
   static propTypes = {
@@ -96,6 +96,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   setPassengersInfo: info => dispatch(setPassengersInfo(info)),
   setReturnFlightPassengersInfo: info => dispatch(setReturnFlightPassengersInfo(info)),
+  resetTicketsInfo: () => dispatch(resetTicketsInfo()),
 });
 
 export default compose(

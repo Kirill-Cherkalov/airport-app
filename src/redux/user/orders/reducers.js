@@ -17,6 +17,10 @@ export default function userOrdersInfo(state = initialState, action) {
         ...state,
         ordersErrored: action.bool,
       };
+    case actionTypes.ORDERS_INFO_RESETTING:
+      return {
+        ...initialState,
+      };
     default:
       return state;
   }
