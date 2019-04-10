@@ -31,6 +31,7 @@ export default function user(state = initialState, action) {
     case actionTypes.USER_INFO_RESETTING:
       return {
         ...initialState,
+        loggedInUser: state.loggedInUser,
       };
     default:
       return state;

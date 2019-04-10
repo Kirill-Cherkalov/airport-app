@@ -6,23 +6,42 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import './index.scss';
 import { resetTicketsInfo } from '../../redux/search/tickets/actions';
-import { resetAllUserInfo } from '../../redux/user/actions';
+import { resetSelectedFlightInfo } from '../../redux/user/selectedFlight/actions';
+import { resetReturnSelectedFlightInfo } from '../../redux/user/returnSelectedFlight/actions';
+import { resetOrdersInfo } from '../../redux/user/orders/actions';
+import { resetUserInfo } from '../../redux/user/actions';
 
 function PaymentSuccess({
-  history, selectedFlight, returnSelectedFlight, twoWayRequest,
+  history,
+  selectedFlight,
+  returnSelectedFlight,
+  twoWayRequest,
+  resetTicketsInfo,
+  resetSelectedFlightInfo,
+  resetReturnSelectedFlightInfo,
+  resetOrdersInfo,
+  resetUserInfo,
 }) {
   PaymentSuccess.propTypes = {
     twoWayRequest: PropTypes.bool.isRequired,
     selectedFlight: PropTypes.object.isRequired,
     returnSelectedFlight: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
+    resetTicketsInfo: PropTypes.func.isRequired,
+    resetSelectedFlightInfo: PropTypes.func.isRequired,
+    resetReturnSelectedFlightInfo: PropTypes.func.isRequired,
+    resetOrdersInfo: PropTypes.func.isRequired,
+    resetUserInfo: PropTypes.func.isRequired,
   };
 
   const flights = twoWayRequest ? [selectedFlight, returnSelectedFlight] : [selectedFlight];
 
   const goToStartPage = () => {
     resetTicketsInfo();
-    resetAllUserInfo();
+    resetSelectedFlightInfo();
+    resetReturnSelectedFlightInfo();
+    resetOrdersInfo();
+    resetUserInfo();
     history.push('/search');
   };
 
@@ -70,7 +89,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   resetTicketsInfo: () => dispatch(resetTicketsInfo()),
-  resetAllUserInfo: () => dispatch(resetAllUserInfo()),
+  resetSelectedFlightInfo: () => dispatch(resetSelectedFlightInfo()),
+  resetReturnSelectedFlightInfo: () => dispatch(resetReturnSelectedFlightInfo()),
+  resetOrdersInfo: () => dispatch(resetOrdersInfo()),
+  resetUserInfo: () => dispatch(resetUserInfo()),
 });
 
 export default compose(

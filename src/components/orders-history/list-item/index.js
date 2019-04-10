@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { FaPlane } from 'react-icons/fa';
 import './index.scss';
 
 class ListItem extends React.Component {
