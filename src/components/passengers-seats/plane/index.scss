@@ -1,10 +1,79 @@
 @import 'src/variables';
 
+@mixin cockpit($top) {
+  box-sizing: border-box;
+  height: 120px;
+  position: relative;
+  z-index: -1;
+  text-align: center;
+  background-color: transparent;
+
+  &:before {
+    content: "";
+    background-color: $planeBackgroundColor;
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    top: $top;
+    left: 0;
+    height: 250px;
+    width: 100%;
+    border-radius: 50%;
+    border-right: 5px solid $planeSchemaBorderColor;
+    border-left: 5px solid $planeSchemaBorderColor;
+  }
+}
+
 .plane {
-  background-color: $planeBackgroundColor;
+  &__cockpit {
+    @include cockpit(0);
+  }
+
+  &__cockpit_invert {
+    @include cockpit(-130px);
+  }
+
+  &__exit {
+    background-color: $planeBackgroundColor;
+    position: relative;
+    z-index: 1;
+    height: 50px;
+    border-right: 5px solid $planeSchemaBorderColor;
+    border-left: 5px solid $planeSchemaBorderColor;
+  
+    &_front {
+      border-top: 5px solid $planeSchemaBorderColor;
+    }
+  
+    &_back {
+      border-bottom: 5px solid $planeSchemaBorderColor;
+    }
+  
+    &:before,
+    &:after {
+      content: "EXIT";
+      font-size: 14px;
+      line-height: 18px;
+      padding: 0px 2px;
+      font-family: "Arial Narrow", Arial, sans-serif;
+      display: block;
+      position: absolute;
+      background: $planeExitBackgrounColor;
+      color: $primaryTextInvertColor;
+      top: 50%;
+      transform: translate(0, -50%);
+    }
+    &:before {
+      left: 0;
+    }
+    &:after {
+      right: 0;
+    }
+  }
 }
 
 .row {
+  background-color: $planeBackgroundColor;
   display: flex;
   padding: 5px 5px;
   height: 20px;
@@ -45,19 +114,10 @@
 }
 
 .selectedSeat {
-  background-color: rgb(118, 200, 252);
-  color: black;
+  background-color: $selectedPlaneSeatColor;
+  color: $primaryTextColor;
   .seat-point {
     display: inline;
-  }
-}
-
-.disabled {
-  background-color: $disabledSeatBackground;
-  cursor: auto;
-
-  &:hover .seat-point {
-    display: none;
   }
 }
 
@@ -76,3 +136,4 @@
   font-size: 0.6rem;
   margin-right: 5px;
 }
+

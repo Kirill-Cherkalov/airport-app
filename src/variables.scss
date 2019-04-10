@@ -2,6 +2,8 @@
 $mobileSize: 600px;
 $tabletSize: 960px;
 $desktopSize: 1280px;
+
+$green: rgb(0, 127, 0);
 // colors
 $gray: rgb(128, 128, 128);
 $white: rgb(255, 255, 255);
@@ -11,9 +13,11 @@ $checkIconColor: rgb(20, 184, 20);
 $dateBorderColor: rgb(225, 225, 225);
 $masterCardColor: rgb(206, 4, 4);
 $orderDetailsDividerColor: $gray;
+$planeSchemaBorderColor: rgb(216, 216, 216);
 $priceColor: rgb(0, 0, 139);
 $selectedFlightColor: blue;
 $selectedPassengerColor: rgb(131, 80, 131);
+$selectedPlaneSeatColor: rgb(118, 200, 252);
 $passengersListBorderColor: gray;
 $ticketsDetailsBorderColor: $gray;
 $ticketsHeaderBorderColor: $gray;
@@ -35,6 +39,8 @@ $passengerTableBackgroundColor: $white;
 $paymentBackground: $white;
 $paymentHeaderBackground: rgb(242, 242, 242);
 $paymentCardBackground: rgb(242, 242, 242);
+
+$planeExitBackgrounColor: $green;
 $planeBackgroundColor: $white;
 $printTicketButtonBackgroundColor: rgb(93, 156, 236);
 $printTicketButtonBackgroundColorHover: rgb(93, 156, 236);
