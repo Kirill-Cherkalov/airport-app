@@ -1,0 +1,32 @@
+@import 'src/variables.scss';
+
+.not-found-page__background {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-image: url('../../assets/not-found.jpg');
+}
+
+.not-found-page {
+  margin: 140px auto;
+  width: 70%;
+  color: $primaryTextInvertColor;
+
+  &__main-header {
+    margin-bottom: 20px;
+    font-size: 3em;
+  }
+  &__secondary-header {
+    font-size: 2em;
+  }
+
+  &__proposal {
+    font-size: 2em;
+  }
+  &__proposal-link {
+    padding-left: 10px;
+    color: $notFoundPageLinkColor;
+  }
+}

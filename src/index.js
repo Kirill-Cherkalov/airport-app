@@ -21,6 +21,7 @@ import Payment from './components/payment';
 import PaymentSuccess from './components/payment-success';
 import OrdersHistory from './components/orders-history';
 import UserRouteGuard from './auth-service';
+import NotFoundPage from './components/not-found';
 
 const store = configureStore();
 
@@ -42,6 +43,7 @@ function App() {
             <SecureRoute path="/orders-history" component={OrdersHistory} routeGuard={UserRouteGuard} redirectToPathWhenFail="/login" />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
+            <Route component={NotFoundPage} />
           </Switch>
         </div>
       </Router>
