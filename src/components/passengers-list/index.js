@@ -12,6 +12,7 @@ import './index.scss';
 import Details from './expandable-panel/details';
 import Header from './expandable-panel/header';
 import { resetTicketsInfo } from '../../redux/search/tickets/actions';
+import HorizontalStepper from '../stepper';
 
 class PassengersList extends Component {
   static propTypes = {
@@ -54,36 +55,40 @@ class PassengersList extends Component {
     const passengersAmount = new Array(adult + child + infant).fill(1);
 
     return (
-      <Form
-        onSubmit={this.onSubmit}
-        mutators={{
-          ...arrayMutators,
-        }}
-        render={({ handleSubmit },
-          pristine, submitting) => (
-            <form
-              onSubmit={handleSubmit}
-              className="passengers-list-form"
-            >
-              <FieldArray name="information">
-                {() => (passengersAmount.map((elem, index) => (
-                  <div className="expandable-panel" key={index}>
-                    <Header index={index} />
-                    <Details index={index} />
-                  </div>
-                )))}
-              </FieldArray>
+      <>
+        <HorizontalStepper activeStep={0} />
 
-              <button
-                type="submit"
-                className="button"
-                disabled={submitting || pristine}
+        <Form
+          onSubmit={this.onSubmit}
+          mutators={{
+            ...arrayMutators,
+          }}
+          render={({ handleSubmit },
+            pristine, submitting) => (
+              <form
+                onSubmit={handleSubmit}
+                className="passengers-list-form"
               >
-                Confirm
-              </button>
-            </form>
-        )}
-      />
+                <FieldArray name="information">
+                  {() => (passengersAmount.map((elem, index) => (
+                    <div className="expandable-panel" key={index}>
+                      <Header index={index} />
+                      <Details index={index} />
+                    </div>
+                  )))}
+                </FieldArray>
+
+                <button
+                  type="submit"
+                  className="button"
+                  disabled={submitting || pristine}
+                >
+                  Confirm
+                </button>
+              </form>
+          )}
+        />
+      </>
     );
   }
 }
