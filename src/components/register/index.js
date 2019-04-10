@@ -4,6 +4,7 @@ import { Form, Field } from 'react-final-form';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { FaUserPlus } from 'react-icons/fa';
 import { authoriseUser } from '../../redux/user/actions';
 import styles from './material.style';
 import TextField from '../text-field';
@@ -33,6 +34,8 @@ class Register extends React.Component {
         render={({ handleSubmit }) => (
           <form className="register-form" onSubmit={handleSubmit}>
             <div className="register-form__container">
+              <FaUserPlus className="register-form__icon" />
+              <h1 className="register-form__header">Register</h1>
               <Field
                 name="firstName"
                 component={TextField}
@@ -71,7 +74,7 @@ class Register extends React.Component {
               />
 
               <button className="button" type="submit">
-                Submit
+                Register
               </button>
             </div>
           </form>

@@ -5,6 +5,7 @@ import { withRouter, Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { FaUserCheck } from 'react-icons/fa';
 import { authoriseUser } from '../../redux/user/actions';
 import styles from './material.style';
 import TextField from '../text-field';
@@ -38,6 +39,8 @@ class Login extends React.Component {
         render={({ handleSubmit }) => (
           <form className="login-form" onSubmit={handleSubmit}>
             <div className="login-form__container">
+              <FaUserCheck className="login-form__icon" />
+              <h1 className="login-form__header">Login</h1>
               <Field
                 name="email"
                 component={TextField}
@@ -57,7 +60,7 @@ class Login extends React.Component {
                 variant="outlined"
               />
               <button className="button" type="submit">
-                Log in
+                Login
               </button>
 
               <Link to="/register" className="login-form__register-link">Registration</Link>

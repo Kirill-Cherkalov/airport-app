@@ -18,6 +18,22 @@
 
     .button {
       margin: 20px 0 0;
+      letter-spacing: 1px;
     }
+  }
+
+
+  &__icon {
+    margin-bottom: 15px;
+    color: $primaryMaterial;
+    font-size: 2em;
+  }
+
+  &__header {
+    margin-bottom: 30px;
+    color: $primaryMaterial;
+    font-size: 1.7em;
+    font-weight: 450;
+    letter-spacing: 1.5px;
   }
 }
