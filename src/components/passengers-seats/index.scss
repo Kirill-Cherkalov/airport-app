@@ -4,9 +4,10 @@
   display: flex;
   justify-content: space-evenly;
   margin-bottom: 30px;
-  &:not(:last-child) {
-    margin-right: 100px;
-  }
+}
+
+.closed-block {
+  display: none;
 }
 
 .seats-choice-container {

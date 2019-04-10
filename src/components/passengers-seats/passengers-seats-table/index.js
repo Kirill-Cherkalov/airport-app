@@ -22,11 +22,11 @@ function PassengersSeatsTable({ flight, passengersInfo, setSelectedPassenger, se
             </th>
           </tr>
           {passengersInfo.map(({ firstname, lastname }, index) => (
-            <tr key={index} className="passengers-seats__passenger">
+            <tr key={index} className={`passengers-seats__passenger ${selectedPassenger === index ? 'selected' : ''}`}>
               <td className="passengers-seats__info td">{firstname} {lastname}</td>
               <td
                 id={index}
-                className={`passengers-seats__seat td ${selectedPassenger === index ? 'selected' : ''}`}
+                className="passengers-seats__seat td"
                 onClick={select}
               >
                 {passengersInfo[index].selectedSeat || 'seat'}
