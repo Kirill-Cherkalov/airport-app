@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { SecureRoute } from 'react-route-guard';
+import { SnackbarProvider } from 'notistack';
 import configureStore from './redux/configureStore';
 
 import './reset.scss';
@@ -22,6 +23,7 @@ import PaymentSuccess from './components/payment-success';
 import OrdersHistory from './components/orders-history';
 import UserRouteGuard from './auth-service';
 import NotFoundPage from './components/not-found';
+import Notifier from './components/notifier';
 
 const store = configureStore();
 
@@ -31,6 +33,7 @@ function App() {
       <Router>
         <div>
           <Header />
+          <Notifier />
           <Switch>
             <Route path="/search" component={Search} />
             <Route path="/passengers-counters" component={PassengersCounters} />
@@ -53,7 +56,9 @@ function App() {
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <SnackbarProvider>
+      <App />
+    </SnackbarProvider>
   </Provider>,
   document.getElementById('root'),
 );

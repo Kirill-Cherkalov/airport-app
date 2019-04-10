@@ -7,8 +7,23 @@ import './index.scss';
 
 const Menu = props => (
   <div className={props.className}>
-    <Link to="/search" className="link-to">Search</Link>
-    {props.loggedInUser && <Link to="/orders-history" className="link-to">My orders</Link>}
+    <Link
+      to="/search"
+      className="link-to"
+      onClick={props.onClick}
+    >
+      Search
+    </Link>
+
+    {props.loggedInUser && (
+      <Link
+        to="/orders-history"
+        className="link-to"
+        onClick={props.onClick}
+      >
+        My orders
+      </Link>
+    )}
     <LoginMenu />
   </div>
 );

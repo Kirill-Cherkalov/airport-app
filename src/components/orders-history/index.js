@@ -38,9 +38,9 @@ class OrdersHistory extends React.Component {
         </div>
 
         <ul className="orders-history__list">
-          {this.props.userOrders.length && this.props.userOrders.map((order, index) => (
+          {this.props.userOrders.length ? this.props.userOrders.map((order, index) => (
             <ListItem order={order} key={index} />
-          ))}
+          )) : <h1>you don't have any orders yet</h1>}
         </ul>
       </section>
     );

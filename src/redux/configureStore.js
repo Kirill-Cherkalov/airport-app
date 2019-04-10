@@ -4,11 +4,13 @@ import thunk from 'redux-thunk';
 import searchPage from './search';
 import user from './user';
 import data from './data';
+import notifications from './notifier/reducers';
 
 const rootReducer = combineReducers({
   searchPage,
   user,
   data,
+  notifications,
 });
 
 export default function configureStore(initialState) {

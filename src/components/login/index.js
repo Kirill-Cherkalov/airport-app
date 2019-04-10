@@ -4,9 +4,11 @@ import { Form, Field } from 'react-final-form';
 import { withRouter, Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { compose, bindActionCreators } from 'redux';
 import { FaUserCheck } from 'react-icons/fa';
+import { withSnackbar } from 'notistack';
 import { authoriseUser } from '../../redux/user/actions';
+// import { enqueueSnackbar } from '../../redux/notifier/actions';
 import styles from './material.style';
 import TextField from '../text-field';
 import validate from './validate';
@@ -18,6 +20,8 @@ class Login extends React.Component {
     classes: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
     authoriseUser: PropTypes.func.isRequired,
+    loggedInUser: PropTypes.bool.isRequired,
+    enqueueSnackbar: PropTypes.func.isRequired,
   };
 
   handleChange = name => (event) => {
@@ -26,8 +30,19 @@ class Login extends React.Component {
 
   onSubmit = (values) => {
     this.props.authoriseUser(values);
-    console.log(this.props.history);
-    this.props.history.goBack();
+    if (!this.props.loggedInUser) {
+      return this.props.enqueueSnackbar('Authorization failed', { 
+        variant: 'error',
+      });
+    }
+
+    return this.props.history.goBack();
+  };
+
+  doSMTH = () => {
+    return this.props.enqueueSnackbar('Authorization failed', { 
+      variant: 'error',
+    });
   };
 
   render() {
@@ -63,6 +78,8 @@ class Login extends React.Component {
                 Login
               </button>
 
+              <button type="button" onClick={this.doSMTH}>button</button>
+
               <Link to="/register" className="login-form__register-link">Registration</Link>
             </div>
           </form>
@@ -72,12 +89,17 @@ class Login extends React.Component {
   }
 }
 
+const mapStateToProps = state => ({
+  loggedInUser: state.user.requestInfo.loggedInUser,
+});
+
 const mapDispatchToProps = dispatch => ({
   authoriseUser: userInfo => dispatch(authoriseUser(userInfo)),
+  // enqueueSnackbar: () => dispatch(enqueueSnackbar()),
 });
 
 export default compose(
   withRouter,
   withStyles(styles),
-  connect(null, mapDispatchToProps),
-)(Login);
+  connect(mapStateToProps, mapDispatchToProps),
+)(withSnackbar(Login));
