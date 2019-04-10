@@ -1,6 +1,9 @@
 import axios from 'axios';
 import actionTypes from './actionTypes';
 import urls from '../../urls';
+import { resetReturnSelectedFlightInfo } from './returnSelectedFlight/actions';
+import { resetSelectedFlightInfo } from './selectedFlight/actions';
+import { resetOrdersInfo } from './orders/actions';
 
 export function setUserRequestData(request) {
   return {
@@ -55,4 +58,17 @@ export function authoriseUser(userInfo) {
       })
       .catch(() => logInUser(false));
   };
+}
+
+export function resetUserInfo() {
+  return {
+    type: actionTypes.USER_INFO_RESETTING,
+  };
+}
+
+export function resetAllUserInfo() {
+  resetSelectedFlightInfo();
+  resetReturnSelectedFlightInfo();
+  resetOrdersInfo();
+  resetUserInfo();
 }

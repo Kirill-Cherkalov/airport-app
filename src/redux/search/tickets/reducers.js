@@ -29,6 +29,10 @@ export default function tickets(state = initialState, action) {
         ...state,
         returnItems: action.items,
       };
+    case actionTypes.TICKETS_INFO_RESETTING:
+      return {
+        ...initialState,
+      };
     default:
       return state;
   }

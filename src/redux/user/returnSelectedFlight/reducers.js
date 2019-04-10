@@ -23,6 +23,10 @@ export default function user(state = initialState, action) {
         ...state,
         selectedPassenger: action.id,
       };
+    case actionTypes.RETURN_SELECTED_FLIGHT_INFO_RESETTING:
+      return {
+        ...initialState,
+      };
     default:
       return state;
   }

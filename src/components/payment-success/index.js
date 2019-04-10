@@ -5,20 +5,24 @@ import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import './index.scss';
+import { resetTicketsInfo } from '../../redux/search/tickets/actions';
+import { resetAllUserInfo } from '../../redux/user/actions';
 
 function PaymentSuccess({
-  history, selectedFlight, returnSelectedFlight, requestInfo,
+  history, selectedFlight, returnSelectedFlight, twoWayRequest,
 }) {
   PaymentSuccess.propTypes = {
-    requestInfo: PropTypes.bool.isRequired,
+    twoWayRequest: PropTypes.bool.isRequired,
     selectedFlight: PropTypes.object.isRequired,
     returnSelectedFlight: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
   };
 
-  const flights = requestInfo ? [selectedFlight, returnSelectedFlight] : [selectedFlight];
+  const flights = twoWayRequest ? [selectedFlight, returnSelectedFlight] : [selectedFlight];
 
   const goToStartPage = () => {
+    resetTicketsInfo();
+    resetAllUserInfo();
     history.push('/search');
   };
 
@@ -26,9 +30,9 @@ function PaymentSuccess({
     <section className="tickets">
       <div className="tickets-wrapper">
         {flights.map(({
-          date, fromCountry, toCountry, startTime, endTime, passengersInfo,
-        }, index) => (
-          <section key={index} className="ticket">
+          id, date, fromCountry, toCountry, startTime, endTime, passengersInfo,
+        }) => (
+          <section key={id} className="ticket">
             <div className="ticket__header">Flight ticket</div>
             <div className="ticket__departure-info">
               <h1 className="ticket__destination">{fromCountry} - {toCountry}</h1>
@@ -54,7 +58,7 @@ function PaymentSuccess({
         ))}
       </div>
 
-      <button type="button" className="button" onClick={goToStartPage}>goToStartPage</button>
+      <button type="button" className="button" onClick={goToStartPage}>to start</button>
     </section>
   );
 }
@@ -64,7 +68,12 @@ const mapStateToProps = state => ({
   returnSelectedFlight: state.user.returnSelectedFlight,
 });
 
+const mapDispatchToProps = dispatch => ({
+  resetTicketsInfo: () => dispatch(resetTicketsInfo()),
+  resetAllUserInfo: () => dispatch(resetAllUserInfo()),
+});
+
 export default compose(
   withRouter,
-  connect(mapStateToProps),
+  connect(mapStateToProps, mapDispatchToProps),
 )(PaymentSuccess);

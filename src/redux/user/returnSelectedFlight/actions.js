@@ -53,3 +53,9 @@ export function setReturnFlightSelectedPassenger(id) {
     id,
   };
 }
+
+export function resetReturnSelectedFlightInfo() {
+  return {
+    type: actionTypes.RETURN_SELECTED_FLIGHT_INFO_RESETTING,
+  };
+}

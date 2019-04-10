@@ -95,3 +95,9 @@ export function ticketsFetchData(userRequest) {
     });
   };
 }
+
+export function resetTicketsInfo() {
+  return {
+    type: actionTypes.TICKETS_INFO_RESETTING,
+  };
+}
