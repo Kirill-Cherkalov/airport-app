@@ -53,3 +53,9 @@ export function setSelectedPassenger(id) {
     id,
   };
 }
+
+export function resetSelectedFlightInfo() {
+  return {
+    type: actionTypes.SELECTED_FLIGHT_INFO_RESETTING,
+  };
+}
