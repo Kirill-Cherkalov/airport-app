@@ -5,6 +5,7 @@ import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import './index.scss';
+import HorizontalStepper from '../stepper';
 import { resetTicketsInfo } from '../../redux/search/tickets/actions';
 import { resetSelectedFlightInfo } from '../../redux/user/selectedFlight/actions';
 import { resetReturnSelectedFlightInfo } from '../../redux/user/returnSelectedFlight/actions';
@@ -46,39 +47,42 @@ function PaymentSuccess({
   };
 
   return (
-    <section className="tickets">
-      <div className="tickets-wrapper">
-        {flights.map(({
-          id, date, fromCountry, toCountry, startTime, endTime, passengersInfo,
-        }) => (
-          <section key={id} className="ticket">
-            <div className="ticket__header">Flight ticket</div>
-            <div className="ticket__departure-info">
-              <h1 className="ticket__destination">{fromCountry} - {toCountry}</h1>
-              <span className="ticket__time">{startTime} - {endTime} , {moment(date).format('MMM Do, YYYY')}</span>
-            </div>
-            <div className="passengers-info">
-              <div className="passengers-info__header">
-                <span>passenger name</span>
-                <span>seat</span>
+    <>
+      <HorizontalStepper activeStep={5} />
+      <section className="tickets">
+        <div className="tickets-wrapper">
+          {flights.map(({
+            id, date, fromCountry, toCountry, startTime, endTime, passengersInfo,
+          }) => (
+            <section key={id} className="ticket">
+              <div className="ticket__header">Flight ticket</div>
+              <div className="ticket__departure-info">
+                <h1 className="ticket__destination">{fromCountry} - {toCountry}</h1>
+                <span className="ticket__time">{startTime} - {endTime} , {moment(date).format('MMM Do, YYYY')}</span>
               </div>
-              {passengersInfo.map(({ firstname, lastname, selectedSeat }) => (
-                <div className="passengers-info__details">
-                  <span className="passengers-info__name">{firstname} {lastname}</span>
-                  <span className="passengers-info__seat">{selectedSeat}</span>
+              <div className="passengers-info">
+                <div className="passengers-info__header">
+                  <span>passenger name</span>
+                  <span>seat</span>
                 </div>
-              ))}
-            </div>
-            <div className="ticket__footer">
-              <div className="ticket__barcode" />
-              <button type="button" className="ticket__print-button">PRINT TICKET</button>
-            </div>
-          </section>
-        ))}
-      </div>
+                {passengersInfo.map(({ firstname, lastname, selectedSeat }) => (
+                  <div className="passengers-info__details">
+                    <span className="passengers-info__name">{firstname} {lastname}</span>
+                    <span className="passengers-info__seat">{selectedSeat}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="ticket__footer">
+                <div className="ticket__barcode" />
+                <button type="button" className="ticket__print-button">PRINT TICKET</button>
+              </div>
+            </section>
+          ))}
+        </div>
 
-      <button type="button" className="button" onClick={goToStartPage}>to start</button>
-    </section>
+        <button type="button" className="button" onClick={goToStartPage}>to start</button>
+      </section>
+    </>
   );
 }
 const mapStateToProps = state => ({

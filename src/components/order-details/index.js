@@ -5,6 +5,7 @@ import { withRouter } from 'react-router';
 import { FaCheck, FaRegUserCircle } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import HorizontalStepper from '../stepper';
 import './index.scss';
 
 function OrderDetails({
@@ -26,68 +27,71 @@ function OrderDetails({
   const goToPaymentPage = () => history.push('/payment');
 
   return (
-    <section className="order-details">
-      <div className="order-details-wrapper">
-        {flights.map(({
-          date, fromCountry, toCountry, startTime, endTime, price, passengersInfo,
-        }, index) => (
-          <div key={index} className={flights.length === 1 ? 'one-ticket' : 'two-tickets'}>
-            <section className="order-details__flight">
-              <div className="order-details__header">
-                <FaCheck className="order-details__icon" />
-                <span className="order-details__text">Flight</span>
-              </div>
-
-              <div className="flight-info">
-                <span className="flight-info__date">{moment(date).format('MMM Do')}</span>
-                <div className="flight-info__wrapper">
-                  <span className="flight-info__direction">{fromCountry} - {toCountry}</span>
-                  <span className="flight-info__time">{startTime} - {endTime}</span>
+    <>
+      <HorizontalStepper activeStep={2} />
+      <section className="order-details">
+        <div className="order-details-wrapper">
+          {flights.map(({
+            date, fromCountry, toCountry, startTime, endTime, price, passengersInfo,
+          }, index) => (
+            <div key={index} className={flights.length === 1 ? 'one-ticket' : 'two-tickets'}>
+              <section className="order-details__flight">
+                <div className="order-details__header">
+                  <FaCheck className="order-details__icon" />
+                  <span className="order-details__text">Flight</span>
                 </div>
-              </div>
 
-              <div className="about-price">
-                <span className="about-price__text">{passengersAmount} x Flight ticket</span>
-                <span className="about-price__amount">$ {price * passengersAmount}</span>
-              </div>
-            </section>
-
-            <section className="order-details__passengers">
-              <div className="order-details__header">
-                <FaCheck className="order-details__icon" />
-                <span className="order-details__text">Passengers</span>
-              </div>
-
-              {passengersInfo.map((passenger, i) => (
-                <div className="passengers-info" key={i}>
-                  <div className="passengers-info__about">
-                    <FaRegUserCircle className="passengers-info__icon" />
-                    <span className="passengers-info__name">{passenger.firstname} {passenger.lastname}</span>
-                  </div>
-
-                  <div className="about-price">
-                    <span className="about-price__text">Luggage - {passenger.luggageKg} kg</span>
-                    <span className="about-price__amount">$ {passenger.luggagePrice}</span>
-                  </div>
-
-                  <div className="about-price">
-                    <span className="about-price__text">Seat - {passenger.selectedSeat}</span>
-                    <span className="about-price__amount">included</span>
+                <div className="flight-info">
+                  <span className="flight-info__date">{moment(date).format('MMM Do')}</span>
+                  <div className="flight-info__wrapper">
+                    <span className="flight-info__direction">{fromCountry} - {toCountry}</span>
+                    <span className="flight-info__time">{startTime} - {endTime}</span>
                   </div>
                 </div>
-              ))}
-            </section>
 
-            <section className="order-details__total-price">
-              <span className="total-price__text">Total</span>
-              <span className="total-price__amount">$ {price * passengersAmount + getTicketPrice(passengersInfo)}</span>
-            </section>
-          </div>
-        ))}
-      </div>
+                <div className="about-price">
+                  <span className="about-price__text">{passengersAmount} x Flight ticket</span>
+                  <span className="about-price__amount">$ {price * passengersAmount}</span>
+                </div>
+              </section>
 
-      <button type="button" className="button" onClick={goToPaymentPage}>Confirm</button>
-    </section>
+              <section className="order-details__passengers">
+                <div className="order-details__header">
+                  <FaCheck className="order-details__icon" />
+                  <span className="order-details__text">Passengers</span>
+                </div>
+
+                {passengersInfo.map((passenger, i) => (
+                  <div className="passengers-info" key={i}>
+                    <div className="passengers-info__about">
+                      <FaRegUserCircle className="passengers-info__icon" />
+                      <span className="passengers-info__name">{passenger.firstname} {passenger.lastname}</span>
+                    </div>
+
+                    <div className="about-price">
+                      <span className="about-price__text">Luggage - {passenger.luggageKg} kg</span>
+                      <span className="about-price__amount">$ {passenger.luggagePrice}</span>
+                    </div>
+
+                    <div className="about-price">
+                      <span className="about-price__text">Seat - {passenger.selectedSeat}</span>
+                      <span className="about-price__amount">included</span>
+                    </div>
+                  </div>
+                ))}
+              </section>
+
+              <section className="order-details__total-price">
+                <span className="total-price__text">Total</span>
+                <span className="total-price__amount">$ {price * passengersAmount + getTicketPrice(passengersInfo)}</span>
+              </section>
+            </div>
+          ))}
+        </div>
+
+        <button type="button" className="button" onClick={goToPaymentPage}>Confirm</button>
+      </section>
+    </>
   );
 }
 

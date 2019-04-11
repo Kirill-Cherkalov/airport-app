@@ -8,6 +8,7 @@ import { Form, Field } from 'react-final-form';
 import validate from './validate';
 import TextField from '../text-field';
 import SimpleSelect from '../select';
+import HorizontalStepper from '../stepper';
 import { payForOrder } from '../../redux/user/actions';
 import './index.scss';
 
@@ -64,85 +65,88 @@ function Payment({
   };
 
   return (
-    <section className="payment">
-      <h1 className="payment__header">credit card</h1>
-      <section className="payment__cards">
-        <span className="payment__text">Accepted cards:</span>
-        <FaCcVisa className="payment__cards_visa" />
-        <FaCcMastercard className="payment__cards_mastercard" />
-      </section>
+    <>
+      <HorizontalStepper activeStep={3} />
+      <section className="payment">
+        <h1 className="payment__header">credit card</h1>
+        <section className="payment__cards">
+          <span className="payment__text">Accepted cards:</span>
+          <FaCcVisa className="payment__cards_visa" />
+          <FaCcMastercard className="payment__cards_mastercard" />
+        </section>
 
-      <Form
-        onSubmit={onSubmit}
-        validate={validate}
-        render={({ handleSubmit }) => (
-          <form onSubmit={handleSubmit}>
-            <div className="payment-card">
-              <div className="payment-card__field-wrapper">
-                <FaRegCreditCard className="payment-card__icon" />
-                <Field
-                  name="number"
-                  label="Card number"
-                  type="text"
-                  parse={normalizeCardNumber}
-                  className="payment-card__field"
-                  component={TextField}
-                  variant="outlined"
-                />
-              </div>
-
-              <div className="payment-card__field-wrapper">
-                <FaUser className="payment-card__icon" />
-                <Field
-                  name="name"
-                  label="Name on card"
-                  className="payment-card__field"
-                  component={TextField}
-                  variant="outlined"
-                />
-              </div>
-
-              <div className="wrapper">
+        <Form
+          onSubmit={onSubmit}
+          validate={validate}
+          render={({ handleSubmit }) => (
+            <form onSubmit={handleSubmit}>
+              <div className="payment-card">
                 <div className="payment-card__field-wrapper">
-                  <FaRegClock className="payment-card__icon" />
+                  <FaRegCreditCard className="payment-card__icon" />
                   <Field
-                    id="month"
-                    name="month"
-                    label="mm"
-                    className="payment-card__date payment-card__date_month"
-                    component={SimpleSelect}
-                    items={months}
-                  />
-                  <Field
-                    id="year"
-                    name="year"
-                    label="yy"
-                    className="payment-card__date"
-                    component={SimpleSelect}
-                    items={years}
-                  />
-                </div>
-
-                <div className="payment-card__field-wrapper">
-                  <FaUnlock className="payment-card__lock-icon" />
-                  <Field
-                    name="code"
-                    label="CVC/CVV"
-                    type="password"
-                    parse={normalizeCode}
-                    className="payment-card__field payment-card__field_code"
+                    name="number"
+                    label="Card number"
+                    type="text"
+                    parse={normalizeCardNumber}
+                    className="payment-card__field"
                     component={TextField}
                     variant="outlined"
                   />
                 </div>
-              </div>
-            </div>
 
-            <button type="submit" className="button payment__button">Pay now</button>
-          </form>
-        )}
-      />
-    </section>
+                <div className="payment-card__field-wrapper">
+                  <FaUser className="payment-card__icon" />
+                  <Field
+                    name="name"
+                    label="Name on card"
+                    className="payment-card__field"
+                    component={TextField}
+                    variant="outlined"
+                  />
+                </div>
+
+                <div className="wrapper">
+                  <div className="payment-card__field-wrapper">
+                    <FaRegClock className="payment-card__icon" />
+                    <Field
+                      id="month"
+                      name="month"
+                      label="mm"
+                      className="payment-card__date payment-card__date_month"
+                      component={SimpleSelect}
+                      items={months}
+                    />
+                    <Field
+                      id="year"
+                      name="year"
+                      label="yy"
+                      className="payment-card__date"
+                      component={SimpleSelect}
+                      items={years}
+                    />
+                  </div>
+
+                  <div className="payment-card__field-wrapper">
+                    <FaUnlock className="payment-card__lock-icon" />
+                    <Field
+                      name="code"
+                      label="CVC/CVV"
+                      type="password"
+                      parse={normalizeCode}
+                      className="payment-card__field payment-card__field_code"
+                      component={TextField}
+                      variant="outlined"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" className="button payment__button">Pay now</button>
+            </form>
+          )}
+        />
+      </section>
+    </>
   );
 }
 
