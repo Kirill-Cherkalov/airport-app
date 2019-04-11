@@ -23,18 +23,18 @@ function HorizontalStepper(props) {
     history: PropTypes.object.isRequired,
   };
 
-  const { classes, activeStep, history } = props;
+  const { classes, activeStep } = props;
 
   return (
     <div>
       <Stepper className={classes.root} activeStep={activeStep} alternativeLabel>
-        <Step onClick={activeStep <= 3 ? () => history.push('/passengers-list') : null}>
+        <Step>
           <StepLabel>Passengers</StepLabel>
         </Step>
-        <Step onClick={activeStep <= 3 ? () => history.push('/passengers-seats') : null}>
+        <Step>
           <StepLabel>Seats</StepLabel>
         </Step>
-        <Step onClick={(activeStep > 2 && activeStep <= 3) ? () => history.push('/order-details') : null}>
+        <Step>
           <StepLabel>Order</StepLabel>
         </Step>
         <Step>
