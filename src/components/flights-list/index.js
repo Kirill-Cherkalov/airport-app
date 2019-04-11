@@ -13,6 +13,7 @@ import List from '@material-ui/core/List';
 import styles from './material.style';
 import { setSelectedFlightInfo } from '../../redux/user/selectedFlight/actions';
 import { setReturnSelectedFlightInfo } from '../../redux/user/returnSelectedFlight/actions';
+import { enqueueSnackbar } from '../../redux/notifier/actions';
 import SearchForm from './search-form/search-form';
 import FlightsListItems from './flights-list-items';
 import './index.scss';
@@ -28,6 +29,7 @@ class FlightsList extends React.Component {
     selectedFlight: PropTypes.object.isRequired,
     returnSelectedFlight: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
+    enqueueSnackBar: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -45,8 +47,16 @@ class FlightsList extends React.Component {
     if (this.props.userRequest.twoWayRequest && this.props.selectedFlight.id && this.props.returnSelectedFlight.id) {
       return this.props.history.push('/passengers-list');
     }
+    if (!this.props.userRequest.twoWayRequest && this.props.selectedFlight.id) {
+      return this.props.history.push('/passengers-list');
+    }
 
-    return (!this.props.userRequest.twoWayRequest && this.props.selectedFlight.id && this.props.history.push('/passengers-list'));
+    return this.props.enqueueSnackBar({
+      message: 'Choose flight',
+      options: {
+        variant: 'warning',
+      },
+    });
   };
 
   getPassAmount = (adult, child, infant) => {
@@ -130,6 +140,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   setSelectedFlightInfo: flightInfo => dispatch(setSelectedFlightInfo(flightInfo)),
   setReturnSelectedFlightInfo: flightInfo => dispatch(setReturnSelectedFlightInfo(flightInfo)),
+  enqueueSnackBar: obj => dispatch(enqueueSnackbar(obj)),
 });
 
 export default compose(

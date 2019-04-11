@@ -1,5 +1,6 @@
 import axios from 'axios';
 import actionTypes from './actionTypes';
+import { enqueueSnackbar } from '../../notifier/actions';
 
 export function getUserOrders(orders) {
   return {
@@ -29,6 +30,14 @@ export function fetchUserOrdersData(date, type) {
       .then((response) => {
         dispatch(getUserOrders(response.data));
         dispatch(getUserOrdersErrored(false));
+        if (!response.data.length) {
+          return dispatch(enqueueSnackbar({
+            message: "You haven't got any orders yet",
+            options: {
+              variant: 'info',
+            },
+          }));
+        }
       })
       .catch(() => dispatch(getUserOrdersErrored(true)));
   };

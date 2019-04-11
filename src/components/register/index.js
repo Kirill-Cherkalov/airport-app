@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, Field } from 'react-final-form';
+import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -16,7 +17,11 @@ class Register extends React.Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
     authoriseUser: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired,
+    loggedInUser: PropTypes.bool.isRequired,
   };
+
+  componentDidUpdate = () => this.props.loggedInUser && this.props.history.goBack();
 
   handleChange = name => (event) => {
     this.setState({ [name]: event.target.value });
@@ -84,11 +89,16 @@ class Register extends React.Component {
   }
 }
 
+const mapStateToProps = state => ({
+  loggedInUser: state.user.requestInfo.loggedInUser,
+});
+
 const mapDispatchToProps = dispatch => ({
   authoriseUser: userInfo => dispatch(authoriseUser(userInfo)),
 });
 
 export default compose(
+  withRouter,
   withStyles(styles),
-  connect(null, mapDispatchToProps),
+  connect(mapStateToProps, mapDispatchToProps),
 )(Register);

@@ -1,5 +1,6 @@
 import actionTypes from '../actionTypes';
 import { setUserRequestData } from '../../user/actions';
+import { enqueueSnackbar } from '../../notifier/actions';
 
 export function hasErrored(bool) {
   return {
@@ -88,9 +89,27 @@ export function ticketsFetchData(userRequest) {
                 planeInfo,
               };
             });
+
+            if (!result.length) {
+              dispatch(enqueueSnackbar({
+                message: "Can't find flights for this request",
+                options: {
+                  variant: 'error',
+                },
+              }));
+            }
+
             dispatch(action(result));
           })
-          .catch(() => dispatch(hasErrored(true)));
+          .catch(() => {
+            dispatch(hasErrored(true));
+            dispatch(enqueueSnackbar({
+              message: 'Ooops...Something goes wrong',
+              options: {
+                variant: 'error',
+              },
+            }));
+          });
       }
     });
   };

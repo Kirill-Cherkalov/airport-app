@@ -2,6 +2,12 @@
 
 .header {
   margin-bottom: 100px;
+
+  &__logo-link {
+    text-decoration: none;
+    color: $primaryTextInvertColor;
+    letter-spacing: 1px;
+  }
 }
 
 @media only screen and (max-width: $mobileSize) {

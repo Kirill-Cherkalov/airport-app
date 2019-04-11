@@ -27,7 +27,15 @@ export function payForOrder(userOrder) {
 
       return response.data;
     })
-    .then(() => dispatch(paymentStatus(true)))
+    .then(() => {
+      dispatch(paymentStatus(true));
+      dispatch(enqueueSnackbar({
+        message: 'Payment success',
+        options: {
+          variant: 'success',
+        },
+      }));
+    })
     .catch(err => console.log(err)));
 }
 
@@ -53,22 +61,24 @@ export function authoriseUser(userInfo) {
     axios.post(url, userInfo)
       .then((response) => {
         dispatch(loginUserInSystem(true, response.data.id, response.data.token));
-        dispatch(enqueueSnackbar({
-          message: 'Authorization success',
+
+        if (!userInfo.firstName) {
+          return dispatch(enqueueSnackbar({
+            message: 'Authorization success',
+            options: {
+              variant: 'success',
+            },
+          }));
+        }
+
+        return dispatch(enqueueSnackbar({
+          message: 'Registration success',
           options: {
             variant: 'success',
           },
         }));
       })
-      .catch(() => {
-        dispatch(logInUser(false));
-        dispatch(enqueueSnackbar({
-          message: 'Authorization failed',
-          options: {
-            variant: 'error',
-          },
-        }));
-      });
+      .catch(() => dispatch(logInUser(false)));
   };
 }
 

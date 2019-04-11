@@ -24,6 +24,8 @@ class Login extends React.Component {
 
   componentDidUpdate = () => this.props.loggedInUser && this.props.history.goBack();
 
+  componentDidMount= () => this.props.loggedInUser && this.props.history.goBack();
+
   handleChange = name => (event) => {
     this.setState({ [name]: event.target.value });
   };
@@ -34,6 +36,7 @@ class Login extends React.Component {
 
   render() {
     const { classes } = this.props;
+
     return (
       <Form
         onSubmit={this.onSubmit}
