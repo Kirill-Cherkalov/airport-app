@@ -7,6 +7,7 @@ import { setSelectedPassenger, setPassengersInfo } from '../../redux/user/select
 import { setReturnFlightSelectedPassenger, setReturnFlightPassengersInfo } from '../../redux/user/returnSelectedFlight/actions';
 import PassengersSeatsTable from './passengers-seats-table';
 import Plane from './plane';
+import HorizontalStepper from '../stepper';
 import './index.scss';
 
 class SeatsChoice extends React.Component {
@@ -51,47 +52,50 @@ class SeatsChoice extends React.Component {
     } = this.props;
 
     return (
-      <div className="seats-choice-wrapper">
-        <div className="seats-choice-container">
-          <div className={`flight-seats${this.state.currentFlightId === selectedFlight.id ? '' : ' closed-block'}`}>
-            <PassengersSeatsTable
-              flight={selectedFlight}
-              passengersInfo={selectedFlight.passengersInfo}
-              setSelectedPassenger={setSelectedPassenger}
-              selectedPassenger={selectedFlight.selectedPassenger}
-            />
-            <Plane
-              setInfo={setPassengersInfo}
-              rows={selectedFlight.planeInfo.rows}
-              location={selectedFlight.planeInfo.location}
-              passengersInfo={selectedFlight.passengersInfo}
-              selectedPassenger={selectedFlight.selectedPassenger}
-              soldSeats={selectedFlight.soldSeats}
-            />
-          </div>
-
-          {returnSelectedFlight.id && (
-            <div className={`flight-seats${this.state.currentFlightId === returnSelectedFlight.id ? '' : ' closed-block'}`}>
+      <>
+        <HorizontalStepper activeStep={1} />
+        <div className="seats-choice-wrapper">
+          <div className="seats-choice-container">
+            <div className={`flight-seats${this.state.currentFlightId === selectedFlight.id ? '' : ' closed-block'}`}>
               <PassengersSeatsTable
-                flight={returnSelectedFlight}
-                passengersInfo={returnSelectedFlight.passengersInfo}
-                setSelectedPassenger={setReturnFlightSelectedPassenger}
-                selectedPassenger={returnSelectedFlight.selectedPassenger}
+                flight={selectedFlight}
+                passengersInfo={selectedFlight.passengersInfo}
+                setSelectedPassenger={setSelectedPassenger}
+                selectedPassenger={selectedFlight.selectedPassenger}
               />
               <Plane
-                setInfo={setReturnFlightPassengersInfo}
-                rows={returnSelectedFlight.planeInfo.rows}
-                location={returnSelectedFlight.planeInfo.location}
-                passengersInfo={returnSelectedFlight.passengersInfo}
-                selectedPassenger={returnSelectedFlight.selectedPassenger}
-                soldSeats={returnSelectedFlight.soldSeats}
+                setInfo={setPassengersInfo}
+                rows={selectedFlight.planeInfo.rows}
+                location={selectedFlight.planeInfo.location}
+                passengersInfo={selectedFlight.passengersInfo}
+                selectedPassenger={selectedFlight.selectedPassenger}
+                soldSeats={selectedFlight.soldSeats}
               />
             </div>
-          )}
 
+            {returnSelectedFlight.id && (
+              <div className={`flight-seats${this.state.currentFlightId === returnSelectedFlight.id ? '' : ' closed-block'}`}>
+                <PassengersSeatsTable
+                  flight={returnSelectedFlight}
+                  passengersInfo={returnSelectedFlight.passengersInfo}
+                  setSelectedPassenger={setReturnFlightSelectedPassenger}
+                  selectedPassenger={returnSelectedFlight.selectedPassenger}
+                />
+                <Plane
+                  setInfo={setReturnFlightPassengersInfo}
+                  rows={returnSelectedFlight.planeInfo.rows}
+                  location={returnSelectedFlight.planeInfo.location}
+                  passengersInfo={returnSelectedFlight.passengersInfo}
+                  selectedPassenger={returnSelectedFlight.selectedPassenger}
+                  soldSeats={returnSelectedFlight.soldSeats}
+                />
+              </div>
+            )}
+
+          </div>
+          <button type="button" className="button" onClick={this.goToNextPage}>Continue</button>
         </div>
-        <button type="button" className="button" onClick={this.goToNextPage}>Continue</button>
-      </div>
+      </>
     );
   }
 }
