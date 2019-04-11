@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
+// import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withSnackbar } from 'notistack';
 import { removeSnackbar } from '../../redux/notifier/actions';
 
 class Notifier extends Component {
   static propTypes = {
-    notifications: PropTypes.object.isRequired,
+    notifications: PropTypes.array.isRequired,
     enqueueSnackbar: PropTypes.func.isRequired,
-    removeSnackbar: PropTypes.func.isRequired,
+    removeSB: PropTypes.func.isRequired,
   };
 
   displayed = [];
@@ -35,7 +35,7 @@ class Notifier extends Component {
       // Keep track of snackbars that we've displayed
       this.storeDisplayed(notification.key);
       // Dispatch action to remove snackbar from redux store
-      this.props.removeSnackbar(notification.key);
+      this.props.removeSB(notification.key);
     });
   }
 
@@ -49,10 +49,12 @@ class Notifier extends Component {
 }
 
 const mapStateToProps = state => ({
-  notifications: state.notifications,
+  notifications: state.notifications.notifications,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({ removeSnackbar }, dispatch);
+const mapDispatchToProps = dispatch => ({
+  removeSB: obj => dispatch(removeSnackbar(obj)),
+});
 
 export default connect(
   mapStateToProps,

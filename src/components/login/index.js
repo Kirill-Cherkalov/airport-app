@@ -4,11 +4,10 @@ import { Form, Field } from 'react-final-form';
 import { withRouter, Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
-import { compose, bindActionCreators } from 'redux';
+import { compose } from 'redux';
 import { FaUserCheck } from 'react-icons/fa';
 import { withSnackbar } from 'notistack';
 import { authoriseUser } from '../../redux/user/actions';
-// import { enqueueSnackbar } from '../../redux/notifier/actions';
 import styles from './material.style';
 import TextField from '../text-field';
 import validate from './validate';
@@ -21,8 +20,9 @@ class Login extends React.Component {
     history: PropTypes.object.isRequired,
     authoriseUser: PropTypes.func.isRequired,
     loggedInUser: PropTypes.bool.isRequired,
-    enqueueSnackbar: PropTypes.func.isRequired,
   };
+
+  componentDidUpdate = () => this.props.loggedInUser && this.props.history.goBack();
 
   handleChange = name => (event) => {
     this.setState({ [name]: event.target.value });
@@ -30,19 +30,6 @@ class Login extends React.Component {
 
   onSubmit = (values) => {
     this.props.authoriseUser(values);
-    if (!this.props.loggedInUser) {
-      return this.props.enqueueSnackbar('Authorization failed', { 
-        variant: 'error',
-      });
-    }
-
-    return this.props.history.goBack();
-  };
-
-  doSMTH = () => {
-    return this.props.enqueueSnackbar('Authorization failed', { 
-      variant: 'error',
-    });
   };
 
   render() {
@@ -78,8 +65,6 @@ class Login extends React.Component {
                 Login
               </button>
 
-              <button type="button" onClick={this.doSMTH}>button</button>
-
               <Link to="/register" className="login-form__register-link">Registration</Link>
             </div>
           </form>
@@ -95,7 +80,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   authoriseUser: userInfo => dispatch(authoriseUser(userInfo)),
-  // enqueueSnackbar: () => dispatch(enqueueSnackbar()),
 });
 
 export default compose(

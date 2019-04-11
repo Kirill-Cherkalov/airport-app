@@ -1,5 +1,6 @@
 import axios from 'axios';
 import actionTypes from './actionTypes';
+import { enqueueSnackbar } from '../notifier/actions';
 import urls from '../../urls';
 
 export function setUserRequestData(request) {
@@ -52,8 +53,22 @@ export function authoriseUser(userInfo) {
     axios.post(url, userInfo)
       .then((response) => {
         dispatch(loginUserInSystem(true, response.data.id, response.data.token));
+        dispatch(enqueueSnackbar({
+          message: 'Authorization success',
+          options: {
+            variant: 'success',
+          },
+        }));
       })
-      .catch(() => logInUser(false));
+      .catch(() => {
+        dispatch(logInUser(false));
+        dispatch(enqueueSnackbar({
+          message: 'Authorization failed',
+          options: {
+            variant: 'error',
+          },
+        }));
+      });
   };
 }
 
