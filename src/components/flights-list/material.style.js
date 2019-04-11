@@ -1,7 +1,7 @@
 const styles = {
   root: {
     flexGrow: 1,
-    zIndex: 1,
+    zIndex: 2,
     marginTop: 56,
   },
   container: {

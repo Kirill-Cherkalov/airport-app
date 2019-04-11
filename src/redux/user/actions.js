@@ -27,15 +27,7 @@ export function payForOrder(userOrder) {
 
       return response.data;
     })
-    .then(() => {
-      dispatch(paymentStatus(true));
-      dispatch(enqueueSnackbar({
-        message: 'Payment success',
-        options: {
-          variant: 'success',
-        },
-      }));
-    })
+    .then(() => dispatch(paymentStatus(true)))
     .catch(err => console.log(err)));
 }
 

@@ -14,7 +14,7 @@ function Menu(props) {
   Menu.propTypes = {
     className: PropTypes.any.isRequired,
     loggedInUser: PropTypes.bool.isRequired,
-    onClick: PropTypes.func.isRequired,
+    onClick: PropTypes.func,
     logInUser: PropTypes.func.isRequired,
     resetTicketsInfo: PropTypes.func.isRequired,
     resetSelectedFlightInfo: PropTypes.func.isRequired,

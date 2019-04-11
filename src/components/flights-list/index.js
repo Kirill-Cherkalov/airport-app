@@ -14,14 +14,13 @@ import styles from './material.style';
 import { setSelectedFlightInfo } from '../../redux/user/selectedFlight/actions';
 import { setReturnSelectedFlightInfo } from '../../redux/user/returnSelectedFlight/actions';
 import { enqueueSnackbar } from '../../redux/notifier/actions';
-import SearchForm from './search-form/search-form';
+import SearchForm from './search-form';
 import FlightsListItems from './flights-list-items';
 import './index.scss';
 
 class FlightsList extends React.Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
-    userRequest: PropTypes.object.isRequired,
     tickets: PropTypes.array.isRequired,
     returnTickets: PropTypes.array.isRequired,
     setSelectedFlightInfo: PropTypes.func.isRequired,
@@ -30,6 +29,7 @@ class FlightsList extends React.Component {
     returnSelectedFlight: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
     enqueueSnackBar: PropTypes.func.isRequired,
+    twoWayRequest: PropTypes.bool.isRequired,
   };
 
   constructor(props) {
@@ -44,10 +44,10 @@ class FlightsList extends React.Component {
   }
 
   goToNextPage = () => {
-    if (this.props.userRequest.twoWayRequest && this.props.selectedFlight.id && this.props.returnSelectedFlight.id) {
+    if (this.props.twoWayRequest && this.props.selectedFlight.id && this.props.returnSelectedFlight.id) {
       return this.props.history.push('/passengers-list');
     }
-    if (!this.props.userRequest.twoWayRequest && this.props.selectedFlight.id) {
+    if (!this.props.twoWayRequest && this.props.selectedFlight.id) {
       return this.props.history.push('/passengers-list');
     }
 
@@ -68,12 +68,12 @@ class FlightsList extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, tickets, returnTickets, twoWayRequest } = this.props;
     const {
-      from, to, adult, child, infant,
-    } = this.props.userRequest;
-    const departure = moment(this.props.userRequest.departure).format('MMMM DD');
-    const back = moment(this.props.userRequest.return).format('MMMM DD');
+      from, to, adult, child, infant, departure, back,
+    } = this.props;
+    const departureDate = moment(departure).format('MMMM DD');
+    const backDate = moment(back).format('MMMM DD');
 
     return (
       <div className="flights-container">
@@ -86,25 +86,22 @@ class FlightsList extends React.Component {
                     {from} to {to}
                   </Typography>
                   <Typography color="inherit">
-                    {departure}{back && ' - ' }{back && back}, {this.getPassAmount(adult, child, infant)}
+                    {departureDate}{backDate && ' - ' }{back && backDate}, {this.getPassAmount(adult, child, infant)}
                     <button className="change-button" type="button" onClick={this.openSearchForm}>
-                    Change
+                      Change
                     </button>
                   </Typography>
                 </div>
               </Toolbar>
             </AppBar>
 
-            {this.state.isOpen && <SearchForm />}
+            <SearchForm state={this.state.isOpen} onSearchClick={this.openSearchForm} />
           </div>
         )
           : <h1 className="flights-list__header">Please, try to search flights</h1>}
 
         <>
-          {this.props.tickets[0]
-            ? <h1 className="flights-list__header"><pre>{from} - {to}   |   {departure}</pre></h1>
-            : <h1 className="flights-list__header">No flights for this request</h1>
-          }
+          {tickets[0] && <h1 className="flights-list__header"><pre>{from} - {to}   |   {moment(departure).format('MMMM DD')}</pre></h1>}
           <List className="flights-list" disablePadding>
             <FlightsListItems
               classes={classes}
@@ -112,8 +109,7 @@ class FlightsList extends React.Component {
               setFlightInfo={this.props.setSelectedFlightInfo}
             />
           </List>
-
-          {this.props.userRequest.twoWayRequest && this.props.returnTickets[0] && <h1 className="flights-list__header"><pre>{to} - {from}   |   {back}</pre></h1>}
+          {twoWayRequest && returnTickets[0] && <h1 className="flights-list__header"><pre>{to} - {from}   |   {backDate}</pre></h1>}
           <List className="flights-list" disablePadding>
             <FlightsListItems
               classes={classes}
@@ -122,15 +118,21 @@ class FlightsList extends React.Component {
             />
           </List>
         </>
-
-        <button type="button" className="button" onClick={this.goToNextPage}>Continue</button>
+        {tickets[0] && <button type="button" className="button" onClick={this.goToNextPage}>Continue</button>}
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  userRequest: state.user.requestInfo.request,
+  twoWayRequest: state.user.requestInfo.request.twoWayRequest,
+  from: state.user.requestInfo.request.from,
+  to: state.user.requestInfo.request.to,
+  adult: state.user.requestInfo.request.adult,
+  child: state.user.requestInfo.request.child,
+  infant: state.user.requestInfo.request.infant,
+  departure: state.user.requestInfo.request.departure,
+  back: state.user.requestInfo.request.return,
   tickets: state.searchPage.tickets.departureItems,
   returnTickets: state.searchPage.tickets.returnItems,
   selectedFlight: state.user.selectedFlight,

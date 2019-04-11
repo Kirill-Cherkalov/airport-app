@@ -48,6 +48,8 @@ export function ticketsFetchData(userRequest) {
   ];
 
   return (dispatch) => {
+    dispatch(fetchDataSuccess([]));
+    dispatch(fetchReturnDataSuccess([]));
     dispatch(isLoading(true));
 
     urls.map(({ url, action }) => {
@@ -99,7 +101,7 @@ export function ticketsFetchData(userRequest) {
               }));
             }
 
-            dispatch(action(result));
+            return dispatch(action(result));
           })
           .catch(() => {
             dispatch(hasErrored(true));

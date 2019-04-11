@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import './index.scss';
 
-const Overlay = ({ isOpen, onClick }) => (
+export const Overlay = ({ isOpen, onClick }) => (
   <div
     role="presentation"
     className={`overlay${isOpen ? ' overlay_opened' : ''}`}
@@ -12,7 +12,7 @@ const Overlay = ({ isOpen, onClick }) => (
 
 Overlay.propTypes = {
   isOpen: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
 };
 
 const Sidebar = ({ isOpen, hideSidebar, children }) => (
@@ -25,7 +25,7 @@ const Sidebar = ({ isOpen, hideSidebar, children }) => (
 );
 
 Sidebar.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
+  isOpen: PropTypes.bool,
   hideSidebar: PropTypes.func.isRequired,
   children: PropTypes.element.isRequired,
 };

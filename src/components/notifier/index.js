@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-// import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withSnackbar } from 'notistack';
 import { removeSnackbar } from '../../redux/notifier/actions';
 
-class Notifier extends Component {
+class Notifier extends React.Component {
   static propTypes = {
     notifications: PropTypes.array.isRequired,
     enqueueSnackbar: PropTypes.func.isRequired,
@@ -28,13 +27,9 @@ class Notifier extends Component {
     const { notifications = [] } = this.props;
 
     notifications.forEach((notification) => {
-      // Do nothing if snackbar is already displayed
       if (this.displayed.includes(notification.key)) return;
-      // Display snackbar using notistack
       this.props.enqueueSnackbar(notification.message, notification.options);
-      // Keep track of snackbars that we've displayed
       this.storeDisplayed(notification.key);
-      // Dispatch action to remove snackbar from redux store
       this.props.removeSB(notification.key);
     });
   }
