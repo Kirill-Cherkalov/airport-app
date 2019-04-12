@@ -69,7 +69,7 @@ function OrderDetails({
                     </div>
 
                     <div className="about-price">
-                      <span className="about-price__text">Luggage - {passenger.luggageKg} kg</span>
+                      <span className="about-price__text">Luggage {passenger.luggageKg === 0 ? '' : ` - ${passenger.luggageKg} kg`}</span>
                       <span className="about-price__amount">$ {passenger.luggagePrice}</span>
                     </div>
 

@@ -1,0 +1,56 @@
+[
+  {
+      "_id": "5c934c176b7e485db87d5e71",
+      "code": "ABA",
+      "name": "Abakan",
+      "__v": 0
+  },
+  {
+      "_id": "5c934c1b6b7e485db87d5e72",
+      "code": "AAA",
+      "name": "Anaa Airport",
+      "__v": 0
+  },
+  {
+      "_id": "5c934c216b7e485db87d5e73",
+      "code": "AAE",
+      "name": "El Mellah Airport",
+      "__v": 0
+  },
+  {
+      "_id": "5c934c276b7e485db87d5e74",
+      "code": "AAL",
+      "name": "Aalborg Airport",
+      "__v": 0
+  },
+  {
+      "_id": "5c934c2d6b7e485db87d5e75",
+      "code": "AAM",
+      "name": "Mala Mala",
+      "__v": 0
+  },
+  {
+      "_id": "5c934c336b7e485db87d5e76",
+      "code": "AAQ",
+      "name": "Olkhovka Airport",
+      "__v": 0
+  },
+  {
+      "_id": "5c934c396b7e485db87d5e77",
+      "code": "AAT",
+      "name": "Altay Airport",
+      "__v": 0
+  },
+  {
+      "_id": "5c934c4d6b7e485db87d5e78",
+      "code": "ACX",
+      "name": "Xingyi",
+      "__v": 0
+  },
+  {
+      "_id": "5c9374bc4285983de0392915",
+      "code": "ABC",
+      "name": "Los Llanos",
+      "__v": 0
+  }
+]

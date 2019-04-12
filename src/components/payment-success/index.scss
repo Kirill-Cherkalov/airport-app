@@ -1,5 +1,11 @@
 @import 'src/variables.scss';
 
+.buttons-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 250px;
+}
+
 .tickets {
   display: flex;
   justify-content: center;
@@ -12,6 +18,10 @@
   display: flex;
   justify-content: space-between;
   width: 70%;
+}
+
+.one-way {
+  width: 45%;
 }
 
 .ticket {
@@ -129,5 +139,24 @@
   }
   .ticket {
     margin-right: 0;
+  }
+}
+
+@media print {
+  .stepper-wrapper, .header, .buttons-wrapper {
+    display: none;
+  }
+  .tickets {
+    margin-top: 50px;
+
+  }
+  .tickets-wrapper {
+    flex-direction: column;
+    width: 100%;
+  }
+  .ticket {
+    
+    box-shadow: none;
+    border: 1px solid black;
   }
 }

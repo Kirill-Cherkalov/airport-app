@@ -1,4 +1,5 @@
 import actionTypes from '../actionTypes';
+// import { setUserRequestData, setRequestType } from '../../user/actions';
 import { setUserRequestData } from '../../user/actions';
 import { enqueueSnackbar } from '../../notifier/actions';
 
@@ -52,7 +53,7 @@ export function ticketsFetchData(userRequest) {
     dispatch(fetchReturnDataSuccess([]));
     dispatch(isLoading(true));
 
-    urls.map(({ url, action }) => {
+    urls.forEach(({ url, action }) => {
       if (url) {
         fetch(url)
           .then((response) => {

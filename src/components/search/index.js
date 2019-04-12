@@ -26,14 +26,24 @@ class Search extends React.Component {
     ticketsFetchData: PropTypes.func.isRequired,
     airportsFetchData: PropTypes.func.isRequired,
     tickets: PropTypes.array.isRequired,
+    returnTickets: PropTypes.array.isRequired,
     history: PropTypes.object.isRequired,
+    userRequest: PropTypes.object.isRequired,
   };
 
   componentDidMount() {
     return this.props.airports.length || this.props.airportsFetchData('http://localhost:3001/airports');
   }
 
-  componentDidUpdate = () => this.props.tickets.length && this.props.history.push('/flights-list');
+  componentDidUpdate = () => {
+    const { twoWayRequest } = this.props.userRequest;
+    return twoWayRequest
+      ? this.props.tickets.length && this.props.returnTickets.length && this.props.history.push('/flights-list')
+      : this.props.tickets.length && this.props.history.push('/flights-list');
+
+    // }
+    // this.props.tickets.length &&this.props.history.push('/flights-list');
+  };
 
   onSubmit = values => this.props.ticketsFetchData(values);
 
@@ -86,12 +96,12 @@ class Search extends React.Component {
               <div className="passengers-counters">
                 <Field
                   name="adult"
-                  label="Adult"
-                  className={classes.passengers}
+                  label="Passengers"
+                  className={classes.textField}
                   component={TextField}
                   variant="outlined"
                 />
-                <Field
+                {/* <Field
                   name="child"
                   label="Child"
                   className={classes.passengers}
@@ -104,7 +114,7 @@ class Search extends React.Component {
                   className={classes.passengers}
                   component={TextField}
                   variant="outlined"
-                />
+                /> */}
               </div>
 
               <Button variant="contained" color="primary" className={classes.button} type="submit">
@@ -119,8 +129,9 @@ class Search extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  userRequest: state.user.request,
+  userRequest: state.user.requestInfo.request,
   tickets: state.searchPage.tickets.departureItems,
+  returnTickets: state.searchPage.tickets.returnItems,
   ticketsHasErrored: state.searchPage.tickets.hasErrored,
   ticketsIsLoading: state.searchPage.tickets.isLoading,
   airports: state.searchPage.airports.items,

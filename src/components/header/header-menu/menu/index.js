@@ -72,6 +72,22 @@ function Menu(props) {
       );
     }
 
+    if (props.loggedInUser) {
+      return (
+        <>
+          <Link
+            to="/orders-history"
+            className="link-to"
+            onClick={props.onClick}
+          >
+            My orders
+          </Link>
+          <LoginMenu logOut={logOut} />
+        </>
+      );
+    }
+
+
     return <LoginMenu logOut={logOut} />;
   };
 

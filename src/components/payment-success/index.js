@@ -48,39 +48,47 @@ function PaymentSuccess({
 
   return (
     <>
-      <HorizontalStepper activeStep={5} />
+      <div className="stepper-wrapper">
+        <HorizontalStepper activeStep={5} />
+      </div>
       <section className="tickets">
-        <div className="tickets-wrapper">
-          {flights.map(({
-            id, date, fromCountry, toCountry, startTime, endTime, passengersInfo,
-          }) => (
-            <section key={id} className="ticket">
-              <div className="ticket__header">Flight ticket</div>
-              <div className="ticket__departure-info">
-                <h1 className="ticket__destination">{fromCountry} - {toCountry}</h1>
-                <span className="ticket__time">{startTime} - {endTime} , {moment(date).format('MMM Do, YYYY')}</span>
-              </div>
-              <div className="passengers-info">
-                <div className="passengers-info__header">
-                  <span>passenger name</span>
-                  <span>seat</span>
+        {/* <div className="tickets-wrapper"> */}
+        {/* <div className="" */}
+          <div className={`tickets-wrapper ${twoWayRequest ? '' : 'one-way'}`}>
+            {flights.map(({
+              id, date, fromCountry, toCountry, startTime, endTime, passengersInfo,
+            }) => (
+              <section key={id} className="ticket">
+                <div className="ticket__header">Flight ticket</div>
+                <div className="ticket__departure-info">
+                  <h1 className="ticket__destination">{fromCountry} - {toCountry}</h1>
+                  <span className="ticket__time">{startTime} - {endTime} , {moment(date).format('MMM Do, YYYY')}</span>
                 </div>
-                {passengersInfo.map(({ firstname, lastname, selectedSeat }) => (
-                  <div className="passengers-info__details">
-                    <span className="passengers-info__name">{firstname} {lastname}</span>
-                    <span className="passengers-info__seat">{selectedSeat}</span>
+                <div className="passengers-info">
+                  <div className="passengers-info__header">
+                    <span>passenger name</span>
+                    <span>seat</span>
                   </div>
-                ))}
-              </div>
-              <div className="ticket__footer">
-                <div className="ticket__barcode" />
-                <button type="button" className="ticket__print-button">PRINT TICKET</button>
-              </div>
-            </section>
-          ))}
-        </div>
-
-        <button type="button" className="button" onClick={goToStartPage}>to start</button>
+                  {passengersInfo.map(({ firstname, lastname, selectedSeat }) => (
+                    <div key={selectedSeat} className="passengers-info__details">
+                      <span className="passengers-info__name">{firstname} {lastname}</span>
+                      <span className="passengers-info__seat">{selectedSeat}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="ticket__footer">
+                  <div className="ticket__barcode" />
+                  {/* <img src="/assets/barcode.png" className="ticket__barcode" alt="code" /> */}
+                  {/* <button type="button" className="ticket__print-button" onClick={() => window.print()}>PRINT TICKET</button> */}
+                </div>
+              </section>
+            ))}
+          </div>
+          <div className="buttons-wrapper">
+            <button type="button" className="button" onClick={goToStartPage}>to start</button>
+            <button type="button" className="button" onClick={() => window.print()}>PRINT TICKET</button>
+          </div>
+        
       </section>
     </>
   );

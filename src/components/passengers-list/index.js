@@ -39,7 +39,7 @@ class PassengersList extends Component {
     }
 
     const { history } = this.props;
-    passengersArray.map(passenger => this.props.luggageTypes.filter((type) => {
+    passengersArray.map(passenger => this.props.luggageTypes.forEach((type) => {
       if (type.price === +passenger.luggagePrice) {
         passenger.luggagePrice = type.price;
         passenger.luggageKg = type.kg;

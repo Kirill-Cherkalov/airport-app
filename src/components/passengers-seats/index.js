@@ -5,6 +5,7 @@ import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { setSelectedPassenger, setPassengersInfo } from '../../redux/user/selectedFlight/actions';
 import { setReturnFlightSelectedPassenger, setReturnFlightPassengersInfo } from '../../redux/user/returnSelectedFlight/actions';
+import { enqueueSnackbar } from '../../redux/notifier/actions';
 import PassengersSeatsTable from './passengers-seats-table';
 import Plane from './plane';
 import HorizontalStepper from '../stepper';
@@ -29,6 +30,12 @@ class SeatsChoice extends React.Component {
   goToNextPage = () => {
     if (this.state.currentFlightId === this.props.selectedFlight.id) {
       const allSeatAreSelected = this.props.selectedFlight.passengersInfo.some(({ selectedSeat }) => selectedSeat === undefined);
+      // this.props.enqueueSnackBar({
+      //   message: 'Select seats',
+      //   options: {
+      //     variant: 'warning',
+      //   },
+      // });
 
       if (!allSeatAreSelected) {
         return this.props.twoWayRequest
@@ -111,6 +118,7 @@ const mapDispatchToProps = dispatch => ({
   setPassengersInfo: info => dispatch(setPassengersInfo(info)),
   setReturnFlightSelectedPassenger: id => dispatch(setReturnFlightSelectedPassenger(id)),
   setReturnFlightPassengersInfo: info => dispatch(setReturnFlightPassengersInfo(info)),
+  enqueueSnackBar: obj => dispatch(enqueueSnackbar(obj)),
 });
 
 export default compose(
