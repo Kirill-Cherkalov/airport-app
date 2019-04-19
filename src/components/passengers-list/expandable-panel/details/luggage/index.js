@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Field } from 'react-final-form';
-import { FaSuitcase } from 'react-icons/fa';
 import fetchLuggageTypes from '../../../../../redux/data/luggage-types/actions';
 import './index.scss';
 

@@ -56,7 +56,10 @@ export function authoriseUser(userInfo) {
       .then((response) => {
         dispatch(loginUserInSystem(true, response.data.id, response.data.token));
       })
-      .catch(() => logInUser(false));
+      .catch((err) => {
+        console.log(err);
+        logInUser(false);
+      });
   };
 }
 
