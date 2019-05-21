@@ -1,7 +1,9 @@
 import actionTypes from './actionTypes';
 
 const initialState = {
-  request: {},
+  request: {
+    twoWayRequest: false
+  },
   loggedInUser: false,
   paymentSuccess: false,
 };

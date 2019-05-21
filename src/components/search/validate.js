@@ -5,6 +5,7 @@ const validate = (values) => {
   const departureDate = moment(values.departure).format('L');
   const returnDate = values.return !== undefined ? moment(values.return).format('L') : null;
   const today = moment(new Date()).format('L');
+  const waytype = values.wayType || [];
 
   if (!values.from) {
     errors.from = 'Required';
@@ -22,8 +23,12 @@ const validate = (values) => {
     errors.departure = 'Please, choose another day';
   }
 
-  if (returnDate <= departureDate) {
-    errors.return = 'Please, choose another day';
+  if (waytype.length) {
+    if (!values.return) {
+      errors.return = 'Required';
+    } else if (returnDate <= departureDate) {
+      errors.return = 'Please, choose another day';
+    }
   }
 
   if ((!values.adult || values.adult === '0') && (!values.child || values.child === '0') && (!values.infant || values.infant === '0')) {

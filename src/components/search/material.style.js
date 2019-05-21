@@ -1,5 +1,6 @@
 const styles = theme => ({
   textField: {
+    // display: 'block',
     marginBottom: theme.spacing.unit,
     backgroundColor: theme.palette.common.white,
     width: 240,
@@ -12,6 +13,9 @@ const styles = theme => ({
     [theme.breakpoints.up('lg')]: {
       width: 270,
     },
+  },
+  hiddenTextField: {
+    display: 'none',
   },
 
   selectField: {

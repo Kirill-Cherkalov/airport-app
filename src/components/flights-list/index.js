@@ -16,13 +16,15 @@ import { setReturnSelectedFlightInfo } from '../../redux/user/returnSelectedFlig
 import { enqueueSnackbar } from '../../redux/notifier/actions';
 import SearchForm from './search-form';
 import FlightsListItems from './flights-list-items';
+import TicketsList from './tickets-table';
 import './index.scss';
 
 class FlightsList extends React.Component {
   static propTypes = {
     classes: PropTypes.object.isRequired,
-    tickets: PropTypes.array.isRequired,
-    returnTickets: PropTypes.array.isRequired,
+    // tickets: PropTypes.array.isRequired,
+    // returnTickets: PropTypes.array.isRequired,
+    request: PropTypes.object.isRequired,
     setSelectedFlightInfo: PropTypes.func.isRequired,
     setReturnSelectedFlightInfo: PropTypes.func.isRequired,
     selectedFlight: PropTypes.object.isRequired,
@@ -68,16 +70,19 @@ class FlightsList extends React.Component {
   }
 
   render() {
-    const { classes, tickets, returnTickets, twoWayRequest } = this.props;
+    const { classes, twoWayRequest, request } = this.props;
     const {
-      from, to, adult, child, infant, departure, back,
-    } = this.props;
+      from, to, adult, child, infant, departure, return: back,
+    } = request;
     const departureDate = moment(departure).format('MMMM DD');
     const backDate = moment(back).format('MMMM DD');
 
+    const tickets = JSON.parse(localStorage.getItem('departureItems'));
+    const returnTickets = JSON.parse(localStorage.getItem('returnItems'));
+
     return (
       <div className="flights-container">
-        {from ? (
+        {/* {from ? ( */}
           <div className="flights-list__bar">
             <AppBar className={classes.root} position="fixed" color="default">
               <Toolbar>
@@ -97,7 +102,11 @@ class FlightsList extends React.Component {
 
             <SearchForm state={this.state.isOpen} onSearchClick={this.openSearchForm} />
           </div>
-        )
+
+        <TicketsList tickets={tickets} />
+        {returnTickets && <TicketsList tickets={returnTickets} />}
+
+        {/* )
           : <h1 className="flights-list__header">Please, try to search flights</h1>}
 
         <>
@@ -118,7 +127,7 @@ class FlightsList extends React.Component {
             />
           </List>
         </>
-        {tickets[0] && <button type="button" className="button" onClick={this.goToNextPage}>Continue</button>}
+        {tickets[0] && <button type="button" className="button" onClick={this.goToNextPage}>Continue</button>} */}
       </div>
     );
   }
@@ -126,15 +135,9 @@ class FlightsList extends React.Component {
 
 const mapStateToProps = state => ({
   twoWayRequest: state.user.requestInfo.request.twoWayRequest,
-  from: state.user.requestInfo.request.from,
-  to: state.user.requestInfo.request.to,
-  adult: state.user.requestInfo.request.adult,
-  child: state.user.requestInfo.request.child,
-  infant: state.user.requestInfo.request.infant,
-  departure: state.user.requestInfo.request.departure,
-  back: state.user.requestInfo.request.return,
-  tickets: state.searchPage.tickets.departureItems,
-  returnTickets: state.searchPage.tickets.returnItems,
+  request: state.user.requestInfo.request,
+  // tickets: state.searchPage.tickets.departureItems,
+  // returnTickets: state.searchPage.tickets.returnItems,
   selectedFlight: state.user.selectedFlight,
   returnSelectedFlight: state.user.returnSelectedFlight,
 });

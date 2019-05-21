@@ -33,18 +33,20 @@ export function fetchReturnDataSuccess(items) {
 
 export function ticketsFetchData(userRequest) {
   const {
-    from, to, departure, return: back,
+    from, to, wayType,
   } = userRequest;
-  const departureUrl = `http://localhost:3001/tickets?fromCountry=${from}&toCountry=${to}&date=${departure}`;
-  const backUrl = back ? `http://localhost:3001/tickets?fromCountry=${to}&toCountry=${from}&date=${back}` : null;
+  const departureUrl = `http://localhost:3001/tickets?fromCountry=${from}&toCountry=${to}`;
+  const backUrl = wayType ? `http://localhost:3001/tickets?fromCountry=${to}&toCountry=${from}` : null;
   const urls = [
     {
       url: departureUrl,
       action: fetchDataSuccess,
+      name: 'departureItems',
     },
     {
       url: backUrl,
       action: fetchReturnDataSuccess,
+      name: 'returnItems',
     },
   ];
 
@@ -53,7 +55,7 @@ export function ticketsFetchData(userRequest) {
     dispatch(fetchReturnDataSuccess([]));
     dispatch(isLoading(true));
 
-    urls.forEach(({ url, action }) => {
+    urls.forEach(({ url, action, name }) => {
       if (url) {
         fetch(url)
           .then((response) => {
@@ -72,7 +74,7 @@ export function ticketsFetchData(userRequest) {
                 _id, date, startTime, endTime, price, planeInfo, fromCountry: { name: fromCountry }, toCountry: { name: toCountry },
               } = ticket;
 
-              const twoWayRequest = !!(userRequest.departure && userRequest.return);
+              const twoWayRequest = !!(wayType);
               const editedUserRequest = {
                 ...userRequest,
                 twoWayRequest,
@@ -81,17 +83,20 @@ export function ticketsFetchData(userRequest) {
               };
               dispatch(setUserRequestData(editedUserRequest));
 
-              return {
-                id: _id,
-                date,
-                startTime,
-                endTime,
-                fromCountry,
-                toCountry,
-                price,
-                planeInfo,
-              };
+              return ticket;
+              // return {
+              //   id: _id,
+              //   date,
+              //   startTime,
+              //   endTime,
+              //   fromCountry,
+              //   toCountry,
+              //   price,
+              //   planeInfo,
+              // };
             });
+
+            localStorage.setItem(`${name}`, JSON.stringify(result));
 
             if (!result.length) {
               dispatch(enqueueSnackbar({

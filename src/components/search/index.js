@@ -3,7 +3,7 @@ import { withRouter } from 'react-router';
 import { Form, Field } from 'react-final-form';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -31,6 +31,10 @@ class Search extends React.Component {
     userRequest: PropTypes.object.isRequired,
   };
 
+  state = {
+    oneWayType: true,
+  };
+
   componentDidMount() {
     return this.props.airports.length || this.props.airportsFetchData('http://localhost:3001/airports');
   }
@@ -40,12 +44,15 @@ class Search extends React.Component {
     return twoWayRequest
       ? this.props.tickets.length && this.props.returnTickets.length && this.props.history.push('/flights-list')
       : this.props.tickets.length && this.props.history.push('/flights-list');
+  }
 
-    // }
-    // this.props.tickets.length &&this.props.history.push('/flights-list');
+  onSubmit = async (values) => {
+    const { history } = this.props;
+    this.props.ticketsFetchData(values);
+    return this.props.tickets && history.push('/flights-list');
   };
 
-  onSubmit = values => this.props.ticketsFetchData(values);
+  setWayType = () => this.setState(state => ({ oneWayType: !state.oneWayType }));
 
   render() {
     const { classes } = this.props;
@@ -83,11 +90,23 @@ class Search extends React.Component {
                 />
               </MuiPickersUtilsProvider>
 
+              <Field
+                name="wayType"
+                className="way-type"
+                component="input"
+                type="checkbox"
+                variant="outlined"
+                value="2"
+                onClick={this.setWayType}
+              />
+
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <Field
                   name="return"
                   label="Return"
-                  className={classes.textField}
+                  className={classNames(classes.textField, {
+                    [classes.hiddenTextField]: this.state.oneWayType,
+                  })}
                   component={DatePicker}
                   variant="outlined"
                 />
@@ -139,7 +158,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  ticketsFetchData: (url, values) => dispatch(ticketsFetchData(url, values)),
+  ticketsFetchData: request => dispatch(ticketsFetchData(request)),
   airportsFetchData: url => dispatch(airportsFetchData(url)),
 });
 
