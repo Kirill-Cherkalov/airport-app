@@ -1,4 +1,4 @@
-import actionTypes from '../actionTypes';
+ import actionTypes from '../actionTypes';
 // import { setUserRequestData, setRequestType } from '../../user/actions';
 import { setUserRequestData } from '../../user/actions';
 import { enqueueSnackbar } from '../../notifier/actions';
@@ -33,20 +33,23 @@ export function fetchReturnDataSuccess(items) {
 
 export function ticketsFetchData(userRequest) {
   const {
-    from, to, wayType,
+    from, to, departure, return: back,
   } = userRequest;
+  const wayType = userRequest.wayType || [];
   const departureUrl = `http://localhost:3001/tickets?fromCountry=${from}&toCountry=${to}`;
-  const backUrl = wayType ? `http://localhost:3001/tickets?fromCountry=${to}&toCountry=${from}` : null;
+  const backUrl = wayType.length ? `http://localhost:3001/tickets?fromCountry=${to}&toCountry=${from}` : null;
   const urls = [
     {
       url: departureUrl,
       action: fetchDataSuccess,
       name: 'departureItems',
+      date: departure,
     },
     {
       url: backUrl,
       action: fetchReturnDataSuccess,
       name: 'returnItems',
+      date: back,
     },
   ];
 
@@ -55,7 +58,7 @@ export function ticketsFetchData(userRequest) {
     dispatch(fetchReturnDataSuccess([]));
     dispatch(isLoading(true));
 
-    urls.forEach(({ url, action, name }) => {
+    urls.forEach(({ url, action, name, date }) => {
       if (url) {
         fetch(url)
           .then((response) => {
@@ -69,12 +72,13 @@ export function ticketsFetchData(userRequest) {
           })
           .then(response => response.json())
           .then((tickets) => {
+            const requestDate = new Date(date);
             const result = tickets.map((ticket) => {
               const {
-                _id, date, startTime, endTime, price, planeInfo, fromCountry: { name: fromCountry }, toCountry: { name: toCountry },
+                _id, code, price, planeInfo, fromCountry: { name: fromCountry }, toCountry: { name: toCountry },
               } = ticket;
-
-              const twoWayRequest = !!(wayType);
+  
+              const twoWayRequest = !!(wayType.length);
               const editedUserRequest = {
                 ...userRequest,
                 twoWayRequest,
@@ -82,19 +86,30 @@ export function ticketsFetchData(userRequest) {
                 to: backUrl ? fromCountry : toCountry,
               };
               dispatch(setUserRequestData(editedUserRequest));
+              const startDate = new Date(ticket.flightPeriod.departureDate);
+              const endDate = new Date(ticket.flightPeriod.arrivalDate);
+              if (startDate <= requestDate && requestDate <= endDate) {
+                const reqDay = requestDate.getDay();
 
-              return ticket;
-              // return {
-              //   id: _id,
-              //   date,
-              //   startTime,
-              //   endTime,
-              //   fromCountry,
-              //   toCountry,
-              //   price,
-              //   planeInfo,
-              // };
+                if (ticket.schedule.some(({ day }) => day === reqDay)) {
+                  const flightSch = ticket.schedule.filter(({ day }) => day === reqDay);
+
+                  return {
+                    id: _id,
+                    code,
+                    date: requestDate,
+                    startTime: flightSch[0].departureTime,
+                    endTime: flightSch[0].arrivalTime,
+                    fromCountry,
+                    toCountry,
+                    price,
+                    planeInfo,
+                  };
+                }
+              }
             });
+
+            console.log(result);
 
             localStorage.setItem(`${name}`, JSON.stringify(result));
 

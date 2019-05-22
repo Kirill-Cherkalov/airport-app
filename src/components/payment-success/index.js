@@ -62,7 +62,7 @@ function PaymentSuccess({
                 <div className="ticket__header">Flight ticket</div>
                 <div className="ticket__departure-info">
                   <h1 className="ticket__destination">{fromCountry} - {toCountry}</h1>
-                  <span className="ticket__time">{startTime} - {endTime} , {moment(date).format('MMM Do, YYYY')}</span>
+                  <span className="ticket__time">{moment(startTime).format('LT')} - {moment(endTime).format('LT')} , {moment(date).format('MMM Do, YYYY')}</span>
                 </div>
                 <div className="passengers-info">
                   <div className="passengers-info__header">

@@ -23,7 +23,7 @@ class ListItem extends React.Component {
             <span className="list-item__destination">{order.fromCountry} - {order.toCountry}</span>
             <div className="list-item__departure">
               <span className="list-item__departure_date">{moment(order.departureDate).format('LL')}</span>
-              <span className="list-item__departure_time">{order.startTime} - {order.endTime}</span>
+              <span className="list-item__departure_time">{moment(order.startTime).format('LT')} - {moment(order.endTime).format('LT')}</span>
             </div>
           </div>
         </div>

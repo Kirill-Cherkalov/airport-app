@@ -58,6 +58,8 @@ class SeatsChoice extends React.Component {
       setReturnFlightPassengersInfo,
     } = this.props;
 
+    console.log(selectedFlight);
+
     return (
       <>
         <HorizontalStepper activeStep={1} />
@@ -72,8 +74,8 @@ class SeatsChoice extends React.Component {
               />
               <Plane
                 setInfo={setPassengersInfo}
-                rows={selectedFlight.planeInfo.rows}
-                location={selectedFlight.planeInfo.location}
+                rows={selectedFlight.planeInfo.rowsNumber}
+                location={selectedFlight.planeInfo.seatsInRow}
                 passengersInfo={selectedFlight.passengersInfo}
                 selectedPassenger={selectedFlight.selectedPassenger}
                 soldSeats={selectedFlight.soldSeats}
@@ -90,8 +92,8 @@ class SeatsChoice extends React.Component {
                 />
                 <Plane
                   setInfo={setReturnFlightPassengersInfo}
-                  rows={returnSelectedFlight.planeInfo.rows}
-                  location={returnSelectedFlight.planeInfo.location}
+                  rows={returnSelectedFlight.planeInfo.rowsNumber}
+                  location={returnSelectedFlight.planeInfo.seatsInRow}
                   passengersInfo={returnSelectedFlight.passengersInfo}
                   selectedPassenger={returnSelectedFlight.selectedPassenger}
                   soldSeats={returnSelectedFlight.soldSeats}

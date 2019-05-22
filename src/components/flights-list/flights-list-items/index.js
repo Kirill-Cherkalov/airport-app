@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import { connect } from 'react-redux';
 import { FaPlane } from 'react-icons/fa';
 import './index.scss';
@@ -12,7 +13,7 @@ function FlightsListItems({
 
   return (
     flights.map(({
-      id, date, startTime, endTime, fromCountry, toCountry, price, planeInfo,
+      id, date, startTime, endTime, fromCountry, toCountry, price, planeInfo, code,
     }, index) => (
       <div
         id={id}
@@ -22,12 +23,12 @@ function FlightsListItems({
         <div className="flights-list-item__info">
           <div className="info-wrapper">
             <div className="flight">
-              <span className="flight__time">{startTime}</span>
+              <span className="flight__time">{moment(startTime).format('LT')}</span>
               <span className="flight__country">{fromCountry}</span>
             </div>
             <FaPlane className="fa-arrow" />
             <div className="flight">
-              <span className="flight__time">{endTime}</span>
+              <span className="flight__time">{moment(endTime).format('LT')}</span>
               <span className="flight__country">{toCountry}</span>
             </div>
           </div>
@@ -37,7 +38,7 @@ function FlightsListItems({
             type="button"
             className="price-link"
             onClick={() => setInfo(price, {
-              id, date, fromCountry, toCountry, startTime, endTime, price, planeInfo,
+              id, date, fromCountry, toCountry, startTime, endTime, price, planeInfo, code,
             })}
           >
             $ {price}

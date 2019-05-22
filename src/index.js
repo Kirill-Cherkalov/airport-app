@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { SecureRoute } from 'react-route-guard';
 import { SnackbarProvider } from 'notistack';
+import { PersistGate } from 'redux-persist/integration/react';
 import configureStore from './redux/configureStore';
 
 import './reset.scss';
@@ -25,7 +26,8 @@ import UserRouteGuard from './auth-service';
 import NotFoundPage from './components/not-found';
 import Notifier from './components/notifier';
 
-const store = configureStore();
+// const store = configureStore();
+const { store, persistor } = configureStore();
 
 function App() {
   return (
@@ -56,9 +58,11 @@ function App() {
 
 ReactDOM.render(
   <Provider store={store}>
-    <SnackbarProvider>
-      <App />
-    </SnackbarProvider>
+    <PersistGate loading={null} persistor={persistor}>
+      <SnackbarProvider>
+        <App />
+      </SnackbarProvider>
+    </PersistGate>
   </Provider>,
   document.getElementById('root'),
 );

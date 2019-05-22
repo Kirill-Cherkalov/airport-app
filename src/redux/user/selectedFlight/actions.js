@@ -1,4 +1,5 @@
 import axios from 'axios';
+import moment from 'moment';
 import actionTypes from '../actionTypes';
 
 export function setFlightInfo(flightInfo) {
@@ -20,6 +21,7 @@ export function setSelectedFlightInfo(flightInfo) {
 
         return response.data;
       })
+      .then(orders => orders.filter(({ departureDate }) => moment(departureDate).format('L') === moment(flightInfo.date).format('L')))
       .then(orders => orders.map(({ passengersInfo }) => passengersInfo))
       .then((passengersInfo) => {
         const seats = [];

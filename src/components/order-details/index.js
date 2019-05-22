@@ -45,7 +45,7 @@ function OrderDetails({
                   <span className="flight-info__date">{moment(date).format('MMM Do')}</span>
                   <div className="flight-info__wrapper">
                     <span className="flight-info__direction">{fromCountry} - {toCountry}</span>
-                    <span className="flight-info__time">{startTime} - {endTime}</span>
+                    <span className="flight-info__time">{moment(startTime).format('LT')} - {moment(endTime).format('LT')}</span>
                   </div>
                 </div>
 
