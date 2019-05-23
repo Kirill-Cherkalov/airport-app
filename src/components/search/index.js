@@ -39,12 +39,14 @@ class Search extends React.Component {
     return this.props.airports.length || this.props.airportsFetchData('http://localhost:3001/airports');
   }
 
-  onSubmit = async (values) => {
-    this.props.ticketsFetchData(values);
-    return this.props.userRequest.twoWayRequest
-      ? this.props.tickets.length && this.props.history.push('/flights-list')
-      : this.props.tickets.length && this.props.returnTickets.length && this.props.history.push('/flights-list');
-  };
+  componentDidUpdate = () => {
+    const { twoWayRequest } = this.props.userRequest;
+    return twoWayRequest
+      ? this.props.tickets.length && this.props.returnTickets.length && this.props.history.push('/flights-list')
+      : this.props.tickets.length && this.props.history.push('/flights-list');
+  }
+
+  onSubmit = values => this.props.ticketsFetchData(values);
 
   setWayType = () => this.setState(state => ({ oneWayType: !state.oneWayType }));
 

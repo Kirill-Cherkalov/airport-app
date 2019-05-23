@@ -77,7 +77,7 @@ export function ticketsFetchData(userRequest) {
               const {
                 _id, code, price, planeInfo, fromCountry: { name: fromCountry }, toCountry: { name: toCountry },
               } = ticket;
-  
+
               const twoWayRequest = !!(wayType.length);
               const editedUserRequest = {
                 ...userRequest,
@@ -86,8 +86,8 @@ export function ticketsFetchData(userRequest) {
                 to: backUrl ? fromCountry : toCountry,
               };
               dispatch(setUserRequestData(editedUserRequest));
-              const startDate = new Date(ticket.flightPeriod.departureDate);
-              const endDate = new Date(ticket.flightPeriod.arrivalDate);
+              const startDate = new Date(ticket.flightPeriod.startDate);
+              const endDate = new Date(ticket.flightPeriod.endDate);
               if (startDate <= requestDate && requestDate <= endDate) {
                 const reqDay = requestDate.getDay();
 
@@ -109,20 +109,18 @@ export function ticketsFetchData(userRequest) {
               }
             });
 
-            console.log(result);
-
             localStorage.setItem(`${name}`, JSON.stringify(result));
 
-            if (!result.length) {
+            if (result[0] === undefined) {
               dispatch(enqueueSnackbar({
                 message: "Can't find flights for this request",
                 options: {
                   variant: 'error',
                 },
               }));
+            } else {
+              return dispatch(action(result));
             }
-
-            return dispatch(action(result));
           })
           .catch(() => {
             dispatch(hasErrored(true));
