@@ -5,7 +5,7 @@ const initialState = {
   getPaymentDataError: false,
 };
 
-export default function airports(state = initialState, action) {
+export default function payment(state = initialState, action) {
   switch (action.type) {
     case actionTypes.SET_PAYMENT_DATA:
       return {

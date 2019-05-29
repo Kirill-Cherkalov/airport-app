@@ -6,12 +6,14 @@ import thunk from 'redux-thunk';
 import searchPage from './search';
 import user from './user';
 import data from './data';
+import payment from './payment/reducers';
 import notifications from './notifier/reducers';
 
 const rootReducer = combineReducers({
   searchPage,
   user,
   data,
+  payment,
   notifications,
 });
 

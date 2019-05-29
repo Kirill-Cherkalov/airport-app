@@ -10,7 +10,7 @@ import { fetchPaymentData } from '../../redux/payment/actions';
 import './index.scss';
 
 function OrderDetails({
-  requestInfo, selectedFlight, returnSelectedFlight, history, fetchPaymentD,
+  requestInfo, selectedFlight, returnSelectedFlight, history, fetchPaymentD, paymentD,
 }) {
   OrderDetails.propTypes = {
     requestInfo: PropTypes.object.isRequired,
@@ -18,6 +18,7 @@ function OrderDetails({
     returnSelectedFlight: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
     fetchPaymentD: PropTypes.func.isRequired,
+    paymentD: PropTypes.string.isRequired,
   };
 
   const flights = requestInfo.twoWayRequest ? [selectedFlight, returnSelectedFlight] : [selectedFlight];
@@ -56,6 +57,7 @@ function OrderDetails({
     };
 
     fetchPaymentD(create_payment_json);
+    window.location = paymentD;
   };
 
   return (
@@ -131,6 +133,7 @@ const mapStateToProps = state => ({
   requestInfo: state.user.requestInfo.request,
   selectedFlight: state.user.selectedFlight,
   returnSelectedFlight: state.user.returnSelectedFlight,
+  paymentD: state.payment.paymentData,
 });
 
 const mapDispatchToProps = dispatch => ({
