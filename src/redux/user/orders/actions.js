@@ -17,10 +17,10 @@ export function getUserOrdersErrored(bool) {
 }
 
 export function fetchUserOrdersData(date, type) {
-  const userId = localStorage.getItem('id');
+  const user = localStorage.getItem('id');
 
   return (dispatch) => {
-    axios.get(`http://localhost:3001/order?userId=${userId}&date=${date}&type=${type}`)
+    axios.get(`http://localhost:3001/order?user=${user}&date=${date}&type=${type}`)
       .then((response) => {
         if (response.status !== 200) {
           throw Error(response.statusText);

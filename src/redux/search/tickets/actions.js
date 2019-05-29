@@ -32,6 +32,7 @@ export function fetchReturnDataSuccess(items) {
 }
 
 export function ticketsFetchData(userRequest) {
+  debugger;
   const {
     from, to, departure, return: back,
   } = userRequest;
@@ -60,6 +61,7 @@ export function ticketsFetchData(userRequest) {
 
     urls.forEach(({ url, action, name, date }) => {
       if (url) {
+        debugger;
         fetch(url)
           .then((response) => {
             if (!response.ok) {
@@ -89,10 +91,11 @@ export function ticketsFetchData(userRequest) {
               const startDate = new Date(ticket.flightPeriod.startDate);
               const endDate = new Date(ticket.flightPeriod.endDate);
               if (startDate <= requestDate && requestDate <= endDate) {
-                const reqDay = requestDate.getDay();
+                debugger;
+                const reqDay = requestDate.getDay() === 0 ? 7 : requestDate.getDay();
 
-                if (ticket.schedule.some(({ day }) => day === reqDay)) {
-                  const flightSch = ticket.schedule.filter(({ day }) => day === reqDay);
+                if (ticket.schedule.some(({ dayOfWeek }) => dayOfWeek === reqDay)) {
+                  const flightSch = ticket.schedule.filter(({ dayOfWeek }) => dayOfWeek === reqDay);
 
                   return {
                     id: _id,

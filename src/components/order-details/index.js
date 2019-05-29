@@ -6,16 +6,18 @@ import { FaCheck, FaRegUserCircle } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import HorizontalStepper from '../stepper';
+import { fetchPaymentData } from '../../redux/payment/actions';
 import './index.scss';
 
 function OrderDetails({
-  requestInfo, selectedFlight, returnSelectedFlight, history,
+  requestInfo, selectedFlight, returnSelectedFlight, history, fetchPaymentD,
 }) {
   OrderDetails.propTypes = {
     requestInfo: PropTypes.object.isRequired,
     selectedFlight: PropTypes.object.isRequired,
     returnSelectedFlight: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
+    fetchPaymentD: PropTypes.func.isRequired,
   };
 
   const flights = requestInfo.twoWayRequest ? [selectedFlight, returnSelectedFlight] : [selectedFlight];
@@ -24,7 +26,37 @@ function OrderDetails({
 
   const getTicketPrice = passengersInfo => passengersInfo.reduce((total, { luggagePrice: price }) => total + price, 0);
 
-  const goToPaymentPage = () => history.push('/payment');
+  const goToPaymentPage = () => {
+    // history.push('/payment');
+    const create_payment_json = {
+      intent: 'sale',
+      payer: {
+        payment_method: 'paypal',
+      },
+      redirect_urls: {
+        return_url: 'http://return.url',
+        cancel_url: 'http://cancel.url',
+      },
+      transactions: [{
+        item_list: {
+          items: [{
+            name: 'item',
+            sku: 'item',
+            price: '1.00',
+            currency: 'USD',
+            quantity: 1,
+          }],
+        },
+        amount: {
+          currency: 'USD',
+          total: '1.00',
+        },
+        description: 'This is the payment description.',
+      }],
+    };
+
+    fetchPaymentD(create_payment_json);
+  };
 
   return (
     <>
@@ -101,7 +133,11 @@ const mapStateToProps = state => ({
   returnSelectedFlight: state.user.returnSelectedFlight,
 });
 
+const mapDispatchToProps = dispatch => ({
+  fetchPaymentD: paymentObj => dispatch(fetchPaymentData(paymentObj)),
+});
+
 export default compose(
   withRouter,
-  connect(mapStateToProps),
+  connect(mapStateToProps, mapDispatchToProps),
 )(OrderDetails);

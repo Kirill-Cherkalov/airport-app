@@ -29,7 +29,7 @@ function Payment({
     const passengersAmount = adult + child + infant;
     const flights = userRequest.twoWayRequest ? [selectedFlight, returnSelectedFlight] : [selectedFlight];
     const orders = flights.map(flight => ({
-      userId: localStorage.getItem('id'),
+      user: localStorage.getItem('id'),
       fromCountry: flight.fromCountry,
       toCountry: flight.toCountry,
       departureDate: flight.date,
