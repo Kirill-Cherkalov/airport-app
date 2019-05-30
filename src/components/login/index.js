@@ -36,7 +36,7 @@ class Login extends React.Component {
       role: 'user',
     };
     this.props.authoriseUser(newValues);
-    this.props.history.goBack();
+    if (this.props.loggedInUser) this.props.history.goBack();
   };
 
   render() {

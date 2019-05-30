@@ -27,7 +27,7 @@ class Register extends React.Component {
     this.setState({ [name]: event.target.value });
   };
 
-  onSubmit = values => this.props.authoriseUser(values);
+  onSubmit = (values) => this.props.authoriseUser({ ...values, role: 'user' });
 
   render() {
     const { classes } = this.props;

@@ -71,7 +71,12 @@ export function authoriseUser(userInfo) {
         }));
       })
       .catch((err) => {
-        console.log(err);
+        dispatch(enqueueSnackbar({
+          message: 'Invalid email or password',
+          options: {
+            variant: 'error',
+          },
+        }));
         logInUser(false);
       });
   };
