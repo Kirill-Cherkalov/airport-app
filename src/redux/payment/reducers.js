@@ -23,6 +23,10 @@ export default function payment(state = initialState, action) {
         ...state,
         paymentSuccessData: action.payload,
       }
+    case actionTypes.RESET_PAYMENT_DATA:
+      return {
+        ...initialState,
+      }
     default:
       return state;
   }

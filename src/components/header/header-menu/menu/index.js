@@ -7,6 +7,7 @@ import { resetTicketsInfo } from '../../../../redux/search/tickets/actions';
 import { resetSelectedFlightInfo } from '../../../../redux/user/selectedFlight/actions';
 import { resetReturnSelectedFlightInfo } from '../../../../redux/user/returnSelectedFlight/actions';
 import { resetOrdersInfo } from '../../../../redux/user/orders/actions';
+import { resetPaymentData } from '../../../../redux/payment/actions';
 import LoginMenu from '../login-menu';
 import './index.scss';
 
@@ -21,6 +22,7 @@ function Menu(props) {
     resetReturnSelectedFlightInfo: PropTypes.func.isRequired,
     resetOrdersInfo: PropTypes.func.isRequired,
     resetUserInfo: PropTypes.func.isRequired,
+    resetPaymentData: PropTypes.func.isRequired,
   };
 
   const logOut = () => {
@@ -30,6 +32,7 @@ function Menu(props) {
     props.resetReturnSelectedFlightInfo();
     props.resetOrdersInfo();
     props.resetUserInfo();
+    props.resetPaymentData();
     props.logInUser(false);
   };
 
@@ -116,6 +119,7 @@ const mapDispatchToProps = dispatch => ({
   resetReturnSelectedFlightInfo: () => dispatch(resetReturnSelectedFlightInfo()),
   resetOrdersInfo: () => dispatch(resetOrdersInfo()),
   resetUserInfo: () => dispatch(resetUserInfo()),
+  resetPaymentData: () => dispatch(resetPaymentData()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Menu);

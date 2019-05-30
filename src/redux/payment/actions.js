@@ -47,3 +47,9 @@ export function fetchPaymentSuccessData(data) {
       .catch();
   };
 }
+
+export function resetPaymentData() {
+  return {
+    type: actionTypes.RESET_PAYMENT_DATA,
+  };
+}
