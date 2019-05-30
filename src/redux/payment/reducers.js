@@ -1,8 +1,9 @@
 import actionTypes from './actionTypes';
 
 const initialState = {
-  paymentData: [],
+  paymentData: '',
   getPaymentDataError: false,
+  paymentSuccessData: '',
 };
 
 export default function payment(state = initialState, action) {
@@ -17,6 +18,11 @@ export default function payment(state = initialState, action) {
         ...state,
         getPaymentDataError: action.payload,
       };
+    case actionTypes.GET_PAYMENT_SUCCESS:
+      return {
+        ...state,
+        paymentSuccessData: action.payload,
+      }
     default:
       return state;
   }

@@ -27,37 +27,37 @@ function OrderDetails({
 
   const getTicketPrice = passengersInfo => passengersInfo.reduce((total, { luggagePrice: price }) => total + price, 0);
 
-  const goToPaymentPage = () => {
-    // history.push('/payment');
+  const goToPaymentPage = async () => {
     const create_payment_json = {
       intent: 'sale',
       payer: {
         payment_method: 'paypal',
       },
       redirect_urls: {
-        return_url: 'http://return.url',
-        cancel_url: 'http://cancel.url',
+        return_url: 'http://localhost:3000/payment-success',
+        cancel_url: 'http://localhost:3000/order-details',
       },
       transactions: [{
         item_list: {
           items: [{
             name: 'item',
-            sku: 'item',
-            price: '1.00',
+            sku: '001',
+            price: '25.00',
             currency: 'USD',
             quantity: 1,
           }],
         },
         amount: {
           currency: 'USD',
-          total: '1.00',
+          total: '25.00',
         },
-        description: 'This is the payment description.',
+        description: 'for two lohs.',
       }],
     };
 
-    fetchPaymentD(create_payment_json);
-    window.location = paymentD;
+    await fetchPaymentD(create_payment_json);
+
+    if (paymentD) window.location = paymentD;
   };
 
   return (

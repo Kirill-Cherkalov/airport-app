@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter } from 'react-router';
@@ -11,6 +11,7 @@ import { resetSelectedFlightInfo } from '../../redux/user/selectedFlight/actions
 import { resetReturnSelectedFlightInfo } from '../../redux/user/returnSelectedFlight/actions';
 import { resetOrdersInfo } from '../../redux/user/orders/actions';
 import { resetUserInfo } from '../../redux/user/actions';
+import { fetchPaymentSuccessData } from '../../redux/payment/actions';
 
 function PaymentSuccess({
   history,
@@ -22,6 +23,7 @@ function PaymentSuccess({
   resetReturnSelectedFlightInfo,
   resetOrdersInfo,
   resetUserInfo,
+  fetchPaymentSuccessData,
 }) {
   PaymentSuccess.propTypes = {
     twoWayRequest: PropTypes.bool.isRequired,
@@ -33,7 +35,12 @@ function PaymentSuccess({
     resetReturnSelectedFlightInfo: PropTypes.func.isRequired,
     resetOrdersInfo: PropTypes.func.isRequired,
     resetUserInfo: PropTypes.func.isRequired,
+    fetchPaymentSuccessData: PropTypes.func.isRequired,
   };
+
+  useEffect(() => {
+    fetchPaymentSuccessData(history.location.search);
+  }, []);
 
   const flights = twoWayRequest ? [selectedFlight, returnSelectedFlight] : [selectedFlight];
 
@@ -105,6 +112,7 @@ const mapDispatchToProps = dispatch => ({
   resetReturnSelectedFlightInfo: () => dispatch(resetReturnSelectedFlightInfo()),
   resetOrdersInfo: () => dispatch(resetOrdersInfo()),
   resetUserInfo: () => dispatch(resetUserInfo()),
+  fetchPaymentSuccessData: data => dispatch(fetchPaymentSuccessData(data)),
 });
 
 export default compose(

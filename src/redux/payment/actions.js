@@ -33,3 +33,18 @@ export function fetchPaymentData(paymentObj) {
       .catch(() => dispatch(getPaymentDataError(true)));
   };
 }
+
+function getPaymentSuccess(payload) {
+  return {
+    type: actionTypes.GET_PAYMENT_SUCCESS,
+    payload,
+  };
+}
+
+export function fetchPaymentSuccessData(data) {
+  return (dispatch) => {
+    axios.get('http://localhost:3001/success' + data)
+      .then(response => dispatch(getPaymentSuccess(response.data)))
+      .catch();
+  };
+}
