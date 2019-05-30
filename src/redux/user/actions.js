@@ -70,7 +70,10 @@ export function authoriseUser(userInfo) {
           },
         }));
       })
-      .catch(() => dispatch(logInUser(false)));
+      .catch((err) => {
+        console.log(err);
+        logInUser(false);
+      });
   };
 }
 

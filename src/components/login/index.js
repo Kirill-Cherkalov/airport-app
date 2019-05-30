@@ -31,7 +31,12 @@ class Login extends React.Component {
   };
 
   onSubmit = (values) => {
-    this.props.authoriseUser(values);
+    const newValues = {
+      ...values,
+      role: 'user',
+    };
+    this.props.authoriseUser(newValues);
+    this.props.history.goBack();
   };
 
   render() {
