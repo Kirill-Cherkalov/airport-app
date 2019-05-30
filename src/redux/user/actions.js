@@ -17,7 +17,7 @@ function paymentStatus(bool) {
   };
 }
 
-export function payForOrder(userOrder) {
+export function payForOrders(userOrder) {
   return dispatch => userOrder.forEach(order => axios.post('http://localhost:3001/order', order)
     .then((response) => {
       if (response.status !== 200) {

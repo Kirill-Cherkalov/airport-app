@@ -7,18 +7,21 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import HorizontalStepper from '../stepper';
 import { fetchPaymentData } from '../../redux/payment/actions';
+import { getUserOrders } from '../../redux/user/orders/actions';
+import urls from '../../urls';
 import './index.scss';
 
 function OrderDetails({
-  requestInfo, selectedFlight, returnSelectedFlight, history, fetchPaymentD, paymentD,
+  requestInfo, selectedFlight, returnSelectedFlight, history, fetchPaymentData, paymentData, setUserOrdersData,
 }) {
   OrderDetails.propTypes = {
     requestInfo: PropTypes.object.isRequired,
     selectedFlight: PropTypes.object.isRequired,
     returnSelectedFlight: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
-    fetchPaymentD: PropTypes.func.isRequired,
-    paymentD: PropTypes.string.isRequired,
+    fetchPaymentData: PropTypes.func.isRequired,
+    paymentData: PropTypes.string.isRequired,
+    setUserOrdersData: PropTypes.func.isRequired,
   };
 
   const flights = requestInfo.twoWayRequest ? [selectedFlight, returnSelectedFlight] : [selectedFlight];
@@ -27,37 +30,89 @@ function OrderDetails({
 
   const getTicketPrice = passengersInfo => passengersInfo.reduce((total, { luggagePrice: price }) => total + price, 0);
 
-  const goToPaymentPage = async () => {
-    const create_payment_json = {
+  const setOrdersData = (total) => {
+    const orders = flights.map(flight => ({
+      user: localStorage.getItem('id'),
+      fromCountry: flight.fromCountry,
+      toCountry: flight.toCountry,
+      departureDate: flight.date,
+      startTime: flight.startTime,
+      endTime: flight.endTime,
+      passengersAmount,
+      selectedFlight: flight.id,
+      passengersInfo: flight.passengersInfo,
+      total,
+    }));
+
+    setUserOrdersData(orders);
+  };
+
+  const constructPaymentObject = () => {
+    const paymentObject = {
       intent: 'sale',
       payer: {
         payment_method: 'paypal',
       },
       redirect_urls: {
-        return_url: 'http://localhost:3000/payment-success',
-        cancel_url: 'http://localhost:3000/order-details',
+        return_url: urls.returnUrl,
+        cancel_url: urls.cancelUrl,
       },
       transactions: [{
         item_list: {
-          items: [{
-            name: 'item',
-            sku: '001',
-            price: '25.00',
-            currency: 'USD',
-            quantity: 1,
-          }],
+          items: [],
         },
         amount: {
           currency: 'USD',
-          total: '25.00',
+          total: '',
         },
-        description: 'for two lohs.',
+        description: '',
       }],
     };
 
-    await fetchPaymentD(create_payment_json);
+    let total = 0;
 
-    if (paymentD) window.location = paymentD;
+    flights.forEach(({ fromCountry, toCountry, price, passengersInfo }) => {
+      const items = [{
+        name: 'Flight ticket',
+        sku: `1 tck: ${fromCountry} - ${toCountry}`,
+        price,
+        currency: 'USD',
+        quantity: passengersInfo.length,
+      }];
+
+      total += price * passengersInfo.length;
+
+      passengersInfo.forEach(({ firstname, lastname, luggageKg, luggagePrice }) => {
+        total += luggagePrice;
+
+        items.push({
+          name: `luggage: ${luggageKg} kg`,
+          sku: `for ${firstname} ${lastname}`,
+          price: luggagePrice,
+          currency: 'USD',
+          quantity: 1,
+        });
+      });
+
+      paymentObject.transactions[0].item_list.items = [...paymentObject.transactions[0].item_list.items, ...items];
+    });
+
+    paymentObject.transactions[0].amount.total = total;
+
+    let description = `${flights[0].fromCountry} - ${flights[0].toCountry}`;
+    if (flights.length > 1) {
+      description += ` || ${flights[0].toCountry} - ${flights[0].fromCountry}`;
+    }
+    paymentObject.transactions[0].description = description;
+
+    return paymentObject;
+  };
+
+  const goToPaymentPage = async () => {
+    const paymentObject = constructPaymentObject();
+    await fetchPaymentData(paymentObject);
+    await setOrdersData(paymentObject.transactions[0].amount.total);
+    if (paymentData) window.location = paymentData;
   };
 
   return (
@@ -133,11 +188,12 @@ const mapStateToProps = state => ({
   requestInfo: state.user.requestInfo.request,
   selectedFlight: state.user.selectedFlight,
   returnSelectedFlight: state.user.returnSelectedFlight,
-  paymentD: state.payment.paymentData,
+  paymentData: state.payment.paymentData,
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchPaymentD: paymentObj => dispatch(fetchPaymentData(paymentObj)),
+  fetchPaymentData: paymentObj => dispatch(fetchPaymentData(paymentObj)),
+  setUserOrdersData: orders => dispatch(getUserOrders(orders)),
 });
 
 export default compose(

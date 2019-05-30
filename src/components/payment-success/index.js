@@ -4,13 +4,14 @@ import { compose } from 'redux';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import queryString from 'query-string';
 import './index.scss';
 import HorizontalStepper from '../stepper';
 import { resetTicketsInfo } from '../../redux/search/tickets/actions';
 import { resetSelectedFlightInfo } from '../../redux/user/selectedFlight/actions';
 import { resetReturnSelectedFlightInfo } from '../../redux/user/returnSelectedFlight/actions';
 import { resetOrdersInfo } from '../../redux/user/orders/actions';
-import { resetUserInfo } from '../../redux/user/actions';
+import { payForOrders, resetUserInfo } from '../../redux/user/actions';
 import { fetchPaymentSuccessData } from '../../redux/payment/actions';
 
 function PaymentSuccess({
@@ -24,6 +25,8 @@ function PaymentSuccess({
   resetOrdersInfo,
   resetUserInfo,
   fetchPaymentSuccessData,
+  payForOrders,
+  orders,
 }) {
   PaymentSuccess.propTypes = {
     twoWayRequest: PropTypes.bool.isRequired,
@@ -36,10 +39,29 @@ function PaymentSuccess({
     resetOrdersInfo: PropTypes.func.isRequired,
     resetUserInfo: PropTypes.func.isRequired,
     fetchPaymentSuccessData: PropTypes.func.isRequired,
+    payForOrders: PropTypes.func.isRequired,
+    orders: PropTypes.array.isRequired,
   };
 
   useEffect(() => {
-    fetchPaymentSuccessData(history.location.search);
+    const { PayerID, paymentId } = queryString.parse(history.location.search);
+    const executePaymentObject = {
+      paymentId,
+      executePaymentObject: {
+        payer_id: PayerID,
+        transactions: [{
+          amount: {
+            currency: 'USD',
+            total: orders[0].total,
+            details: {
+              subtotal: orders[0].total,
+            },
+          },
+        }],
+      },
+    };
+    fetchPaymentSuccessData(executePaymentObject);
+    payForOrders(orders);
   }, []);
 
   const flights = twoWayRequest ? [selectedFlight, returnSelectedFlight] : [selectedFlight];
@@ -100,7 +122,8 @@ function PaymentSuccess({
     </>
   );
 }
-const mapStateToProps = state => ({
+const mapStateToProps = state => ({ 
+  orders: state.user.ordersInfo.orders,
   twoWayRequest: state.user.requestInfo.request.twoWayRequest,
   selectedFlight: state.user.selectedFlight,
   returnSelectedFlight: state.user.returnSelectedFlight,
@@ -113,6 +136,7 @@ const mapDispatchToProps = dispatch => ({
   resetOrdersInfo: () => dispatch(resetOrdersInfo()),
   resetUserInfo: () => dispatch(resetUserInfo()),
   fetchPaymentSuccessData: data => dispatch(fetchPaymentSuccessData(data)),
+  payForOrders: orders => dispatch(payForOrders(orders)),
 });
 
 export default compose(
