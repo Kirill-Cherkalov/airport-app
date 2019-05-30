@@ -19,7 +19,7 @@ class Luggage extends React.Component {
       <div className="luggage-list">
         {this.props.luggageTypes.map(({ kg, price }, index) => (
           <div key={index} className="luggage-list__checkbox">
-            <div className={`image${kg} image${kg}_active`} />
+            <div className={`image${index} image${index}_active`} />
             <label htmlFor={price} key={Math.random()} className={`luggage-list__label luggage-list__label_${kg}`}>
               <Field
                 id={price}
