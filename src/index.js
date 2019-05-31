@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { SecureRoute } from 'react-route-guard';
 import { SnackbarProvider } from 'notistack';
@@ -37,6 +37,7 @@ function App() {
           <Header />
           <Notifier />
           <Switch>
+            <Route exact path="/" render={() => <Redirect to="/search" />} />
             <Route path="/search" component={Search} />
             <Route path="/passengers-counters" component={PassengersCounters} />
             <Route path="/flights-list" component={FlightsList} />
@@ -59,7 +60,13 @@ function App() {
 ReactDOM.render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-      <SnackbarProvider>
+      <SnackbarProvider
+        preventDuplicate
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+      >
         <App />
       </SnackbarProvider>
     </PersistGate>
